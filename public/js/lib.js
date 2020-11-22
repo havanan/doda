@@ -3487,7 +3487,7 @@ var App = function() {
                 $(parent.attr('data-related')).css('height', parent.height());
             }
         });
-    }
+    };
 
     // Handles quick sidebar toggler
     var handleQuickSidebarToggler = function() {

@@ -16,7 +16,7 @@
     @yield('css')
 </head>
 <body class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md header-white white-sidebar-color logo-indigo">
-<div class="page-wrapper">
+<div class="page-wrapper" id="page-wrapper">
     <!-- start header -->
         @includeIf('admin.components.nav-bar')
     <!-- end header -->

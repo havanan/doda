@@ -18,12 +18,14 @@ class CreateProductsTable extends Migration
             $table->string('avatar')->nullable();
             $table->string('name')->nullable();
             $table->string('slug')->nullable();
-            $table->text('description ')->nullable();
+            $table->text('description')->nullable();
             $table->text('reviews')->nullable();
             $table->integer('brand_id')->nullable();
             $table->integer('product_type_id')->nullable();
             $table->integer('status')->default(1)->comment('1:hoạt động,0:hết hàng');
+            $table->integer('parent_id')->nullable();
             $table->boolean('is_discount')->default(0);
+
             $table->timestamps();
         });
     }

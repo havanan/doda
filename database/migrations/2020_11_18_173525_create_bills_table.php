@@ -17,8 +17,12 @@ class CreateBillsTable extends Migration
             $table->id();
             $table->integer('member_id')->nullable();
             $table->integer('user_id')->nullable();
-            $table->integer('price_total')->nullable();
-            $table->integer('price_discount')->nullable();
+            $table->integer('voucher_id')->nullable();
+            $table->integer('price_total')->default(0);
+            $table->integer('price_discount')->default(0);
+            $table->integer('product_total')->default(0)->comment('tổng sản phẩm');
+            $table->integer('amount')->default(0)->comment('tổng số lượng hàng');
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }
