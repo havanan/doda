@@ -16,7 +16,7 @@
     @yield('css')
 </head>
 <body class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md header-white white-sidebar-color logo-indigo">
-<div class="page-wrapper" id="page-wrapper">
+<div class="page-wrapper" id="app">
     <!-- start header -->
         @includeIf('admin.components.nav-bar')
     <!-- end header -->
@@ -44,6 +44,7 @@
 <!-- start js include path -->
 <script src="{{asset('js/lib.js')}}" ></script>
 <!-- end js include path -->
+{{-- <script src="{{ asset('js/app.js') }}" type="text/javascript"></script> --}}
 @yield('js')
 </body>
 </html>

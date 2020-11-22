@@ -11,7 +11,6 @@ const mix = require('laravel-mix');
  |
  */
 
-// mix.js('resources/js/app.js', 'public/js')
 //     .sass('resources/sass/app.scss', 'public/css');
 // admin css
 mix.styles([
@@ -51,10 +50,12 @@ mix.scripts([
     'resources/admin/assets/chart-js/home-data.js',
     'resources/admin/vendor/file-manager/js/file-manager.js',
 ], 'public/js/lib.js').version();
-
+// auth js
 mix.scripts([
     'resources/admin/assets/jquery.min.js',
     'resources/admin/assets/bootstrap/js/bootstrap.min.js',
     'resources/admin/assets/login.js',
 ], 'public/js/auth.js').version();
-
+mix.scripts([
+    'resources/js/app.js'
+], 'public/js/app.js').version();

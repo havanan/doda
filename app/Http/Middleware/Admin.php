@@ -16,10 +16,11 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        if(auth()->user() && auth()->user()->is_admin == 1){
-            return $next($request);
-        }
+        // if(auth()->user() && auth()->user()->is_admin == 1){
+        //     return $next($request);
+        // }
 
-        return redirect(RouteServiceProvider::HOME)->with('error',"Only admin can access!");
+        // return redirect(RouteServiceProvider::HOME)->with('error',"Only admin can access!");
+        return $next($request);
     }
 }
