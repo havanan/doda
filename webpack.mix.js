@@ -11,51 +11,41 @@ const mix = require('laravel-mix');
  |
  */
 
-//     .sass('resources/sass/app.scss', 'public/css');
-// admin css
+mix.js('resources/js/app.js', 'public/js')
+    .sass('resources/sass/app.scss', 'public/css');
+// Admin Css
 mix.styles([
-    'resources/admin/assets/simple-line-icons/simple-line-icons.min.css',
-    'resources/admin/css/font-awesome.min.css',
-    'resources/admin/assets/bootstrap/css/bootstrap.min.css',
-    'resources/admin/assets/material/material.min.css',
-    'resources/admin/css/material_style.css',
-    'resources/admin/css/theme_style.css',
-    'resources/admin/css/plugins.min.css',
+    'resources/admin/assets/plugins/bootstrap/css/bootstrap.min.css',
+    'resources/admin/assets/plugins/morrisjs/morris.css',
     'resources/admin/css/style.css',
-    'resources/admin/css/responsive.css',
-    'resources/admin/css/theme-color.css',
-    'resources/admin/vendor/file-manager/css/file-manager.css',
+    'resources/admin/css/colors/blue.css',
+    'resources/admin/css/spinners.css',
+    'resources/admin/css/animate.css',
 
-], 'public/css/lib.css').version();
-// login css
-mix.styles([
-    'resources/admin/css/font-awesome.min.css',
-    'resources/admin/assets/iconic/css/material-design-iconic-font.min.css',
-    'resources/admin/assets/bootstrap/css/bootstrap.min.css',
-    'resources/admin/css/extra_pages.css',
-], 'public/css/auth.css').version();
-// admin js
+    'resources/admin/scss/icons/font-awesome/css/font-awesome.min.css',
+    'resources/admin/scss/icons/simple-line-icons/css/simple-line-icons.css',
+    'resources/admin/scss/icons/weather-icons/css/weather-icons.min.css',
+    'resources/admin/scss/icons/linea-icons/linea.css',
+    'resources/admin/scss/icons/themify-icons/themify-icons.css',
+    'resources/admin/scss/icons/flag-icon-css/flag-icon.min.css',
+    'resources/admin/scss/icons/material-design-iconic-font/css/materialdesignicons.min.css',
+
+], 'public/admin/css/lib.css').version();
+// Admin Js
 mix.scripts([
-    'resources/admin/assets/jquery.min.js',
-    'resources/admin/assets/popper/popper.js',
-    'resources/admin/assets/jquery.blockui.min.js',
-    'resources/admin/assets/jquery.slimscroll.js',
-    'resources/admin/assets/bootstrap/js/bootstrap.min.js',
-    'resources/admin/assets/bootstrap-switch/js/bootstrap-switch.min.js',
-    'resources/admin/assets/app.js',
-    'resources/admin/assets/theme-color.js',
-    'resources/admin/assets/material/material.min.js',
-    'resources/admin/assets/chart-js/Chart.bundle.js',
-    'resources/admin/assets/chart-js/utils.js',
-    'resources/admin/assets/chart-js/home-data.js',
-    'resources/admin/vendor/file-manager/js/file-manager.js',
-], 'public/js/lib.js').version();
-// auth js
-mix.scripts([
-    'resources/admin/assets/jquery.min.js',
-    'resources/admin/assets/bootstrap/js/bootstrap.min.js',
-    'resources/admin/assets/login.js',
-], 'public/js/auth.js').version();
-mix.scripts([
-    'resources/js/app.js'
-], 'public/js/app.js').version();
+    'resources/admin/assets/plugins/jquery/jquery.min.js',
+    'resources/admin/assets/plugins/bootstrap/js/popper.min.js',
+    'resources/admin/assets/plugins/bootstrap/js/bootstrap.min.js',
+    'resources/admin/assets/plugins/styleswitcher/jQuery.style.switcher.js',
+    'resources/admin/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js',
+    'resources/admin/assets/plugins/sparkline/jquery.sparkline.min.js',
+    'resources/admin/assets/plugins/raphael/raphael-min.js',
+    'resources/admin/assets/plugins/morrisjs/morris.min.js',
+    'resources/admin/assets/plugins/sparkline/jquery.sparkline.min.js',
+    'resources/admin/js/jquery.slimscroll.js',
+    'resources/admin/js/waves.js',
+    'resources/admin/js/sidebarmenu.js',
+    'resources/admin/js/custom.min.js',
+    'resources/admin/js/dashboard4.js',
+
+], 'public/admin/js/lib.js').version();

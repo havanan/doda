@@ -7,44 +7,89 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Admin - @yield('title')</title>
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=all" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link href="{{asset('css/lib.css')}}" rel="stylesheet" type="text/css"  />
-    <!-- favicon -->
-    <link rel="shortcut icon" href="{{asset('img/favicon.ico')}}" />
-    @yield('css')
+    <title>Admin Manager</title>
+
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('admin/images/favicon.png')}}">
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('admin/js/lib.js') }}" defer></script>
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin/css/lib.css') }}" rel="stylesheet">
+
+    @yield('lib')
 </head>
-<body class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md header-white white-sidebar-color logo-indigo">
-<div class="page-wrapper" id="app">
-    <!-- start header -->
-        @includeIf('admin.components.nav-bar')
-    <!-- end header -->
-    <!-- start page container -->
-    <div class="page-container">
-        <!-- start sidebar menu -->
-            @includeIf('admin.components.sidebar')
-        <!-- end sidebar menu -->
-        <!-- start page content -->
-        <div class="page-content-wrapper">
-            <div class="page-content">
-                <div class="page-bar">
-                    @include('admin.components.breadcrumb')
-                </div>
-                @yield('content')
-            </div>
-        </div>
-        <!-- end page content -->
+<body class="fix-header fix-sidebar card-no-border">
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
     </div>
-    <!-- end page container -->
-    <!-- start footer -->
-    @includeIf('admin.components.footer')
-    <!-- end footer -->
-</div>
-<!-- start js include path -->
-<script src="{{asset('js/lib.js')}}" ></script>
-<!-- end js include path -->
-{{-- <script src="{{ asset('js/app.js') }}" type="text/javascript"></script> --}}
-@yield('js')
+    <div id="app">
+
+        <div id="main-wrapper">
+            <!-- ============================================================== -->
+            <!-- Topbar header - style you can find in pages.scss -->
+            <!-- ============================================================== -->
+                @include('layouts.admin.header')
+            <!-- ============================================================== -->
+            <!-- End Topbar header -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Left Sidebar - style you can find in sidebar.scss  -->
+            <!-- ============================================================== -->
+                @include('layouts.admin.left-sidebar')
+            <!-- ============================================================== -->
+            <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Page wrapper  -->
+            <!-- ============================================================== -->
+            <div class="page-wrapper">
+                <!-- ============================================================== -->
+                <!-- Bread crumb and right sidebar toggle -->
+                <!-- ============================================================== -->
+                <div class="row page-titles">
+                    <div class="col-md-5 align-self-center">
+                        <h3 class="text-themecolor">Bảng điều khiển</h3>
+                    </div>
+                    <div class="col-md-7 align-self-center">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Home</a></li>
+                            <li class="breadcrumb-item active">Bảng điều khiển</li>
+                        </ol>
+                    </div>
+                    <div>
+                        <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Bread crumb and right sidebar toggle -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Container fluid  -->
+                <!-- ============================================================== -->
+                <div class="container-fluid">
+                     @yield('content')
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Container fluid  -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- footer -->
+                <!-- ============================================================== -->
+                <footer class="footer">
+                    © 2019 Admin Press Admin by themedesigner.in
+                </footer>
+                <!-- ============================================================== -->
+                <!-- End footer -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Page wrapper  -->
+            <!-- ============================================================== -->
+        </div>
+    </div>
+
 </body>
 </html>
