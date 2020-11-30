@@ -49,6 +49,26 @@ Route::group([
         });
 
         Route::group([
+            'prefix' => 'staff',
+        ],function (){
+            Route::get('/',             'StaffController@index')->name('admin.staff.index');
+            Route::get('list',          'StaffController@list')->name('admin.staff.list');
+            Route::get('create',         'StaffController@create')->name('admin.staff.create');
+            Route::get('view/{id}',     'StaffController@view')->name('admin.staff.view');
+            Route::get('update/{id}',   'StaffController@update')->name('admin.staff.update');
+            Route::get('delete/{id}',   'StaffController@delete')->name('admin.staff.delete');
+        });
+        Route::group([
+            'prefix' => 'role',
+        ],function (){
+            Route::get('/',             'RoleController@index')->name('admin.role.index');
+            Route::get('list',          'RoleController@list')->name('admin.role.list');
+            Route::get('create',        'RoleController@create')->name('admin.role.create');
+            Route::get('view/{id}',     'RoleController@view')->name('admin.role.view');
+            Route::get('update/{id}',   'RoleController@update')->name('admin.role.update');
+            Route::get('delete/{id}',   'RoleController@delete')->name('admin.role.delete');
+        });
+        Route::group([
             'prefix' => 'report',
         ],function (){
             Route::get('/',             'ReportController@index')->name('admin.report.index');
@@ -64,10 +84,86 @@ Route::group([
         ],function (){
             Route::get('/',             'BillController@index')->name('admin.bill.index');
             Route::get('list',          'BillController@list')->name('admin.bill.list');
-            Route::get('create',         'BillController@create')->name('admin.bill.create');
+            Route::get('create',        'BillController@create')->name('admin.bill.create');
             Route::get('view/{id}',     'BillController@view')->name('admin.bill.view');
             Route::get('update/{id}',   'BillController@update')->name('admin.bill.update');
             Route::get('delete/{id}',   'BillController@delete')->name('admin.bill.delete');
+
+            Route::group([
+                'prefix' => 'status',
+            ],function (){
+                Route::get('/',             'BillStatusController@index')->name('admin.bill.status.index');
+                Route::get('list',          'BillStatusController@list')->name('admin.bill.status.list');
+                Route::get('create',        'BillStatusController@create')->name('admin.bill.status.create');
+                Route::get('view/{id}',     'BillStatusController@view')->name('admin.bill.status.view');
+                Route::get('update/{id}',   'BillStatusController@update')->name('admin.bill.status.update');
+                Route::get('delete/{id}',   'BillStatusController@delete')->name('admin.bill.status.delete');
+            });
+        });
+
+        Route::group([
+            'prefix' => 'brand',
+        ],function (){
+            Route::get('/',             'BrandController@index')->name('admin.brand.index');
+            Route::get('list',          'BrandController@list')->name('admin.brand.list');
+            Route::get('create',        'BrandController@create')->name('admin.brand.create');
+            Route::get('view/{id}',     'BrandController@view')->name('admin.brand.view');
+            Route::get('update/{id}',   'BrandController@update')->name('admin.brand.update');
+            Route::get('delete/{id}',   'BrandController@delete')->name('admin.brand.delete');
+        });
+
+        Route::group([
+            'prefix' => 'product',
+        ],function (){
+            Route::get('/',             'ProductController@index')->name('admin.product.index');
+            Route::get('list',          'ProductController@list')->name('admin.product.list');
+            Route::get('create',         'ProductController@create')->name('admin.product.create');
+            Route::get('view/{id}',     'ProductController@view')->name('admin.product.view');
+            Route::get('update/{id}',   'ProductController@update')->name('admin.product.update');
+            Route::get('delete/{id}',   'ProductController@delete')->name('admin.product.delete');
+
+            Route::group([
+                'prefix' => 'category',
+            ],function (){
+                Route::get('/',             'ProductCatController@index')->name('admin.product.cat.index');
+                Route::get('list',          'ProductCatController@list')->name('admin.product.cat.list');
+                Route::get('create',         'ProductCatController@create')->name('admin.product.cat.create');
+                Route::get('view/{id}',     'ProductCatController@view')->name('admin.product.cat.view');
+                Route::get('update/{id}',   'ProductCatController@update')->name('admin.product.cat.update');
+                Route::get('delete/{id}',   'ProductCatController@delete')->name('admin.product.cat.delete');
+            });
+
+            Route::group([
+                'prefix' => 'size',
+            ],function (){
+                Route::get('/',             'ProductSizeController@index')->name('admin.product.size.index');
+                Route::get('list',          'ProductSizeController@list')->name('admin.product.size.list');
+                Route::get('create',        'ProductSizeController@create')->name('admin.product.size.create');
+                Route::get('view/{id}',     'ProductSizeController@view')->name('admin.product.size.view');
+                Route::get('update/{id}',   'ProductSizeController@update')->name('admin.product.size.update');
+                Route::get('delete/{id}',   'ProductSizeController@delete')->name('admin.product.size.delete');
+            });
+
+            Route::group([
+                'prefix' => 'color',
+            ],function (){
+                Route::get('/',             'ProductColorController@index')->name('admin.product.color.index');
+                Route::get('list',          'ProductColorController@list')->name('admin.product.color.list');
+                Route::get('create',        'ProductColorController@create')->name('admin.product.color.create');
+                Route::get('view/{id}',     'ProductColorController@view')->name('admin.product.color.view');
+                Route::get('update/{id}',   'ProductColorController@update')->name('admin.product.color.update');
+                Route::get('delete/{id}',   'ProductColorController@delete')->name('admin.product.color.delete');
+            });
+            Route::group([
+                'prefix' => 'media',
+            ],function (){
+                Route::get('/',             'ProductMediaController@index')->name('admin.media.index');
+                Route::get('list',          'ProductMediaController@list')->name('admin.media.list');
+                Route::get('create',        'ProductMediaController@create')->name('admin.media.create');
+                Route::get('view/{id}',     'ProductMediaController@view')->name('admin.media.view');
+                Route::get('update/{id}',   'ProductMediaController@update')->name('admin.media.update');
+                Route::get('delete/{id}',   'ProductMediaController@delete')->name('admin.media.delete');
+            });
         });
     });
 });

@@ -49,20 +49,7 @@
                 <!-- ============================================================== -->
                 <!-- Bread crumb and right sidebar toggle -->
                 <!-- ============================================================== -->
-                <div class="row page-titles">
-                    <div class="col-md-5 align-self-center">
-                        <h3 class="text-themecolor">Bảng điều khiển</h3>
-                    </div>
-                    <div class="col-md-7 align-self-center">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{route('admin.index')}}">Home</a></li>
-                            <li class="breadcrumb-item active">Bảng điều khiển</li>
-                        </ol>
-                    </div>
-                    <div>
-                        <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>
-                    </div>
-                </div>
+                    @include('layouts.admin.bread-crumb')
                 <!-- ============================================================== -->
                 <!-- End Bread crumb and right sidebar toggle -->
                 <!-- ============================================================== -->
@@ -79,7 +66,7 @@
                 <!-- footer -->
                 <!-- ============================================================== -->
                 <footer class="footer">
-                    © 2019 Admin Press Admin by themedesigner.in
+                    © {{date('yy')}} Admin Tung Store By Anhv
                 </footer>
                 <!-- ============================================================== -->
                 <!-- End footer -->

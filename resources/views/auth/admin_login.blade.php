@@ -29,7 +29,7 @@
     <div class="login-register" style="background-image:url({{asset('admin/images/background/login-register.jpg')}});">
         <div class="login-box card">
             <div class="card-body">
-                @include('layouts.notification')
+                @include('layouts.message')
                 <form class="form-horizontal form-material" id="loginform" action="{{route('admin.login.submit')}}" method="post">
                     <h3 class="box-title m-b-20">Đăng Nhập</h3>
                     @csrf

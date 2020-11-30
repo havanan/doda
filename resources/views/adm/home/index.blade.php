@@ -1,5 +1,13 @@
 @extends('layouts.admin')
-
+@section('breadcrumb')
+<?php
+$breadcrumb = [
+    'title' => 'Bảng điều khiển',
+    'url' => '#',
+    'child' => []
+]
+?>
+@endsection
 @section('content')
     <div class="row">
         <!-- Column -->
