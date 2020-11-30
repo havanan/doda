@@ -10,15 +10,11 @@
     <title>Admin Manager</title>
 
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('admin/images/favicon.png')}}">
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('admin/js/lib.js') }}" defer></script>
-
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/css/lib.css') }}" rel="stylesheet">
+    @yield('css')
 
-    @yield('lib')
 </head>
 <body class="fix-header fix-sidebar card-no-border">
     <div class="preloader">
@@ -26,7 +22,6 @@
             <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
     </div>
     <div id="app">
-
         <div id="main-wrapper">
             <!-- ============================================================== -->
             <!-- Topbar header - style you can find in pages.scss -->
@@ -77,6 +72,9 @@
             <!-- ============================================================== -->
         </div>
     </div>
-
+    <script src="{{ asset('js/app.js') }}"></script>
+    <!-- Scripts -->
+    <script src="{{ asset('admin/js/lib.js') }}"></script>
+    @yield('js')
 </body>
 </html>

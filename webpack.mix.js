@@ -42,10 +42,14 @@ mix.scripts([
     'resources/admin/assets/plugins/raphael/raphael-min.js',
     'resources/admin/assets/plugins/morrisjs/morris.min.js',
     'resources/admin/assets/plugins/sparkline/jquery.sparkline.min.js',
+    'resources/admin/assets/plugins/datatables/jquery.dataTables.min.js',
     'resources/admin/js/jquery.slimscroll.js',
     'resources/admin/js/waves.js',
     'resources/admin/js/sidebarmenu.js',
     'resources/admin/js/custom.min.js',
     'resources/admin/js/dashboard4.js',
-
 ], 'public/admin/js/lib.js').version();
+
+mix.scripts([
+    'resources/admin/js/data-table-init.js',
+], 'public/admin/js/data-table.js').version();
