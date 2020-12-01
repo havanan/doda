@@ -15,10 +15,12 @@ class AddMoreFieldUsersTable extends Migration
     {
         Schema::table('users', function($table) {
             $table->string('avatar')->nullable();
+            $table->string('phone')->nullable();
             $table->integer('status')->nullable();
             $table->integer('role_id')->nullable();
             $table->date('birthday')->nullable();
-            $table->string('address')->nullable();
+            $table->string('address_1')->nullable();
+            $table->string('address_2')->nullable();
         });
     }
 
@@ -35,6 +37,7 @@ class AddMoreFieldUsersTable extends Migration
             $table->dropColumn('address_2');
             $table->dropColumn('status');
             $table->dropColumn('birthday');
+            $table->dropColumn('phone');
         });
     }
 }

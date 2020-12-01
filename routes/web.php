@@ -41,7 +41,7 @@ Route::group([
             'prefix' => 'user',
         ],function (){
             Route::get('/',             'UserController@index')->name('admin.user.index');
-            Route::get('list',          'UserController@list')->name('admin.user.list');
+            Route::get('list',          'UserController@getList')->name('admin.user.list');
             Route::get('create',         'UserController@create')->name('admin.user.create');
             Route::get('view/{id}',     'UserController@view')->name('admin.user.view');
             Route::get('update/{id}',   'UserController@update')->name('admin.user.update');
@@ -52,7 +52,7 @@ Route::group([
             'prefix' => 'staff',
         ],function (){
             Route::get('/',             'StaffController@index')->name('admin.staff.index');
-            Route::get('list',          'StaffController@list')->name('admin.staff.list');
+            Route::get('list',          'StaffController@getList')->name('admin.staff.list');
             Route::get('create',         'StaffController@create')->name('admin.staff.create');
             Route::get('view/{id}',     'StaffController@view')->name('admin.staff.view');
             Route::get('update/{id}',   'StaffController@update')->name('admin.staff.update');
@@ -62,7 +62,7 @@ Route::group([
             'prefix' => 'role',
         ],function (){
             Route::get('/',             'RoleController@index')->name('admin.role.index');
-            Route::get('list',          'RoleController@list')->name('admin.role.list');
+            Route::get('list',          'RoleController@getList')->name('admin.role.list');
             Route::get('create',        'RoleController@create')->name('admin.role.create');
             Route::get('view/{id}',     'RoleController@view')->name('admin.role.view');
             Route::get('update/{id}',   'RoleController@update')->name('admin.role.update');
@@ -72,7 +72,7 @@ Route::group([
             'prefix' => 'report',
         ],function (){
             Route::get('/',             'ReportController@index')->name('admin.report.index');
-            Route::get('list',          'ReportController@list')->name('admin.report.list');
+            Route::get('list',          'ReportController@getList')->name('admin.report.list');
             Route::get('create',         'ReportController@create')->name('admin.report.create');
             Route::get('view/{id}',     'ReportController@view')->name('admin.report.view');
             Route::get('update/{id}',   'ReportController@update')->name('admin.report.update');
@@ -83,7 +83,7 @@ Route::group([
             'prefix' => 'bill',
         ],function (){
             Route::get('/',             'BillController@index')->name('admin.bill.index');
-            Route::get('list',          'BillController@list')->name('admin.bill.list');
+            Route::get('list',          'BillController@getList')->name('admin.bill.list');
             Route::get('create',        'BillController@create')->name('admin.bill.create');
             Route::get('view/{id}',     'BillController@view')->name('admin.bill.view');
             Route::get('update/{id}',   'BillController@update')->name('admin.bill.update');
@@ -93,7 +93,7 @@ Route::group([
                 'prefix' => 'status',
             ],function (){
                 Route::get('/',             'BillStatusController@index')->name('admin.bill.status.index');
-                Route::get('list',          'BillStatusController@list')->name('admin.bill.status.list');
+                Route::get('list',          'BillStatusController@getList')->name('admin.bill.status.list');
                 Route::get('create',        'BillStatusController@create')->name('admin.bill.status.create');
                 Route::get('view/{id}',     'BillStatusController@view')->name('admin.bill.status.view');
                 Route::get('update/{id}',   'BillStatusController@update')->name('admin.bill.status.update');
@@ -105,7 +105,7 @@ Route::group([
             'prefix' => 'brand',
         ],function (){
             Route::get('/',             'BrandController@index')->name('admin.brand.index');
-            Route::get('list',          'BrandController@list')->name('admin.brand.list');
+            Route::get('list',          'BrandController@getList')->name('admin.brand.list');
             Route::get('create',        'BrandController@create')->name('admin.brand.create');
             Route::get('view/{id}',     'BrandController@view')->name('admin.brand.view');
             Route::get('update/{id}',   'BrandController@update')->name('admin.brand.update');
@@ -116,7 +116,7 @@ Route::group([
             'prefix' => 'product',
         ],function (){
             Route::get('/',             'ProductController@index')->name('admin.product.index');
-            Route::get('list',          'ProductController@list')->name('admin.product.list');
+            Route::get('list',          'ProductController@getList')->name('admin.product.list');
             Route::get('create',         'ProductController@create')->name('admin.product.create');
             Route::get('view/{id}',     'ProductController@view')->name('admin.product.view');
             Route::get('update/{id}',   'ProductController@update')->name('admin.product.update');
@@ -126,7 +126,7 @@ Route::group([
                 'prefix' => 'category',
             ],function (){
                 Route::get('/',             'ProductCatController@index')->name('admin.product.cat.index');
-                Route::get('list',          'ProductCatController@list')->name('admin.product.cat.list');
+                Route::get('list',          'ProductCatController@getList')->name('admin.product.cat.list');
                 Route::get('create',         'ProductCatController@create')->name('admin.product.cat.create');
                 Route::get('view/{id}',     'ProductCatController@view')->name('admin.product.cat.view');
                 Route::get('update/{id}',   'ProductCatController@update')->name('admin.product.cat.update');
@@ -137,7 +137,7 @@ Route::group([
                 'prefix' => 'size',
             ],function (){
                 Route::get('/',             'ProductSizeController@index')->name('admin.product.size.index');
-                Route::get('list',          'ProductSizeController@list')->name('admin.product.size.list');
+                Route::get('list',          'ProductSizeController@getList')->name('admin.product.size.list');
                 Route::get('create',        'ProductSizeController@create')->name('admin.product.size.create');
                 Route::get('view/{id}',     'ProductSizeController@view')->name('admin.product.size.view');
                 Route::get('update/{id}',   'ProductSizeController@update')->name('admin.product.size.update');
@@ -148,7 +148,7 @@ Route::group([
                 'prefix' => 'color',
             ],function (){
                 Route::get('/',             'ProductColorController@index')->name('admin.product.color.index');
-                Route::get('list',          'ProductColorController@list')->name('admin.product.color.list');
+                Route::get('list',          'ProductColorController@getList')->name('admin.product.color.list');
                 Route::get('create',        'ProductColorController@create')->name('admin.product.color.create');
                 Route::get('view/{id}',     'ProductColorController@view')->name('admin.product.color.view');
                 Route::get('update/{id}',   'ProductColorController@update')->name('admin.product.color.update');
@@ -158,7 +158,7 @@ Route::group([
                 'prefix' => 'media',
             ],function (){
                 Route::get('/',             'ProductMediaController@index')->name('admin.media.index');
-                Route::get('list',          'ProductMediaController@list')->name('admin.media.list');
+                Route::get('list',          'ProductMediaController@getList')->name('admin.media.list');
                 Route::get('create',        'ProductMediaController@create')->name('admin.media.create');
                 Route::get('view/{id}',     'ProductMediaController@view')->name('admin.media.view');
                 Route::get('update/{id}',   'ProductMediaController@update')->name('admin.media.update');
