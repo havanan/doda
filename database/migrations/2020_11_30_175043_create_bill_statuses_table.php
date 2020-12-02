@@ -15,6 +15,8 @@ class CreateBillStatusesTable extends Migration
     {
         Schema::create('bill_statuses', function (Blueprint $table) {
             $table->id();
+            $table->integer('bill_id')->nullable();
+            $table->integer('product_id')->nullable();
             $table->timestamps();
         });
     }

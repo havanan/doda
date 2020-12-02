@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Helpers\Common;
 use App\Repositories\UserRepository;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
@@ -50,5 +51,13 @@ class UserService
 
     public function getListWithDataTable($params) {
         return $this->useRepository->getListWithDataTable($params);
+    }
+
+    public function deleteById($id){
+        $action = $this->useRepository->delete($id);
+        if ($action) {
+            return Common::successResponse('Xóa người dùng thành công');
+        }
+        return Common::errorResponse('Xóa người dùng thất bại');
     }
 }

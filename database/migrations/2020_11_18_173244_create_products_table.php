@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('avatar')->nullable();
             $table->string('name')->nullable();
             $table->string('slug')->nullable();
-            $table->text('description ')->nullable();
+            $table->text('description')->nullable();
             $table->text('reviews')->nullable();
             $table->integer('brand_id')->nullable();
             $table->integer('product_type_id')->nullable();

@@ -22,7 +22,10 @@ class UserController extends Controller
     }
     public function getList(Request $request) {
         $params = $request->all();
-        $data = $this->userervice->getListWithDataTable($params);
-        return response()->json($data);
+        return  $this->userervice->getListWithDataTable($params);
+    }
+    public function delete(Request $request) {
+        $id = $request->get('id');
+        return $this->userervice->deleteById($id);
     }
 }

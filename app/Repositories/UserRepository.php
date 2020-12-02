@@ -44,7 +44,6 @@ class UserRepository extends BaseRepository
 
     public function getListWithDataTable($params) {
         $paginate = Common::toPagination($params);
-
         $query = $this->model->orderBy($paginate['sort'], $paginate['order']);
 
         if (isset($paginate['search'])) {
@@ -52,9 +51,14 @@ class UserRepository extends BaseRepository
             $query->where('email', 'like', "%" . $paginate['search'] . "%");
             $query->orWhere('phone', 'like', "%" . $paginate['search'] . "%");
             $query->orWhere('name', 'like', "%" . $paginate['search'] . "%");
-            $query->orWhere('address', 'like', "%" . $paginate['search'] . "%");
+            $query->orWhere('address_1', 'like', "%" . $paginate['search'] . "%");
+            $query->orWhere('address_2', 'like', "%" . $paginate['search'] . "%");
+
         }
 
-        return $query->get();
+        $query = $query->paginate($paginate['limit']);
+
+        return Common::toJson($query);
     }
+
 }

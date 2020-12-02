@@ -45,7 +45,7 @@ Route::group([
             Route::get('create',         'UserController@create')->name('admin.user.create');
             Route::get('view/{id}',     'UserController@view')->name('admin.user.view');
             Route::get('update/{id}',   'UserController@update')->name('admin.user.update');
-            Route::get('delete/{id}',   'UserController@delete')->name('admin.user.delete');
+            Route::post('delete',       'UserController@delete')->name('admin.user.delete');
         });
 
         Route::group([

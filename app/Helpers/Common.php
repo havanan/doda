@@ -69,11 +69,13 @@ class Common
      */
     public static function toJson($collection){
         $data = [];
-        $data['total'] = $collection->total();
+        $total = $collection->total();
+        $data['recordsTotal'] = $total;
+        $data['recordsFiltered'] = $total;
         $data['lastPage'] = $collection->lastPage();
         $data['perPage'] = $collection->perPage();
         $data['currentPage'] = $collection->currentPage();
-        $data['rows'] = $collection->items();
+        $data['data'] = $collection->items();
         return json_encode($data);
     }
 
@@ -91,9 +93,8 @@ class Common
         $search = null;
         $query = [];
 
-        if (isset($params['limit'])) {
-            $query['limit'] = in_array($params['limit'], LIMIT_PAGINATE) ? intval($params['limit']) : $limit;
-        }
+        $query['limit'] = isset($params['limit']) ? $params['limit'] : $limit;
+
         if(!empty($table)){
             $query['sort'] = $table.".".$sort;
         }
@@ -210,5 +211,17 @@ class Common
         return $expriedDay;
     }
 
+    public static function successResponse ($text){
+        return json_encode([
+            'code' => 500,
+            'text' => $text
+        ]);
+    }
 
+    public static function errorResponse ($text){
+        return json_encode([
+            'code' => 500,
+            'text' => $text
+        ]);
+    }
 }

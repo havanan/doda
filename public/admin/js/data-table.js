@@ -1,9 +1,25 @@
 $(document).ready(function() {
+    const customColumnDefs = config.columnDefs;
+    const defaultColumnDefs = {
+        searchable: true,
+        orderable: true,
+        targets: 0
+    } ;
+    if (customColumnDefs) {
+        customColumnDefs.push(defaultColumnDefs)
+    }
     var table = $('.data-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: config.ajax,
+        paging: true,
+        ajax: {
+            url: config.ajax,
+        },
         columns: config.columns,
+        columnDefs:customColumnDefs,
+        dom: 'Bfrtip',
+        searchDelay: 500,
+        cache:true,
         language: {
             sProcessing: "Đang xử lý...",
             sLengthMenu: "Xem _MENU_ mục",
@@ -21,5 +37,12 @@ $(document).ready(function() {
                 sLast: "Cuối"
             }
         }
+    });
+    // vẽ số thứ tự từng dòng
+    table.on('draw.dt', function () {
+        const info = table.page.info();
+        table.column(0, { search: 'applied', order: 'applied', page: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1 + info.start;
+        });
     });
 } );
