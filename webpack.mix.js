@@ -52,7 +52,6 @@ mix.scripts([
     'resources/admin/js/sidebarmenu.js',
     'resources/admin/js/custom.min.js',
     'resources/admin/js/dashboard4.js',
-    'resources/admin/js/data-table-init.js',
     'resources/admin/js/common.js',
 ], 'public/admin/js/lib.js').version();
 

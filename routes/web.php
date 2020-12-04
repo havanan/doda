@@ -15,7 +15,9 @@ Route::group([
 ],function (){
     Route::get('profile', 'HomeController@profile')->name('profile');
 });
-
+Route::group(['prefix' => 'laravel-filemanager'], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
 //Admin Route
 Route::group([
     'prefix' => 'adm'
@@ -46,6 +48,8 @@ Route::group([
             Route::get('view/{id}',     'UserController@view')->name('admin.user.view');
             Route::get('update/{id}',   'UserController@update')->name('admin.user.update');
             Route::post('delete',       'UserController@delete')->name('admin.user.delete');
+            Route::post('save',       'UserController@save')->name('admin.user.save');
+
         });
 
         Route::group([

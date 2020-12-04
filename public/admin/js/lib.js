@@ -5173,55 +5173,6 @@ $(function () {
 });
 
 
-const customColumnDefs = config.columnDefs;
-const defaultColumnDefs = {
-    searchable: true,
-    orderable: true,
-    targets: 0
-} ;
-if (customColumnDefs) {
-    customColumnDefs.push(defaultColumnDefs)
-}
-var table = $('.data-table').DataTable({
-    processing: true,
-    serverSide: true,
-    paging: true,
-    ajax: {
-        url: config.ajax,
-    },
-    columns: config.columns,
-    columnDefs:customColumnDefs,
-    dom: 'Bfrtip',
-    searchDelay: 500,
-    cache:true,
-    language: {
-        sProcessing: "Đang xử lý...",
-        sLengthMenu: "Xem _MENU_ mục",
-        sZeroRecords: "Không tìm thấy dòng nào phù hợp",
-        sInfo: "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ mục",
-        sInfoEmpty: "Đang xem 0 đến 0 trong tổng số 0 mục",
-        sInfoFiltered: "(được lọc từ _MAX_ mục)",
-        sInfoPostFix: "",
-        sSearch: "Tìm:",
-        sUrl: "",
-        oPaginate: {
-            sFirst: "Đầu",
-            sPrevious: "Trước",
-            sNext: "Tiếp",
-            sLast: "Cuối"
-        }
-    }
-});
-// vẽ số thứ tự từng dòng
-table.on('draw.dt', function () {
-    const info = table.page.info();
-    table.column(0, { search: 'applied', order: 'applied', page: 'applied' }).nodes().each(function (cell, i) {
-        cell.innerHTML = i + 1 + info.start;
-    });
-});
-function reloadDataTable() {
-    table.ajax.reload();
-}
 $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -5231,6 +5182,9 @@ const warningAlert = {
     title: 'Cảnh báo !',
     text: 'Bạn chắc chắn muốn thực hiện tác vụ ?'
 };
+const DATE_TIME   = 'HH:mm DD/MM/YYYY';
+const DATE = 'DD/MM/YYYY';
+
 function alertDelete(id) {
     swal({
         title: warningAlert.title,
@@ -5267,4 +5221,74 @@ function alertDelete(id) {
 
        }
     });
+}
+function getUConfTable() {
+    return {
+        ajax: urlList,
+        columns: [
+            {data:null},
+            {
+                data:'avatar',
+                render:function (data) {
+                    let img = '';
+                    if (data) {
+                        img = '<img src="'+data+'" class="img-circle img-responsive" />';
+                    }
+                    return img;
+                }},
+            {
+                data:'name',
+                render:function (data,b,row) {
+
+                    let addr1 = '';
+                    let addr2 = '';
+                    const name = '<p class="box-title">'+data+'</p>';
+                    if (row) {
+                        if (row.address_1){
+                            addr1 = '<address><i class="fa fa-podcast"></i>'+row.address_1+'</address>'
+                        }
+                        if (row.address_2){
+                            addr1 = '<address><i class="fa fa-podcast"></i>'+row.address_2+'</address>'
+                        }
+                    }
+                    return '<div class="row">' +
+                        '<div">'+name+addr1+addr2+'</div>' +
+                        '</div>';
+                }},
+            {data:'email'},
+            {data:'phone'},
+            {data:'birthday',
+                type:'date',
+                render: function(data){
+                    if (data === null) return "";
+                    return moment(data).format(DATE);
+                },},
+            {data:'status',render:function (data) {
+
+                    let btn = '<span class="label label-danger font-weight-100">Khóa</span>';
+
+                    if (data) {
+                        console.log('ahihi')
+                        btn = '<span class="label label-success font-weight-100">Hoạt động</span>'
+                    }
+                    return btn;
+                }},
+            {data:'created_at',
+                type:'date',
+                render: function(data){
+                    if (data === null) return "";
+                    return moment(data).format(DATE_TIME);
+                },},
+            {data: null,
+                render: function (data) {
+                    if (!data) {
+                        return ''
+                    }
+                    return '<a href="user/view/'+data.id+'" class="btn btn-success m-r-5"><i class="fa fa-info-circle"></i></a >'+
+                        '<a href="user/edit/'+data.id+'" class="btn btn-info m-r-5"><i class="fa fa-pencil"></i></a>' +
+                        '<button class="btn btn-danger alert-delete" onclick="alertDelete('+data.id+')"><i class="fa fa-trash"></i></button>'
+                }}
+        ],
+        columnDefs: [],
+    }
 }
