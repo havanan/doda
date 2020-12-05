@@ -13,6 +13,11 @@
         0 => 'Nữ',
         1 => 'Nam',
         2 => 'Khác'
+    ];
+    $types = [
+        0 => 'Khách lẻ',
+        1 => 'Khách sỉ',
+        2 => 'Khác'
     ]
     ?>
 @endsection
@@ -41,7 +46,7 @@
                                     <div class="form-group row">
                                         <label class="control-label text-right col-md-3">Tên đầy đủ</label>
                                         <div class="col-md-9">
-                                            <input type="text" class="form-control" placeholder="Vd: Hoàng Văn Xyz" required>
+                                            <input type="text" class="form-control" placeholder="Vd: Hoàng Văn Xyz" name="name" required>
                                             {{--<small class="form-control-feedback"> This is inline help </small> --}}
                                         </div>
                                     </div>
@@ -51,8 +56,8 @@
                                     <div class="form-group row">
                                         <label class="control-label text-right col-md-3">Email</label>
                                         <div class="col-md-9">
-                                            <input type="text" class="form-control"
-                                                   placeholder="Vd: abcd@xyz.com" required>
+                                            <input type="email" class="form-control"
+                                                   placeholder="Vd: abcd@xyz.com" name="email" required>
                                             {{--<small class="form-control-feedback"> This field has error. </small> --}}
                                         </div>
                                     </div>
@@ -91,8 +96,10 @@
                                         <label class="control-label text-right col-md-3">Phân loại</label>
                                         <div class="col-md-9">
                                             <select class="form-control custom-select"
-                                                    data-placeholder="Choose a Category" tabindex="1">
-                                                <option value="Category 1">Category 1</option>
+                                                    data-placeholder="Vui lòng chọn loại khách" tabindex="1">
+                                                @foreach($types as $key => $item)
+                                                    <option value="{{$key}}">{{$item}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -101,7 +108,7 @@
                                     <div class="form-group row">
                                         <label class="control-label text-right col-md-3">Sinh nhật</label>
                                         <div class="col-md-9">
-                                            <input type="date" class="form-control" placeholder="dd/mm/yyyy" name="birthday">
+                                            <input type="date" class="form-control" placeholder="dd/mm/yyyy" name="birthday" value="{{date('Y-m-d')}}">
                                         </div>
                                     </div>
                                 </div>
@@ -129,17 +136,22 @@
                                     <div class="form-group row">
                                         <label class="control-label text-right col-md-3">Ảnh đại diện</label>
                                         <div class="col-md-9">
-                                            <div class="input-group">
+                                           <div class="row">
+                                               <div class="col-md-6">
+                                                   <div class="input-group">
                                                    <span class="input-group-btn">
                                                      <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary text-white">
                                                        <i class="fa fa-picture-o"></i> Chọn ảnh
                                                      </a>
                                                    </span>
-                                                <input id="thumbnail" class="form-control" type="text" name="avatar" style="display: none">
-                                            </div>
-                                            <div id="holder" style="margin-top:15px;max-height:100px;">
+                                                       <input id="thumbnail" class="form-control" type="text" name="avatar" style="display: none">
+                                                   </div>
+                                               </div>
+                                               <div class="col-md-6">
+                                                   <div id="holder" style="max-height:200px;"></div>
+                                               </div>
+                                           </div>
 
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -148,50 +160,52 @@
                             <h3 class="box-title">Địa chỉ</h3>
                             <hr class="m-t-0 m-b-40">
                             <!--/row-->
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-3">City</label>
-                                        <div class="col-md-9">
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/span-->
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-3">State</label>
-                                        <div class="col-md-9">
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/span-->
-                            </div>
-                            <!--/row-->
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-3">Post Code</label>
-                                        <div class="col-md-9">
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/span-->
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-3">Country</label>
-                                        <div class="col-md-9">
-                                            <select class="form-control custom-select">
-                                                <option>Country 1</option>
-                                                <option>Country 2</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/span-->
-                            </div>
+{{--                            <div class="row">--}}
+{{--                                <div class="col-md-6">--}}
+{{--                                    <div class="form-group row">--}}
+{{--                                        <label class="control-label text-right col-md-3">Tỉnh/Thành phố</label>--}}
+{{--                                        <div class="col-md-9">--}}
+{{--                                            <select class="form-control custom-select">--}}
+{{--                                                <option>Country 1</option>--}}
+{{--                                            </select>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <!--/span-->--}}
+{{--                                <div class="col-md-6">--}}
+{{--                                    <div class="form-group row">--}}
+{{--                                        <label class="control-label text-right col-md-3">State</label>--}}
+{{--                                        <div class="col-md-9">--}}
+{{--                                            <input type="text" class="form-control">--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <!--/span-->--}}
+{{--                            </div>--}}
+{{--                            <!--/row-->--}}
+{{--                            <div class="row">--}}
+{{--                                <div class="col-md-6">--}}
+{{--                                    <div class="form-group row">--}}
+{{--                                        <label class="control-label text-right col-md-3">Post Code</label>--}}
+{{--                                        <div class="col-md-9">--}}
+{{--                                            <input type="text" class="form-control">--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <!--/span-->--}}
+{{--                                <div class="col-md-6">--}}
+{{--                                    <div class="form-group row">--}}
+{{--                                        <label class="control-label text-right col-md-3">Country</label>--}}
+{{--                                        <div class="col-md-9">--}}
+{{--                                            <select class="form-control custom-select">--}}
+{{--                                                <option>Country 1</option>--}}
+{{--                                                <option>Country 2</option>--}}
+{{--                                            </select>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <!--/span-->--}}
+{{--                            </div>--}}
                             <!--/row-->
                             <div class="row">
                                 <div class="col-md-6">

@@ -46,6 +46,9 @@ class UserService
      */
     public function createUser($input)
     {
+        if (!isset($input['password'])) {
+            $input['password'] = bcrypt('abcd1234');
+        }
         return $this->useRepository->create($input);
     }
 

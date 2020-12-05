@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\User\CreateRequest;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 
@@ -27,5 +28,13 @@ class UserController extends Controller
     public function delete(Request $request) {
         $id = $request->get('id');
         return $this->userervice->deleteById($id);
+    }
+    public function save(CreateRequest $request) {
+        $params = $request->all();
+        $create = $this->userervice->createUser($params);
+        if ($create) {
+            return redirect()->route('admin.user.index')->with('success','Thêm người dùng thành công');
+        }
+        return  back()->with('error','Thêm người dùng thất bại');
     }
 }
