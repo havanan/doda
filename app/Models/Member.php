@@ -9,6 +9,7 @@ class Member extends Authenticatable
     use Notifiable;
 
     protected $guard = 'member';
+    protected $guarded = [];
 
     protected $hidden = [
         'password', 'remember_token',

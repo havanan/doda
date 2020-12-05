@@ -5232,7 +5232,7 @@ function getUConfTable() {
                 render:function (data) {
                     let img = '';
                     if (data) {
-                        img = '<img src="'+data+'" class="img-circle img-responsive" />';
+                        img = '<img src="'+data+'" style="width: 100px; height: 100px" />';
                     }
                     return img;
                 }},
@@ -5242,13 +5242,13 @@ function getUConfTable() {
 
                     let addr1 = '';
                     let addr2 = '';
-                    const name = '<p class="box-title">'+data+'</p>';
+                    const name = ' <p class="box-title"> '+data+' </p>';
                     if (row) {
                         if (row.address_1){
-                            addr1 = '<address><i class="fa fa-podcast"></i>'+row.address_1+'</address>'
+                            addr1 = '<address><i class="fa fa-podcast"></i> '+row.address_1+'</address>'
                         }
                         if (row.address_2){
-                            addr1 = '<address><i class="fa fa-podcast"></i>'+row.address_2+'</address>'
+                            addr1 = '<address><i class="fa fa-podcast"></i> '+row.address_2+'</address>'
                         }
                     }
                     return '<div class="row">' +
@@ -5289,6 +5289,9 @@ function getUConfTable() {
                         '<button class="btn btn-danger alert-delete" onclick="alertDelete('+data.id+')"><i class="fa fa-trash"></i></button>'
                 }}
         ],
-        columnDefs: [],
+        columnDefs: [
+            { targets: 0, orderable: false },
+            { targets: 8, orderable: false },
+        ],
     }
 }

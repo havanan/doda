@@ -23,7 +23,7 @@
         items.forEach(function (item) {
           console.log(item)
           target_preview.append(
-            $('<img>').css('height', '5rem').attr('src', item.thumb_url)
+            $('<img>').css('width', '200px').attr('src', item.thumb_url)
           );
         });
 

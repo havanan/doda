@@ -43,7 +43,9 @@ class UserRepository extends BaseRepository
     }
 
     public function getListWithDataTable($params) {
+
         $paginate = Common::toPagination($params);
+
         $query = $this->model->orderBy($paginate['sort'], $paginate['order']);
 
         if (isset($paginate['search'])) {
@@ -55,10 +57,11 @@ class UserRepository extends BaseRepository
             $query->orWhere('address_2', 'like', "%" . $paginate['search'] . "%");
 
         }
-
-        $query = $query->paginate($paginate['limit']);
-
-        return Common::toJson($query);
+        $query = $query->skip($paginate['start'])->take($paginate['limit'])->get();
+//         $query = $query->skip($paginate['start'])->paginate($paginate['limit']);
+//        dd($query);
+        $total = $this->model->count();
+        return Common::toJson($query,$total);
     }
 
 }

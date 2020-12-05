@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class BillStatus extends Model
 {
-    //
+    protected $guarded = [];
+
 }

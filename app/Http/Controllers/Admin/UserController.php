@@ -31,10 +31,32 @@ class UserController extends Controller
     }
     public function save(CreateRequest $request) {
         $params = $request->all();
-        $create = $this->userervice->createUser($params);
-        if ($create) {
+
+        try {
+            $this->userervice->createUser($params);
             return redirect()->route('admin.user.index')->with('success','Thêm người dùng thành công');
         }
-        return  back()->with('error','Thêm người dùng thất bại');
+        catch (\Exception $e) {
+            return  back()->with('error','Thêm người dùng thất bại');
+        }
+
+    }
+    public function edit($id){
+        $info = $this->userervice->findUserById($id);
+        return view('adm.user.create',compact('info'));
+    }
+    public function update(CreateRequest $request,$id) {
+        $params = $request->all();
+        try {
+            $this->userervice->updateUserInfo($id,$params);
+            return redirect()->route('admin.user.index')->with('success','Sửa người dùng thành công');
+        }
+        catch (\Exception $e) {
+            return  back()->with('error','Sửa người dùng thất bại');
+        }
+    }
+    public function view($id) {
+        $info = $this->userervice->findUserById($id);
+        return view('adm.user.view',compact('info'));
     }
 }

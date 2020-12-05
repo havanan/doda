@@ -46,9 +46,11 @@ Route::group([
             Route::get('list',          'UserController@getList')->name('admin.user.list');
             Route::get('create',         'UserController@create')->name('admin.user.create');
             Route::get('view/{id}',     'UserController@view')->name('admin.user.view');
-            Route::get('update/{id}',   'UserController@update')->name('admin.user.update');
+            Route::get('edit/{id}',     'UserController@edit')->name('admin.user.edit');
             Route::post('delete',       'UserController@delete')->name('admin.user.delete');
             Route::post('save',       'UserController@save')->name('admin.user.save');
+            Route::post('update/{id}',   'UserController@update')->name('admin.user.update');
+
 
         });
 

@@ -10,6 +10,9 @@ abstract class BaseRepository implements BaseRepositoryInterface
 
     public function create($attribute)
     {
+        if (isset($attribute['_token'])) {
+            unset($attribute['_token']);
+        }
         return $this->model->create($attribute);
     }
 
@@ -28,6 +31,9 @@ abstract class BaseRepository implements BaseRepositoryInterface
 
     public function updateById($id, $input)
     {
+        if (isset($input['_token'])) {
+            unset($input['_token']);
+        }
         return $this->model->where('id', $id)
             ->update($input);
     }
@@ -39,16 +45,25 @@ abstract class BaseRepository implements BaseRepositoryInterface
 
     public function firstOrCreate($input)
     {
+        if (isset($input['_token'])) {
+            unset($input['_token']);
+        }
         return $this->model->firstOrCreate($input);
     }
 
     public function insertMulti($input)
     {
+        if (isset($input['_token'])) {
+            unset($input['_token']);
+        }
         return $this->model->insert($input);
     }
 
     public function updateOrCreate($attributes, $values)
     {
+        if (isset($values['_token'])) {
+            unset($values['_token']);
+        }
         return $this->model->updateOrCreate($attributes, $values);
     }
 }

@@ -67,15 +67,14 @@ class Common
      * @param $collection
      * @return false|string
      */
-    public static function toJson($collection){
+    public static function toJson($collection,$total){
         $data = [];
-        $total = $collection->total();
-        $data['recordsTotal'] = $total;
+        $data['recordsTotal'] = count($collection);
         $data['recordsFiltered'] = $total;
-        $data['lastPage'] = $collection->lastPage();
-        $data['perPage'] = $collection->perPage();
-        $data['currentPage'] = $collection->currentPage();
-        $data['data'] = $collection->items();
+//        $data['lastPage'] = $collection->lastPage();
+//        $data['perPage'] = $collection->perPage();
+//        $data['currentPage'] = $collection->currentPage();
+        $data['data'] = $collection;
         return json_encode($data);
     }
 
@@ -86,13 +85,19 @@ class Common
      * @return array
      */
     public static function toPagination($params, $table = null){
+        $start = $params['start'];
         $limit = 10;
-        $start = 0;
         $sort = "id";
         $order = 'desc';
         $search = null;
         $query = [];
+        $columns = $params['columns'];
 
+        if (isset($params['order'][0]['column']) && isset($params['order'][0]['column'])){
+            $orderColumn = $params['order'][0]['column'];
+            if (isset($columns[$orderColumn]['data']))
+            $sort = $columns[$orderColumn]['data'];
+        }
         $query['limit'] = isset($params['limit']) ? $params['limit'] : $limit;
 
         if(!empty($table)){
@@ -106,7 +111,7 @@ class Common
 
         $query['order'] = isset($params['order'][0]['dir']) ? $params['order'][0]['dir'] : $order;
 
-
+        $query['start'] = $start;
 
         return $query;
     }

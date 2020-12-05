@@ -23,13 +23,21 @@ class CreateRequest extends FormRequest
      */
     public function rules()
     {
+        //check update
+        if (isset($this->id) && $this->id != null) {
+
+            return [
+                'name' => 'required|max:255',
+                'email' => "email|unique:users,email,{$this->id}",
+                'phone' => "required|between:1,13|unique:users,phone,{$this->id}",
+                'birthday' => 'nullable|date',
+            ];
+        }
+        //check create
         return [
             'name' => 'required|max:255',
-            'email' => 'email|unique:admins,email',
-            'phone' => 'required',
-
-//            'password' => 'required|min:6|max:255',
-//            'password_confirm' => 'required_with:password|same:password',
+            'email' => 'email|unique:users,email',
+            'phone' => 'required|between:1,13|unique:users,phone',
             'birthday' => 'nullable|date',
         ];
     }
@@ -39,7 +47,10 @@ class CreateRequest extends FormRequest
         return [
             'name.required' => 'Tên người dùng không được để trống',
             'email.required' => 'Email không được để trống',
+            'email.unique' => 'Email đã tồn tại',
             'phone.required' => 'Số điện thoại không được để trống',
+            'phone.unique' => 'Số điện thoại đã tồn tại',
+            'phone.between' => 'Số điện thoại không quá 13 số',
             'password' => 'Mật khẩu không được để trống',
             'birthday.date' => 'Ngày sinh phải là dạng dd/mm/yyyy'
         ];

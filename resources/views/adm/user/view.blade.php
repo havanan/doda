@@ -40,8 +40,7 @@
                     <h4 class="m-b-0 text-white"><i class="fa fa-user-plus"></i></h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{isset($info) ? route('admin.user.update',$info->id) : route('admin.user.save')}}" method="post" class="form-horizontal">
-                        @csrf
+                    <div class="form-horizontal">
                         <div class="form-body">
                             <h3 class="box-title">Thông tin khách hàng</h3>
                             <hr class="m-t-0 m-b-40">
@@ -50,7 +49,7 @@
                                     <div class="form-group row">
                                         <label class="control-label text-right col-md-3">Tên đầy đủ</label>
                                         <div class="col-md-9">
-                                            <input type="text" class="form-control" placeholder="Vd: Hoàng Văn Xyz" name="name" value="{{isset($info['name']) ? $info['name'] : old('name')}}" required>
+                                            <input type="text" class="form-control" placeholder="Vd: Hoàng Văn Xyz" name="name" value="{{isset($info['name']) ? $info['name'] : old('name')}}" disabled>
                                             {{--<small class="form-control-feedback"> This is inline help </small> --}}
                                         </div>
                                     </div>
@@ -61,7 +60,7 @@
                                         <label class="control-label text-right col-md-3">Email</label>
                                         <div class="col-md-9">
                                             <input type="email" class="form-control"
-                                                   placeholder="Vd: abcd@xyz.com" name="email" value="{{isset($info['email']) ? $info['email'] : old('email')}}" required>
+                                                   placeholder="Vd: abcd@xyz.com" name="email" value="{{isset($info['email']) ? $info['email'] : old('email')}}" disabled>
                                             {{--<small class="form-control-feedback"> This field has error. </small> --}}
                                         </div>
                                     </div>
@@ -74,7 +73,7 @@
                                     <div class="form-group row">
                                         <label class="control-label text-right col-md-3">Giới tính</label>
                                         <div class="col-md-9">
-                                            <select class="form-control custom-select" name="gender" required>
+                                            <select class="form-control custom-select" name="gender" disabled>
                                                @foreach($genders as $key => $item)
                                                     <option value="{{$key}}">{{$item}}</option>
                                                @endforeach
@@ -87,7 +86,7 @@
                                     <div class="form-group row">
                                         <label class="control-label text-right col-md-3">Điện thoại</label>
                                         <div class="col-md-9">
-                                            <input type="number" max="9999999999999" name="phone" class="form-control" required placeholder="Vd: 039283333" value="{{isset($info['phone']) ? $info['phone'] : ''}}">
+                                            <input type="text" name="phone" class="form-control" disabled placeholder="Vd: 039283333" value="{{isset($info['phone']) ? $info['phone'] : ''}}">
                                         </div>
                                     </div>
                                 </div>
@@ -124,7 +123,7 @@
                                             <div class="m-b-10">
                                                 @foreach($status as $key => $item)
                                                 <label class="custom-control custom-radio">
-                                                    <input value="{{$key}}" id="radio{{$key}}" name="status" type="radio"
+                                                    <input value="{{$key}}" id="radio{{$key}}" name="status" type="radio" disabled
                                                            class="custom-control-input" @if(isset($info['status']) && $info['status'] == $key) checked @elseif($key == 0) checked @endif>
                                                     <span class="custom-control-label">{{$item}}</span>
                                                 </label>
@@ -222,7 +221,7 @@
                                     <div class="form-group row">
                                         <label class="control-label text-right col-md-3">Địa chỉ 1</label>
                                         <div class="col-md-9">
-                                            <textarea class="form-control" name="address_1">{{isset($info['address_1']) ? $info['address_1'] : ''}}</textarea>
+                                            <textarea class="form-control" name="address_1" disabled>{{isset($info['address_1']) ? $info['address_1'] : ''}}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -230,7 +229,7 @@
                                     <div class="form-group row">
                                         <label class="control-label text-right col-md-3">Địa chỉ 2</label>
                                         <div class="col-md-9">
-                                            <textarea class="form-control" name="address_2">{{isset($info['address_2']) ? $info['address_2'] : ''}}</textarea>
+                                            <textarea class="form-control" name="address_2" disabled>{{isset($info['address_2']) ? $info['address_2'] : ''}}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -243,15 +242,15 @@
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-9">
-                                            <button type="reset" class="btn btn-primary">Làm mới</button>
-                                            <button type="submit" class="btn btn-danger">Lưu thông tin</button>
+                                            <a href="{{route('admin.user.index')}}"  class="btn btn-primary">Quay lại</a>
+                                            <a href="{{route('admin.user.edit',$info->id)}}" class="btn btn-danger">Sửa thông tin</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6"></div>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
