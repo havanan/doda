@@ -57,12 +57,12 @@ Route::group([
         Route::group([
             'prefix' => 'staff',
         ],function (){
-            Route::get('/',             'StaffController@index')->name('admin.staff.index');
-            Route::get('list',          'StaffController@getList')->name('admin.staff.list');
-            Route::get('create',         'StaffController@create')->name('admin.staff.create');
-            Route::get('view/{id}',     'StaffController@view')->name('admin.staff.view');
-            Route::get('update/{id}',   'StaffController@update')->name('admin.staff.update');
-            Route::get('delete/{id}',   'StaffController@delete')->name('admin.staff.delete');
+            Route::get('/',             'AdminController@index')->name('admin.staff.index');
+            Route::get('list',          'AdminController@getList')->name('admin.staff.list');
+            Route::get('create',         'AdminController@create')->name('admin.staff.create');
+            Route::get('view/{id}',     'AdminController@view')->name('admin.staff.view');
+            Route::get('update/{id}',   'AdminController@update')->name('admin.staff.update');
+            Route::get('delete/{id}',   'AdminController@delete')->name('admin.staff.delete');
         });
         Route::group([
             'prefix' => 'role',
