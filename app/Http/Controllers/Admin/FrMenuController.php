@@ -7,5 +7,9 @@ use Illuminate\Http\Request;
 
 class FrMenuController extends Controller
 {
+    public function __construct()
+    {
+
+    }
     //
 }
