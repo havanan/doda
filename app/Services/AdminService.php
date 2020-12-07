@@ -9,13 +9,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class AdminService
 {
-    /** @var AdminRepository $useRepository */
-    protected $useRepository;
+    /** @var AdminRepository $adminRepository */
+    protected $adminRepository;
     
     public function __construct(
         AdminRepository $adminRepository
     ) {
-        $this->useRepository = $adminRepository;
+        $this->adminRepository = $adminRepository;
     }
     /**
      * @param $id
@@ -23,12 +23,12 @@ class AdminService
      */
     public function findUserById($id)
     {
-        return $this->useRepository->find($id);
+        return $this->adminRepository->find($id);
     }
 
     public function getUserByEmail($email)
     {
-        return $this->useRepository->getByEmail($email);
+        return $this->adminRepository->getByEmail($email);
     }
     /**
      * @param $userId
@@ -37,7 +37,7 @@ class AdminService
      */
     public function updateUserInfo($userId, $params)
     {
-        return $this->useRepository->updateById($userId, $params);
+        return $this->adminRepository->updateById($userId, $params);
     }
 
     /**
@@ -49,15 +49,15 @@ class AdminService
         if (!isset($input['password'])) {
             $input['password'] = bcrypt('abcd1234');
         }
-        return $this->useRepository->create($input);
+        return $this->adminRepository->create($input);
     }
 
     public function getListWithDataTable($params) {
-        return $this->useRepository->getListWithDataTable($params);
+        return $this->adminRepository->getListWithDataTable($params);
     }
 
     public function deleteById($id){
-        $action = $this->useRepository->delete($id);
+        $action = $this->adminRepository->delete($id);
         if ($action) {
             return Common::successResponse('Xóa người dùng thành công');
         }

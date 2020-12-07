@@ -14,6 +14,7 @@
 
         const urlDelete = '{{route('admin.user.delete')}}';
         const urlList = '{{route('admin.user.list')}}';
+        const urlPrefix = 'user';
         const config = getUConfTable();
     </script>
     <script src="{{asset( 'admin/js/data-table-init.js')}}"></script>

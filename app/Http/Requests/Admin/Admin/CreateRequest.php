@@ -28,16 +28,16 @@ class CreateRequest extends FormRequest
 
             return [
                 'name' => 'required|max:255',
-                'email' => "email|unique:users,email,{$this->id}",
-                'phone' => "required|between:1,13|unique:users,phone,{$this->id}",
+                'email' => "email|unique:admins,email,{$this->id}",
+                'phone' => "required|between:1,13|unique:admins,phone,{$this->id}",
                 'birthday' => 'nullable|date',
             ];
         }
         //check create
         return [
             'name' => 'required|max:255',
-            'email' => 'email|unique:users,email',
-            'phone' => 'required|between:1,13|unique:users,phone',
+            'email' => 'email|unique:admins,email',
+            'phone' => 'required|between:1,13|unique:admins,phone',
             'birthday' => 'nullable|date',
         ];
     }

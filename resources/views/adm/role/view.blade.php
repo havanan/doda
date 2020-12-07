@@ -2,8 +2,8 @@
 @section('breadcrumb')
     <?php
     $breadcrumb = [
-        'title' => 'Người dùng',
-        'url' => 'admin.user.index',
+        'title' => 'Quyền',
+        'url' => 'admin.role.index',
         'child' => [
             'title' => isset($info) ? 'Sửa' : 'Tạo mới',
             'url' => '#'

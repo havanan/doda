@@ -14,7 +14,8 @@
 
         const urlDelete = '{{route('admin.staff.delete')}}';
         const urlList = '{{route('admin.staff.list')}}';
-        const config = getUConfTable();
+        const urlPrefix = 'staff';
+        const config = getAConfTable();
     </script>
     <script src="{{asset( 'admin/js/data-table-init.js')}}"></script>
 @endsection
@@ -36,6 +37,7 @@
                                 <th>Phone</th>
                                 <th>Ngày sinh</th>
                                 <th>Trạng thái</th>
+                                <th>Quyền</th>
                                 <th>Tạo lúc</th>
                                 <th></th>
                             </tr>

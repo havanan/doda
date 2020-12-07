@@ -48,7 +48,7 @@ Route::group([
             Route::get('view/{id}',     'UserController@view')->name('admin.user.view');
             Route::get('edit/{id}',     'UserController@edit')->name('admin.user.edit');
             Route::post('delete',       'UserController@delete')->name('admin.user.delete');
-            Route::post('save',       'UserController@save')->name('admin.user.save');
+            Route::post('save',         'UserController@save')->name('admin.user.save');
             Route::post('update/{id}',   'UserController@update')->name('admin.user.update');
 
 
@@ -59,10 +59,13 @@ Route::group([
         ],function (){
             Route::get('/',             'AdminController@index')->name('admin.staff.index');
             Route::get('list',          'AdminController@getList')->name('admin.staff.list');
-            Route::get('create',         'AdminController@create')->name('admin.staff.create');
+            Route::get('create',        'AdminController@create')->name('admin.staff.create');
             Route::get('view/{id}',     'AdminController@view')->name('admin.staff.view');
             Route::get('update/{id}',   'AdminController@update')->name('admin.staff.update');
-            Route::get('delete/{id}',   'AdminController@delete')->name('admin.staff.delete');
+            Route::get('edit/{id}',     'AdminController@edit')->name('admin.staff.edit');
+            Route::post('delete',       'AdminController@delete')->name('admin.staff.delete');
+            Route::post('save',         'AdminController@save')->name('admin.staff.save');
+            Route::post('update/{id}',  'AdminController@update')->name('admin.staff.update');
         });
         Route::group([
             'prefix' => 'role',
@@ -72,7 +75,9 @@ Route::group([
             Route::get('create',        'RoleController@create')->name('admin.role.create');
             Route::get('view/{id}',     'RoleController@view')->name('admin.role.view');
             Route::get('update/{id}',   'RoleController@update')->name('admin.role.update');
-            Route::get('delete/{id}',   'RoleController@delete')->name('admin.role.delete');
+            Route::post('delete',       'RoleController@delete')->name('admin.role.delete');
+            Route::post('save',         'RoleController@save')->name('admin.role.save');
+            Route::post('update/{id}',  'RoleController@update')->name('admin.role.update');
         });
         Route::group([
             'prefix' => 'report',

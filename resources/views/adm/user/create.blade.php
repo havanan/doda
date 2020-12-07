@@ -76,7 +76,7 @@
                                         <div class="col-md-9">
                                             <select class="form-control custom-select" name="gender" required>
                                                @foreach($genders as $key => $item)
-                                                    <option value="{{$key}}">{{$item}}</option>
+                                                    <option value="{{$key}}" @if(isset($info['gender']) && $info['gender'] == $key) selected @elseif($key == 0) selected @endif>{{$item}}</option>
                                                @endforeach
                                             </select>
                                         </div>
@@ -100,9 +100,9 @@
                                         <label class="control-label text-right col-md-3">Phân loại</label>
                                         <div class="col-md-9">
                                             <select class="form-control custom-select"
-                                                    data-placeholder="Vui lòng chọn loại khách" tabindex="1">
+                                                    data-placeholder="Vui lòng chọn loại khách" name="type" tabindex="1">
                                                 @foreach($types as $key => $item)
-                                                    <option value="{{$key}}">{{$item}}</option>
+                                                    <option value="{{$key}}" @if(isset($info['type']) && $info['type'] == $key) selected @elseif($key == 0) selected @endif>{{$item}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -129,11 +129,6 @@
                                                     <span class="custom-control-label">{{$item}}</span>
                                                 </label>
                                                 @endforeach
-                                                {{--<label class="custom-control custom-radio">--}}
-                                                    {{--<input value="0" id="radio4" name="status" type="radio"--}}
-                                                           {{--class="custom-control-input">--}}
-                                                    {{--<span class="custom-control-label">Khóa</span>--}}
-                                                {{--</label>--}}
                                             </div>
                                         </div>
                                     </div>

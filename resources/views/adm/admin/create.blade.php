@@ -76,7 +76,7 @@
                                         <div class="col-md-9">
                                             <select class="form-control custom-select" name="gender" required>
                                                @foreach($genders as $key => $item)
-                                                    <option value="{{$key}}">{{$item}}</option>
+                                                    <option value="{{$key}}" @if(isset($info['gender']) && $info['gender'] == $key) selected @elseif($key == 0) selected @endif>{{$item}}</option>
                                                @endforeach
                                             </select>
                                         </div>
@@ -97,12 +97,12 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-3">Phân loại</label>
+                                        <label class="control-label text-right col-md-3">Quyền</label>
                                         <div class="col-md-9">
                                             <select class="form-control custom-select"
-                                                    data-placeholder="Vui lòng chọn loại khách" tabindex="1">
-                                                @foreach($types as $key => $item)
-                                                    <option value="{{$key}}">{{$item}}</option>
+                                                    data-placeholder="Vui lòng chọn quyền" name="role_id" tabindex="1">
+                                                @foreach($roles as $key => $item)
+                                                    <option value="{{$item['id']}}" @if(isset($info['role_id']) && $info['role_id'] == $item['id']) selected @elseif($item['id'] == 0) selected @endif>{{$item['name']}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -129,11 +129,6 @@
                                                     <span class="custom-control-label">{{$item}}</span>
                                                 </label>
                                                 @endforeach
-                                                {{--<label class="custom-control custom-radio">--}}
-                                                    {{--<input value="0" id="radio4" name="status" type="radio"--}}
-                                                           {{--class="custom-control-input">--}}
-                                                    {{--<span class="custom-control-label">Khóa</span>--}}
-                                                {{--</label>--}}
                                             </div>
                                         </div>
                                     </div>
@@ -222,7 +217,7 @@
                                     <div class="form-group row">
                                         <label class="control-label text-right col-md-3">Địa chỉ 1</label>
                                         <div class="col-md-9">
-                                            <textarea class="form-control" name="address_1">{{isset($info['address_1']) ? $info['address_1'] : ''}}</textarea>
+                                            <textarea class="form-control" name="address_1">{{isset($info['address_1']) ? $info['address_1'] : old('address_1')}}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -230,7 +225,7 @@
                                     <div class="form-group row">
                                         <label class="control-label text-right col-md-3">Địa chỉ 2</label>
                                         <div class="col-md-9">
-                                            <textarea class="form-control" name="address_2">{{isset($info['address_2']) ? $info['address_2'] : ''}}</textarea>
+                                            <textarea class="form-control" name="address_2">{{isset($info['address_2']) ? $info['address_2'] : old('address_2')}}</textarea>
                                         </div>
                                     </div>
                                 </div>

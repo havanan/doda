@@ -30,31 +30,22 @@ class AdminRepository extends BaseRepository
             ->where('email', $email)
             ->first();
     }
-
-    /**
-     * @param $user
-     * @param $data
-     * @return Collection
-     */
-    public function updateUserInfo($user, $data)
-    {
-        $user->fill($data)->save();
-        return $user;
-    }
-
     public function getListWithDataTable($params) {
 
         $paginate = Common::toPagination($params);
 
-        $query = $this->model->orderBy($paginate['sort'], $paginate['order']);
+        $query = $this->model
+            ->select('admins.*','roles.name as role_name')
+            ->orderBy($paginate['sort'], $paginate['order'])
+            ->leftJoin('roles','roles.id','admins.role_id');
 
         if (isset($paginate['search'])) {
 
-            $query->where('email', 'like', "%" . $paginate['search'] . "%");
-            $query->orWhere('phone', 'like', "%" . $paginate['search'] . "%");
-            $query->orWhere('name', 'like', "%" . $paginate['search'] . "%");
-            $query->orWhere('address_1', 'like', "%" . $paginate['search'] . "%");
-            $query->orWhere('address_2', 'like', "%" . $paginate['search'] . "%");
+            $query->where('admins.email', 'like', "%" . $paginate['search'] . "%");
+            $query->orWhere('admins.phone', 'like', "%" . $paginate['search'] . "%");
+            $query->orWhere('admins.name', 'like', "%" . $paginate['search'] . "%");
+            $query->orWhere('admins.address_1', 'like', "%" . $paginate['search'] . "%");
+            $query->orWhere('admins.address_2', 'like', "%" . $paginate['search'] . "%");
 
         }
         $query = $query->skip($paginate['start'])->take($paginate['limit'])->get();

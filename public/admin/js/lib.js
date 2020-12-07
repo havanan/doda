@@ -5284,14 +5284,117 @@ function getUConfTable() {
                     if (!data) {
                         return ''
                     }
-                    return '<a href="user/view/'+data.id+'" class="btn btn-success m-r-5"><i class="fa fa-info-circle"></i></a >'+
-                        '<a href="user/edit/'+data.id+'" class="btn btn-info m-r-5"><i class="fa fa-pencil"></i></a>' +
+                    return '<a href="'+urlPrefix+'/view/'+data.id+'" class="btn btn-success m-r-5"><i class="fa fa-info-circle"></i></a >'+
+                        '<a href="'+urlPrefix+'/edit/'+data.id+'" class="btn btn-info m-r-5"><i class="fa fa-pencil"></i></a>' +
                         '<button class="btn btn-danger alert-delete" onclick="alertDelete('+data.id+')"><i class="fa fa-trash"></i></button>'
                 }}
         ],
         columnDefs: [
             { targets: 0, orderable: false },
             { targets: 8, orderable: false },
+        ],
+    }
+}
+function getAConfTable() {
+    return {
+        ajax: urlList,
+        columns: [
+            {data:null},
+            {
+                data:'avatar',
+                render:function (data) {
+                    let img = '';
+                    if (data) {
+                        img = '<img src="'+data+'" style="width: 100px; height: 100px" />';
+                    }
+                    return img;
+                }},
+            {
+                data:'name',
+                render:function (data,b,row) {
+
+                    let addr1 = '';
+                    let addr2 = '';
+                    const name = ' <p class="box-title"> '+data+' </p>';
+                    if (row) {
+                        if (row.address_1){
+                            addr1 = '<address><i class="fa fa-podcast"></i> '+row.address_1+'</address>'
+                        }
+                        if (row.address_2){
+                            addr1 = '<address><i class="fa fa-podcast"></i> '+row.address_2+'</address>'
+                        }
+                    }
+                    return '<div class="row">' +
+                        '<div">'+name+addr1+addr2+'</div>' +
+                        '</div>';
+                }},
+            {data:'email'},
+            {data:'phone'},
+            {data:'birthday',
+                type:'date',
+                render: function(data){
+                    if (data === null) return "";
+                    return moment(data).format(DATE);
+                },},
+            {data:'status',render:function (data) {
+
+                    let btn = '<span class="label label-danger font-weight-100">Khóa</span>';
+
+                    if (data) {
+                        console.log('ahihi')
+                        btn = '<span class="label label-success font-weight-100">Hoạt động</span>'
+                    }
+                    return btn;
+                }},
+            {data:'role_name'},
+            {data:'created_at',
+                type:'date',
+                render: function(data){
+                    if (data === null) return "";
+                    return moment(data).format(DATE_TIME);
+                },},
+            {data: null,
+                render: function (data) {
+                    if (!data) {
+                        return ''
+                    }
+                    return '<a href="'+urlPrefix+'/view/'+data.id+'" class="btn btn-success m-r-5"><i class="fa fa-info-circle"></i></a >'+
+                        '<a href="'+urlPrefix+'/edit/'+data.id+'" class="btn btn-info m-r-5"><i class="fa fa-pencil"></i></a>' +
+                        '<button class="btn btn-danger alert-delete" onclick="alertDelete('+data.id+')"><i class="fa fa-trash"></i></button>'
+                }}
+        ],
+        columnDefs: [
+            { targets: 0, orderable: false },
+            { targets: 8, orderable: false },
+        ],
+    }
+}
+function getRConfTable() {
+    return {
+        ajax: urlList,
+        columns: [
+            {data:null},
+            {data:'name'},
+            {data:'note'},
+            {data:'created_at',
+                type:'date',
+                render: function(data){
+                    if (data === null) return "";
+                    return moment(data).format(DATE_TIME);
+                },},
+            {data: null,
+                render: function (data) {
+                    if (!data) {
+                        return ''
+                    }
+                    return '<a href="'+urlPrefix+'/view/'+data.id+'" class="btn btn-success m-r-5"><i class="fa fa-info-circle"></i></a >'+
+                        '<a href="'+urlPrefix+'/edit/'+data.id+'" class="btn btn-info m-r-5"><i class="fa fa-pencil"></i></a>' +
+                        '<button class="btn btn-danger alert-delete" onclick="alertDelete('+data.id+')"><i class="fa fa-trash"></i></button>'
+                }}
+        ],
+        columnDefs: [
+            { targets: 0, orderable: false },
+            { targets: 4, orderable: false },
         ],
     }
 }
