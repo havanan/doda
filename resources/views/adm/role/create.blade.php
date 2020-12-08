@@ -3,21 +3,11 @@
     <?php
     $breadcrumb = [
         'title' => 'Quyền',
-        'url' => 'admin.user.index',
+        'url' => 'admin.role.index',
         'child' => [
             'title' => isset($info) ? 'Sửa' : 'Tạo mới',
             'url' => '#'
         ]
-    ];
-    $genders = [
-        0 => 'Nữ',
-        1 => 'Nam',
-        2 => 'Khác'
-    ];
-    $types = [
-        0 => 'Khách lẻ',
-        1 => 'Khách sỉ',
-        2 => 'Khác'
     ];
     $status = [
         0 => 'Khóa',
@@ -26,11 +16,7 @@
     ?>
 @endsection
 @section('js')
-    <script src="{{asset('vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>
-    <script>
-        var route_prefix = "{{route('home')}}/laravel-filemanager";
-        $('#lfm').filemanager('image', {prefix: route_prefix});
-    </script>
+
 @endsection
 @section('content')
     <div class="row">
@@ -79,7 +65,7 @@
                                                 @foreach($permissions as $key => $item)
                                                     <label class="custom-control custom-radio">
                                                         <input value="{{$item->id}}" id="radio{{$item->id}}" name="permission_id[]" type="checkbox"
-                                                               class="custom-control-input" @if(isset($info['permission_id']) && in_array($item->id,$info['permission_id'])) checked @elseif($item->id == 0) checked @endif>
+                                                               class="custom-control-input" @if(isset($info['permission_ids']) && isset($info['permission_ids'][$item->id])) checked @elseif($item->id == 0) checked @endif>
                                                         <span class="custom-control-label">{{$item['name']}}</span>
                                                     </label>
                                                 @endforeach

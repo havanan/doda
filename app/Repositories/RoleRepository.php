@@ -36,16 +36,10 @@ class RoleRepository extends BaseRepository
 
         if (isset($paginate['search'])) {
 
-            $query->where('email', 'like', "%" . $paginate['search'] . "%");
-            $query->orWhere('phone', 'like', "%" . $paginate['search'] . "%");
             $query->orWhere('name', 'like', "%" . $paginate['search'] . "%");
-            $query->orWhere('address_1', 'like', "%" . $paginate['search'] . "%");
-            $query->orWhere('address_2', 'like', "%" . $paginate['search'] . "%");
 
         }
         $query = $query->skip($paginate['start'])->take($paginate['limit'])->get();
-//         $query = $query->skip($paginate['start'])->paginate($paginate['limit']);
-//        dd($query);
         $total = $this->model->count();
         return Common::toJson($query,$total);
     }

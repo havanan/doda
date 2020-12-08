@@ -2,22 +2,12 @@
 @section('breadcrumb')
     <?php
     $breadcrumb = [
-        'title' => 'Người dùng',
-        'url' => 'admin.user.index',
+        'title' => 'Loại sản phẩm',
+        'url' => 'admin.product.cat.index',
         'child' => [
             'title' => isset($info) ? 'Sửa' : 'Tạo mới',
             'url' => '#'
         ]
-    ];
-    $genders = [
-        0 => 'Nữ',
-        1 => 'Nam',
-        2 => 'Khác'
-    ];
-    $types = [
-        0 => 'Khách lẻ',
-        1 => 'Khách sỉ',
-        2 => 'Khác'
     ];
     $status = [
         0 => 'Khóa',
@@ -42,14 +32,14 @@
                 <div class="card-body">
                     <div class="form-horizontal">
                         <div class="form-body">
-                            <h3 class="box-title">Thông tin khách hàng</h3>
+                            <h3 class="box-title">Thông tin loại sản phẩm</h3>
                             <hr class="m-t-0 m-b-40">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-3">Tên đầy đủ</label>
+                                        <label class="control-label text-right col-md-3">Tên loại sản phẩm</label>
                                         <div class="col-md-9">
-                                            <input type="text" class="form-control" placeholder="Vd: Hoàng Văn Xyz" name="name" value="{{isset($info['name']) ? $info['name'] : old('name')}}" disabled>
+                                            <input type="text" class="form-control" placeholder="Vd: Áo, Quần, Giày...." name="name" value="{{isset($info['name']) ? $info['name'] : old('name')}}" disabled>
                                             {{--<small class="form-control-feedback"> This is inline help </small> --}}
                                         </div>
                                     </div>
@@ -242,8 +232,8 @@
                                 <div class="col-md-6">
                                     <div class="row">
                                         <div class="col-md-offset-3 col-md-9">
-                                            <a href="{{route('admin.user.index')}}"  class="btn btn-primary">Quay lại</a>
-                                            <a href="{{route('admin.user.edit',$info->id)}}" class="btn btn-danger">Sửa thông tin</a>
+                                            <a href="{{route('admin.product.cat.index')}}"  class="btn btn-primary">Quay lại</a>
+                                            <a href="{{route('admin.product.cat.edit',$info->id)}}" class="btn btn-danger">Sửa thông tin</a>
                                         </div>
                                     </div>
                                 </div>

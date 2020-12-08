@@ -12,9 +12,10 @@
 @section('js')
     <script>
 
-        const urlDelete = '{{route('admin.user.delete')}}';
-        const urlList = '{{route('admin.user.list')}}';
-        const config = getUConfTable();
+        const urlDelete = '{{route('admin.brand.delete')}}';
+        const urlList = '{{route('admin.brand.list')}}';
+        const urlPrefix = 'brand';
+        const config = getBrConfTable();
     </script>
     <script src="{{asset( 'admin/js/data-table-init.js')}}"></script>
 @endsection
@@ -23,18 +24,13 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <a href="{{route('admin.user.create')}}" class="btn btn-primary">Tạo mới <i class="fa fa-plus"></i></a>
-                    {{--<h4 class="card-title">Tổng <strong class="text-danger">100</strong> người dùng</h4>--}}
+                    <a href="{{route('admin.brand.create')}}" class="btn btn-primary">Tạo mới <i class="fa fa-plus"></i></a>
                     <div class="table-responsive m-t-40">
                         <table class="data-table display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
                                 <th>STT</th>
-                                <th>Avatar</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Ngày sinh</th>
+                                <th>Tên thương hiệu</th>
                                 <th>Trạng thái</th>
                                 <th>Tạo lúc</th>
                                 <th></th>

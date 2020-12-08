@@ -33,14 +33,22 @@ class RoleService
     {
         return $this->roleRepository->find($id);
     }
-    /**
-     * @param $userId
-     * @param array $params
-     * @return Model
-     */
-    public function updateInfo($userId, $params)
+
+    public function updateInfo($id, $params)
     {
-        return $this->roleRepository->updateById($userId, $params);
+        $input = [
+            'name' => $params['name'],
+            'note' =>$params['note'],
+            'slug' => Str::slug($params['name'])
+        ];
+        $this->roleRepository->updateById($id, $input);
+        $permission_ids = $params['permission_id'];
+        $rolePermission = $this->mergeRolePermission($id,$permission_ids);
+        if (!empty($rolePermission)) {
+            $this->rolePermissionRepository->deleteAllByRoleId($id);
+            $this->rolePermissionRepository->insertMulti($rolePermission);
+        }
+        return $rolePermission;
     }
 
     public function getListWithDataTable($params) {
@@ -60,6 +68,9 @@ class RoleService
     public function getAllPermission(){
         return $this->permissionRepository->getAll();
     }
+    public function getPermissionIdsByRole($role_id){
+        return $this->permissionRepository->getIdsByRole($role_id);
+    }
     public function createRole($params) {
         $input = [
             'name' => $params['name'],
@@ -68,19 +79,23 @@ class RoleService
         ];
         $permission_ids = $params['permission_id'];
         $role = $this->roleRepository->create($input);
-
+        $rolePermission = $this->mergeRolePermission($role->id,$permission_ids);
+        if (!empty($rolePermission)) {
+            $this->rolePermissionRepository->insertMulti($rolePermission);
+        }
+        return $rolePermission;
+    }
+    public function mergeRolePermission($role_id,$permission_ids){
         $rolePermission = [];
+
         if (!empty($permission_ids)){
             foreach ($permission_ids as $key => $id) {
                 $item = [
                     'permission_id' => $id,
-                    'role_id' => $role->id
+                    'role_id' => $role_id
                 ];
-                array_push($item,$rolePermission);
+                array_push($rolePermission,$item);
             }
-        }
-        if (!empty($rolePermission)) {
-            $this->rolePermissionRepository->create($rolePermission);
         }
         return $rolePermission;
     }

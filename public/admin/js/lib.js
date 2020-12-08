@@ -5268,7 +5268,6 @@ function getUConfTable() {
                     let btn = '<span class="label label-danger font-weight-100">Khóa</span>';
 
                     if (data) {
-                        console.log('ahihi')
                         btn = '<span class="label label-success font-weight-100">Hoạt động</span>'
                     }
                     return btn;
@@ -5341,7 +5340,6 @@ function getAConfTable() {
                     let btn = '<span class="label label-danger font-weight-100">Khóa</span>';
 
                     if (data) {
-                        console.log('ahihi')
                         btn = '<span class="label label-success font-weight-100">Hoạt động</span>'
                     }
                     return btn;
@@ -5365,7 +5363,7 @@ function getAConfTable() {
         ],
         columnDefs: [
             { targets: 0, orderable: false },
-            { targets: 8, orderable: false },
+            { targets: 9, orderable: false },
         ],
     }
 }
@@ -5389,6 +5387,81 @@ function getRConfTable() {
                     }
                     return '<a href="'+urlPrefix+'/view/'+data.id+'" class="btn btn-success m-r-5"><i class="fa fa-info-circle"></i></a >'+
                         '<a href="'+urlPrefix+'/edit/'+data.id+'" class="btn btn-info m-r-5"><i class="fa fa-pencil"></i></a>' +
+                        '<button class="btn btn-danger alert-delete" onclick="alertDelete('+data.id+')"><i class="fa fa-trash"></i></button>'
+                }}
+        ],
+        columnDefs: [
+            { targets: 0, orderable: false },
+            { targets: 4, orderable: false },
+        ],
+    }
+}
+function getPcConfTable() {
+    return {
+        ajax: urlList,
+        columns: [
+            {data:null},
+            {data:'name'},
+            {data:'parent_name'},
+            {data:'status',render:function (data) {
+
+                    let btn = '<span class="label label-danger font-weight-100">Khóa</span>';
+
+                    if (data) {
+                        btn = '<span class="label label-success font-weight-100">Hoạt động</span>'
+                    }
+                    return btn;
+                }},
+            {data:'created_at',
+                type:'date',
+                render: function(data){
+                    if (data === null) return "";
+                    return moment(data).format(DATE_TIME);
+                },},
+            {data: null,
+                render: function (data) {
+                    if (!data) {
+                        return ''
+                    }
+                    return '<a href="'+urlPrefix+'/edit/'+data.id+'" class="btn btn-info m-r-5"><i class="fa fa-pencil"></i></a>' +
+                        // '<a href="'+urlPrefix+'/view/'+data.id+'" class="btn btn-success m-r-5"><i class="fa fa-info-circle"></i></a >'+
+                        '<button class="btn btn-danger alert-delete" onclick="alertDelete('+data.id+')"><i class="fa fa-trash"></i></button>'
+                }}
+        ],
+        columnDefs: [
+            { targets: 0, orderable: false },
+            { targets: 4, orderable: false },
+        ],
+    }
+}
+function getBrConfTable() {
+    return {
+        ajax: urlList,
+        columns: [
+            {data:null},
+            {data:'name'},
+            {data:'status',render:function (data) {
+
+                    let btn = '<span class="label label-danger font-weight-100">Khóa</span>';
+
+                    if (data) {
+                        btn = '<span class="label label-success font-weight-100">Hoạt động</span>'
+                    }
+                    return btn;
+                }},
+            {data:'created_at',
+                type:'date',
+                render: function(data){
+                    if (data === null) return "";
+                    return moment(data).format(DATE_TIME);
+                },},
+            {data: null,
+                render: function (data) {
+                    if (!data) {
+                        return ''
+                    }
+                    return '<a href="'+urlPrefix+'/edit/'+data.id+'" class="btn btn-info m-r-5"><i class="fa fa-pencil"></i></a>' +
+                        // '<a href="'+urlPrefix+'/view/'+data.id+'" class="btn btn-success m-r-5"><i class="fa fa-info-circle"></i></a >'+
                         '<button class="btn btn-danger alert-delete" onclick="alertDelete('+data.id+')"><i class="fa fa-trash"></i></button>'
                 }}
         ],

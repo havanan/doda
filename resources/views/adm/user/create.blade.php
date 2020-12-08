@@ -164,54 +164,6 @@
                             </div>
                             <h3 class="box-title">Địa chỉ</h3>
                             <hr class="m-t-0 m-b-40">
-                            <!--/row-->
-{{--                            <div class="row">--}}
-{{--                                <div class="col-md-6">--}}
-{{--                                    <div class="form-group row">--}}
-{{--                                        <label class="control-label text-right col-md-3">Tỉnh/Thành phố</label>--}}
-{{--                                        <div class="col-md-9">--}}
-{{--                                            <select class="form-control custom-select">--}}
-{{--                                                <option>Country 1</option>--}}
-{{--                                            </select>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <!--/span-->--}}
-{{--                                <div class="col-md-6">--}}
-{{--                                    <div class="form-group row">--}}
-{{--                                        <label class="control-label text-right col-md-3">State</label>--}}
-{{--                                        <div class="col-md-9">--}}
-{{--                                            <input type="text" class="form-control">--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <!--/span-->--}}
-{{--                            </div>--}}
-{{--                            <!--/row-->--}}
-{{--                            <div class="row">--}}
-{{--                                <div class="col-md-6">--}}
-{{--                                    <div class="form-group row">--}}
-{{--                                        <label class="control-label text-right col-md-3">Post Code</label>--}}
-{{--                                        <div class="col-md-9">--}}
-{{--                                            <input type="text" class="form-control">--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <!--/span-->--}}
-{{--                                <div class="col-md-6">--}}
-{{--                                    <div class="form-group row">--}}
-{{--                                        <label class="control-label text-right col-md-3">Country</label>--}}
-{{--                                        <div class="col-md-9">--}}
-{{--                                            <select class="form-control custom-select">--}}
-{{--                                                <option>Country 1</option>--}}
-{{--                                                <option>Country 2</option>--}}
-{{--                                            </select>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <!--/span-->--}}
-{{--                            </div>--}}
-                            <!--/row-->
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">

@@ -75,6 +75,7 @@ Route::group([
             Route::get('create',        'RoleController@create')->name('admin.role.create');
             Route::get('view/{id}',     'RoleController@view')->name('admin.role.view');
             Route::get('update/{id}',   'RoleController@update')->name('admin.role.update');
+            Route::get('edit/{id}',     'RoleController@edit')->name('admin.role.edit');
             Route::post('delete',       'RoleController@delete')->name('admin.role.delete');
             Route::post('save',         'RoleController@save')->name('admin.role.save');
             Route::post('update/{id}',  'RoleController@update')->name('admin.role.update');
@@ -120,7 +121,7 @@ Route::group([
             Route::get('create',        'BrandController@create')->name('admin.brand.create');
             Route::get('view/{id}',     'BrandController@view')->name('admin.brand.view');
             Route::get('update/{id}',   'BrandController@update')->name('admin.brand.update');
-            Route::get('delete/{id}',   'BrandController@delete')->name('admin.brand.delete');
+            Route::post('delete',       'BrandController@delete')->name('admin.brand.delete');
         });
 
         Route::group([
@@ -128,20 +129,25 @@ Route::group([
         ],function (){
             Route::get('/',             'ProductController@index')->name('admin.product.index');
             Route::get('list',          'ProductController@getList')->name('admin.product.list');
-            Route::get('create',         'ProductController@create')->name('admin.product.create');
+            Route::get('create',        'ProductController@create')->name('admin.product.create');
             Route::get('view/{id}',     'ProductController@view')->name('admin.product.view');
             Route::get('update/{id}',   'ProductController@update')->name('admin.product.update');
-            Route::get('delete/{id}',   'ProductController@delete')->name('admin.product.delete');
-
+            Route::get('edit/{id}',     'ProductController@edit')->name('admin.product.edit');
+            Route::post('delete',       'ProductController@delete')->name('admin.product.delete');
+            Route::post('save',         'ProductController@save')->name('admin.product.save');
+            Route::post('update/{id}',  'ProductController@update')->name('admin.product.update');
             Route::group([
                 'prefix' => 'category',
             ],function (){
                 Route::get('/',             'ProductCatController@index')->name('admin.product.cat.index');
                 Route::get('list',          'ProductCatController@getList')->name('admin.product.cat.list');
-                Route::get('create',         'ProductCatController@create')->name('admin.product.cat.create');
+                Route::get('create',        'ProductCatController@create')->name('admin.product.cat.create');
                 Route::get('view/{id}',     'ProductCatController@view')->name('admin.product.cat.view');
                 Route::get('update/{id}',   'ProductCatController@update')->name('admin.product.cat.update');
-                Route::get('delete/{id}',   'ProductCatController@delete')->name('admin.product.cat.delete');
+                Route::get('edit/{id}',     'ProductCatController@edit')->name('admin.product.cat.edit');
+                Route::post('delete',       'ProductCatController@delete')->name('admin.product.cat.delete');
+                Route::post('save',         'ProductCatController@save')->name('admin.product.cat.save');
+                Route::post('update/{id}',  'ProductCatController@update')->name('admin.product.cat.update');
             });
 
             Route::group([
@@ -152,7 +158,10 @@ Route::group([
                 Route::get('create',        'ProductSizeController@create')->name('admin.product.size.create');
                 Route::get('view/{id}',     'ProductSizeController@view')->name('admin.product.size.view');
                 Route::get('update/{id}',   'ProductSizeController@update')->name('admin.product.size.update');
-                Route::get('delete/{id}',   'ProductSizeController@delete')->name('admin.product.size.delete');
+                Route::get('edit/{id}',     'ProductSizeController@edit')->name('admin.product.size.edit');
+                Route::post('delete',       'ProductSizeController@delete')->name('admin.product.size.delete');
+                Route::post('save',         'ProductSizeController@save')->name('admin.product.size.save');
+                Route::post('update/{id}',  'ProductSizeController@update')->name('admin.product.size.update');
             });
 
             Route::group([
@@ -163,7 +172,10 @@ Route::group([
                 Route::get('create',        'ProductColorController@create')->name('admin.product.color.create');
                 Route::get('view/{id}',     'ProductColorController@view')->name('admin.product.color.view');
                 Route::get('update/{id}',   'ProductColorController@update')->name('admin.product.color.update');
-                Route::get('delete/{id}',   'ProductColorController@delete')->name('admin.product.color.delete');
+                Route::get('edit/{id}',     'ProductColorController@edit')->name('admin.product.color.edit');
+                Route::post('delete',       'ProductColorController@delete')->name('admin.product.color.delete');
+                Route::post('save',         'ProductColorController@save')->name('admin.product.color.save');
+                Route::post('update/{id}',  'ProductColorController@update')->name('admin.product.color.update');
             });
             Route::group([
                 'prefix' => 'media',
@@ -173,7 +185,10 @@ Route::group([
                 Route::get('create',        'ProductMediaController@create')->name('admin.media.create');
                 Route::get('view/{id}',     'ProductMediaController@view')->name('admin.media.view');
                 Route::get('update/{id}',   'ProductMediaController@update')->name('admin.media.update');
-                Route::get('delete/{id}',   'ProductMediaController@delete')->name('admin.media.delete');
+                Route::get('edit/{id}',     'ProductMediaController@edit')->name('admin.media.edit');
+                Route::post('delete',       'ProductMediaController@delete')->name('admin.media.delete');
+                Route::post('save',         'ProductMediaController@save')->name('admin.media.save');
+                Route::post('update/{id}',  'ProductMediaController@update')->name('admin.media.update');
             });
         });
     });

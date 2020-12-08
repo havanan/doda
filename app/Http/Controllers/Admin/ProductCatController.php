@@ -3,87 +3,75 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Product\CategoryRequest;
+use App\Services\ProductCategoryService;
 use Illuminate\Http\Request;
 
 class ProductCatController extends Controller
 {
-    public function __construct()
-    {
+    protected $productCategoryService;
 
+    public function __construct(ProductCategoryService $productCategoryService)
+    {
+        $this->productCategoryService = $productCategoryService;
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+
+        return view('adm.product.category.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        //
+        $parents = $this->productCategoryService->getParent();
+        return view('adm.product.category.create', compact('parents'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function save(CategoryRequest $request)
     {
-        //
+        $params = $request->all();
+        try {
+            $this->productCategoryService->create($params);
+            return redirect()->route('admin.product.cat.index')->with('success', 'Thêm loại sản phẩm thành công');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Thêm loại sản phẩm thất bại');
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function view($id)
     {
-        //
+        $info = $this->productCategoryService->findUserById($id);
+        $parents = $this->productCategoryService->getParent();
+        return view('adm.product.category.view',compact('info','parents'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $info = $this->productCategoryService->findUserById($id);
+        $parents = $this->productCategoryService->getParent();
+        return view('adm.product.category.create',compact('info','parents'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
-        //
+        $params = $request->all();
+        try {
+            $this->productCategoryService->updateById($id,$params);
+            return redirect()->route('admin.product.cat.index')->with('success', 'Sửa loại sản phẩm thành công');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Sửa loại sản phẩm thất bại');
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function delete(Request $request)
     {
-        //
+        $id = $request->get('id');
+        return $this->productCategoryService->deleteById($id);
+    }
+    public function getList(Request $request) {
+        $params = $request->all();
+        return  $this->productCategoryService->getListWithDataTable($params);
     }
 }

@@ -18,4 +18,10 @@ class RolePermissionRepository extends BaseRepository
     public function getAll(){
         return $this->model->all();
     }
+    public function deleteAllByRoleId($role_id){
+        return $this->model->where('role_id',$role_id)->delete();
+    }
+    public function deleteAllByPermissionId($permission_id){
+        return $this->model->where('permission_id',$permission_id)->delete();
+    }
 }

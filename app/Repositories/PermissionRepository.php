@@ -25,19 +25,14 @@ class PermissionRepository extends BaseRepository
         $query = $this->model->orderBy($paginate['sort'], $paginate['order']);
 
         if (isset($paginate['search'])) {
-
-            $query->where('email', 'like', "%" . $paginate['search'] . "%");
-            $query->orWhere('phone', 'like', "%" . $paginate['search'] . "%");
             $query->orWhere('name', 'like', "%" . $paginate['search'] . "%");
-            $query->orWhere('address_1', 'like', "%" . $paginate['search'] . "%");
-            $query->orWhere('address_2', 'like', "%" . $paginate['search'] . "%");
-
         }
         $query = $query->skip($paginate['start'])->take($paginate['limit'])->get();
-//         $query = $query->skip($paginate['start'])->paginate($paginate['limit']);
-//        dd($query);
         $total = $this->model->count();
         return Common::toJson($query,$total);
+    }
+    public function getIdsByRole($role_id){
+        return $this->model->join('role_permissions','role_permissions.permission_id','permissions.id')->where('role_permissions.role_id',$role_id)->pluck('permissions.name','permissions.id')->toArray();
     }
 
 }

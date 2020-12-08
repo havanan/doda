@@ -13,4 +13,11 @@ class BrandController extends Controller
     {
         $this->brandService = $brandService;
     }
+    public function index(){
+        return view('adm.brand.index');
+    }
+    public function getList(Request $request) {
+        $params = $request->all();
+        return $this->brandService->getListWithDataTable($params);
+    }
 }
