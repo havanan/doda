@@ -9,16 +9,6 @@
             'url' => '#'
         ]
     ];
-    $genders = [
-        0 => 'Nữ',
-        1 => 'Nam',
-        2 => 'Khác'
-    ];
-    $types = [
-        0 => 'Khách lẻ',
-        1 => 'Khách sỉ',
-        2 => 'Khác'
-    ];
     $status = [
         0 => 'Khóa',
         1 => 'Hoạt động'

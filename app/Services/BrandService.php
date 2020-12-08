@@ -15,7 +15,7 @@ class BrandService
         $this->brandRepository = $brandRepository;
     }
 
-    public function findUserById($id)
+    public function findById($id)
     {
         return $this->brandRepository->find($id);
     }
@@ -27,8 +27,17 @@ class BrandService
     public function deleteById($id){
         $action = $this->brandRepository->delete($id);
         if ($action) {
-            return Common::successResponse('Xóa người dùng thành công');
+            return Common::successResponse('Xóa thương hiệu thành công');
         }
-        return Common::errorResponse('Xóa người dùng thất bại');
+        return Common::errorResponse('Xóa thương hiệu thất bại');
+    }
+    public function create($params) {
+        if (!isset($params['status'])) {
+            $params['status'] = ACTIVE;
+        }
+        return $this->brandRepository->create($params);
+    }
+    public function update($id,$params) {
+        return $this->brandRepository->updateById($id,$params);
     }
 }

@@ -4,7 +4,7 @@
         <!-- User profile -->
         <div class="user-profile">
             <!-- User profile image -->
-            <div class="profile-img"><img src="{{asset('admin/images/users/profile.png')}}" alt="user"/>
+            <div class="profile-img"><img src="{{auth()->user()->avatar != null ? auth()->user()->avatar : asset('admin/images/users/profile.png')}}" alt="user"/>
                 <!-- this is blinking heartbit-->
                 <div class="notify setpos"><span class="heartbit"></span> <span class="point"></span></div>
             </div>
@@ -79,8 +79,7 @@
                         <li><a href="{{route('admin.product.create')}}">Tạo mới</a></li>
                         <li><a href="{{route('admin.product.index')}}">Danh sách</a></li>
                         <li><a href="{{route('admin.product.size.index')}}">Size</a></li>
-                        <li><a href="{{route('admin.product.color.index')}}">Màu sắc</a></li>
-
+                        {{--<li><a href="{{route('admin.product.color.index')}}">Màu sắc</a></li>--}}
                     </ul>
                 </li>
                 <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
@@ -93,18 +92,18 @@
                 <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
                                 class="mdi mdi-wunderlist"></i><span class="hide-menu">Thương hiệu</span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="{{route('admin.brand.create')}}">Tạo mới</a></li>
+                        {{--<li><a href="{{route('admin.brand.create')}}">Tạo mới</a></li>--}}
                         <li><a href="{{route('admin.brand.index')}}">Danh sách</a></li>
                     </ul>
                 </li>
-                <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
-                                class="mdi mdi-folder-multiple-image"></i><span class="hide-menu">Media</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                        <li><a href="{{route('admin.media.index')}}">Tổng hợp</a></li>
-                        <li><a href="{{route('admin.media.index',['type' => 'image'])}}">Ảnh</a></li>
-                        <li><a href="{{route('admin.media.index',['type' => 'video'])}}">Video</a></li>
-                    </ul>
-                </li>
+                {{--<li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i--}}
+                                {{--class="mdi mdi-folder-multiple-image"></i><span class="hide-menu">Media</span></a>--}}
+                    {{--<ul aria-expanded="false" class="collapse">--}}
+                        {{--<li><a href="{{route('admin.media.index')}}">Tổng hợp</a></li>--}}
+                        {{--<li><a href="{{route('admin.media.index',['type' => 'image'])}}">Ảnh</a></li>--}}
+                        {{--<li><a href="{{route('admin.media.index',['type' => 'video'])}}">Video</a></li>--}}
+                    {{--</ul>--}}
+                {{--</li>--}}
                 <li class="nav-small-cap">Kho hàng</li>
                 <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
                                 class="mdi mdi-note-multiple"></i><span class="hide-menu">Đơn hàng</span></a>

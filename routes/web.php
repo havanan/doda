@@ -120,8 +120,11 @@ Route::group([
             Route::get('list',          'BrandController@getList')->name('admin.brand.list');
             Route::get('create',        'BrandController@create')->name('admin.brand.create');
             Route::get('view/{id}',     'BrandController@view')->name('admin.brand.view');
-            Route::get('update/{id}',   'BrandController@update')->name('admin.brand.update');
+            Route::get('edit/{id}',     'BrandController@edit')->name('admin.brand.edit');
+            Route::post('update/{id}',  'BrandController@update')->name('admin.brand.update');
             Route::post('delete',       'BrandController@delete')->name('admin.brand.delete');
+            Route::post('save',         'BrandController@save')->name('admin.brand.save');
+
         });
 
         Route::group([

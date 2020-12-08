@@ -264,6 +264,13 @@ function getBrConfTable() {
         ajax: urlList,
         columns: [
             {data:null},
+            {data:'avatar',render:function (data) {
+                    let img = '';
+                    if (data) {
+                        img = '<img src="'+data+'" style="width: 100px; height: 100px" />';
+                    }
+                    return img;
+                }},
             {data:'name'},
             {data:'status',render:function (data) {
 
@@ -286,7 +293,6 @@ function getBrConfTable() {
                         return ''
                     }
                     return '<a href="'+urlPrefix+'/edit/'+data.id+'" class="btn btn-info m-r-5"><i class="fa fa-pencil"></i></a>' +
-                        // '<a href="'+urlPrefix+'/view/'+data.id+'" class="btn btn-success m-r-5"><i class="fa fa-info-circle"></i></a >'+
                         '<button class="btn btn-danger alert-delete" onclick="alertDelete('+data.id+')"><i class="fa fa-trash"></i></button>'
                 }}
         ],
