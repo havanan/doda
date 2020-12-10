@@ -11,7 +11,7 @@
             <!-- User profile text-->
             <div class="profile-text">
                 <h5>{{auth()->user()->name}}</h5>
-                <a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true"
+                <a href="javascript:void(0);" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true"
                    aria-expanded="true"><i class="mdi mdi-settings"></i></a>
                 <a href="app-email.html" class="" data-toggle="tooltip" title="Email"><i class="mdi mdi-gmail"></i></a>
                 <a href="{{ route('admin.logout') }}" data-toggle="tooltip" title="Đăng xuất" onclick="event.preventDefault();
@@ -22,15 +22,15 @@
                 </form>
                 <div class="dropdown-menu animated flipInY">
                     <!-- text-->
-                    <a href="#" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
+                    <a href="javascript:void(0);" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
                     <!-- text-->
-                    <a href="#" class="dropdown-item"><i class="ti-wallet"></i> My Balance</a>
+                    <a href="javascript:void(0);" class="dropdown-item"><i class="ti-wallet"></i> My Balance</a>
                     <!-- text-->
-                    <a href="#" class="dropdown-item"><i class="ti-email"></i> Inbox</a>
+                    <a href="javascript:void(0);" class="dropdown-item"><i class="ti-email"></i> Inbox</a>
                     <!-- text-->
                     <div class="dropdown-divider"></div>
                     <!-- text-->
-                    <a href="#" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
+                    <a href="javascript:void(0);" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
                     <!-- text-->
                     <div class="dropdown-divider"></div>
                     <!-- text-->
@@ -44,28 +44,28 @@
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
                 <li class="nav-devider"></li>
-                <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+                <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0);" aria-expanded="false"><i
                                 class="mdi mdi-gauge"></i><span class="hide-menu">Bảng điều khiển</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{{route('admin.index')}}">Thông tin chung</a></li>
                     </ul>
                 </li>
                 <li class="nav-small-cap">Tài khoản</li>
-                <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+                <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0);" aria-expanded="false"><i
                                 class="mdi mdi-account"></i><span class="hide-menu">Người dùng</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{{route('admin.user.create')}}">Tạo mới</a></li>
                         <li><a href="{{route('admin.user.index')}}">Danh sách</a></li>
                     </ul>
                 </li>
-                <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+                <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0);" aria-expanded="false"><i
                                 class="mdi mdi-nature-people"></i><span class="hide-menu">Quyền hạn</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{{route('admin.role.create')}}">Tạo mới</a></li>
                         <li><a href="{{route('admin.role.index')}}">Danh sách</a></li>
                     </ul>
                 </li>
-                <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+                <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0);" aria-expanded="false"><i
                                 class="mdi mdi-account-multiple"></i><span class="hide-menu">Nhân viên</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{{route('admin.staff.create')}}">Tạo mới</a></li>
@@ -73,7 +73,7 @@
                     </ul>
                 </li>
                 <li class="nav-small-cap">Hàng hóa</li>
-                <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+                <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0);" aria-expanded="false"><i
                                 class="mdi mdi-treasure-chest"></i><span class="hide-menu">Sản phẩm</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{{route('admin.product.create')}}">Tạo mới</a></li>
@@ -82,21 +82,21 @@
                         {{--<li><a href="{{route('admin.product.color.index')}}">Màu sắc</a></li>--}}
                     </ul>
                 </li>
-                <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+                <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0);" aria-expanded="false"><i
                                 class="mdi mdi-vector-arrange-above"></i><span class="hide-menu">Loại sản phẩm</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{{route('admin.product.cat.create')}}">Tạo mới</a></li>
                         <li><a href="{{route('admin.product.cat.index')}}">Danh sách</a></li>
                     </ul>
                 </li>
-                <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+                <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0);" aria-expanded="false"><i
                                 class="mdi mdi-wunderlist"></i><span class="hide-menu">Thương hiệu</span></a>
                     <ul aria-expanded="false" class="collapse">
                         {{--<li><a href="{{route('admin.brand.create')}}">Tạo mới</a></li>--}}
                         <li><a href="{{route('admin.brand.index')}}">Danh sách</a></li>
                     </ul>
                 </li>
-                {{--<li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i--}}
+                {{--<li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0);" aria-expanded="false"><i--}}
                                 {{--class="mdi mdi-folder-multiple-image"></i><span class="hide-menu">Media</span></a>--}}
                     {{--<ul aria-expanded="false" class="collapse">--}}
                         {{--<li><a href="{{route('admin.media.index')}}">Tổng hợp</a></li>--}}
@@ -105,7 +105,7 @@
                     {{--</ul>--}}
                 {{--</li>--}}
                 <li class="nav-small-cap">Kho hàng</li>
-                <li><a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+                <li><a class="has-arrow waves-effect waves-dark" href="javascript:void(0);" aria-expanded="false"><i
                                 class="mdi mdi-note-multiple"></i><span class="hide-menu">Đơn hàng</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{{route('admin.bill.create')}}">Tạo mới</a></li>

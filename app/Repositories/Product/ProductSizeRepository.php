@@ -4,22 +4,39 @@ namespace App\Repositories\Product;
 
 use App\Helpers\Common;
 use App\Models\ProductSize;
-use App\Models\Size;
 use App\Repositories\Base\BaseRepository;
 use Illuminate\Database\Eloquent\Collection;
 
-class SizeRepository extends BaseRepository
+class ProductSizeRepository extends BaseRepository
 {
-    public function __construct(Size $model)
+    public function __construct(ProductSize $model)
     {
         $this->model = $model;
     }
+    /**
+     * @return Collection
+     */
+    public function getBlockUsers()
+    {
+        return $this->model->where('is_blocked', 1)->get();
+    }
+    /**
+     * @param $email
+     * @return Collection
+     */
+    public function getByEmail($email)
+    {
+        return $this->model
+            ->where('email', $email)
+            ->first();
+    }
+
     /**
      * @param $user
      * @param $data
      * @return Collection
      */
-    public function updateInfo($user, $data)
+    public function updateUserInfo($user, $data)
     {
         $user->fill($data)->save();
         return $user;
