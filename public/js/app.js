@@ -2064,7 +2064,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "product-component"
+  name: "product-component",
+  data: function data() {
+    return {
+      count: 0
+    };
+  }
 });
 
 /***/ }),

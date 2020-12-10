@@ -31,26 +31,6 @@
         var route_prefix = "{{route('home')}}/laravel-filemanager";
         $('#lfm').filemanager('image', {prefix: route_prefix});
     </script>
-    <script>
-        new Vue({
-            el: "#cardBody",
-            data: {
-                items: [
-                    {
-                        "name": "Cafe",
-                        "images": "http://link-images-cafe.ds/cafe.jpg",
-                        "linUrl": "http://hoanguyenit.com/cafe.jpg"
-                    },
-                    {
-                        "name": "Cafe sửa",
-                        "images": "http://link-images-cafe.ds/cafe-sua.jpg",
-                        "linUrl": "http://hoanguyenit.com/cafe-sua.jpg"
-                    }
-                ]
-            }
-        })
-
-    </script>
 @endsection
 @section('content')
     <div class="row" id="app">

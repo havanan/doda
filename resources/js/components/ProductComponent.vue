@@ -123,6 +123,11 @@
 <script>
     export default {
         name: "product-component",
+        data: function () {
+            return {
+                count: 0
+            }
+        },
     }
 </script>
 
