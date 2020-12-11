@@ -27,5 +27,12 @@ class BrandRepository extends BaseRepository
         $total = $this->model->count();
         return Common::toJson($query,$total);
     }
+    public function getAll($params){
+        $status = ACTIVE;
+        if (isset($params['status']) && $params['status'] != null) {
+            $status = $params['status'];
+        }
+        return $this->model->select('name','slug','avatar','id')->where('status',$status)->get();
+    }
 
 }

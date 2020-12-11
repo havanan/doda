@@ -125,6 +125,12 @@ Route::group([
             Route::post('delete',       'BrandController@delete')->name('admin.brand.delete');
             Route::post('save',         'BrandController@save')->name('admin.brand.save');
 
+            Route::group([
+                'prefix' => 'api',
+            ],function (){
+                Route::get('get-all',   'BrandController@apiGetAll')->name('admin.brand.apiGetAll');
+            });
+
         });
 
         Route::group([
@@ -165,6 +171,12 @@ Route::group([
                 Route::post('delete',       'ProductSizeController@delete')->name('admin.product.size.delete');
                 Route::post('save',         'ProductSizeController@save')->name('admin.product.size.save');
                 Route::post('update/{id}',  'ProductSizeController@update')->name('admin.product.size.update');
+
+                Route::group([
+                    'prefix' => 'api',
+                ],function (){
+                    Route::get('get-all',   'ProductSizeController@apiGetAllSize')->name('admin.product.size.apiGetAllSize');
+                });
             });
 
             Route::group([

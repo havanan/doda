@@ -49,4 +49,8 @@ class BrandController extends Controller
         $id = $request->get('id');
         return $this->brandService->deleteById($id);
     }
+    public function apiGetAll(){
+        $data = $this->brandService->apiGetAll([]);
+        return $this->resSuccessData($data);
+    }
 }

@@ -41,7 +41,10 @@
                 </div>
                 <div class="card-body" id="cardBody">
                     <form>
-                        <product-component></product-component>
+                        <product-component
+                                :url-get-brand="'{{route('admin.brand.apiGetAll')}}'"
+                                :url-get-size="'{{route('admin.product.size.apiGetAllSize')}}'"
+                        ></product-component>
                     </form>
                 </div>
             </div>

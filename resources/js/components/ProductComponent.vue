@@ -5,69 +5,67 @@
           <hr class="m-t-0 m-b-40">
           <div class="row">
               <div class="col-md-6">
-                  <div class="form-group row"><label class="control-label text-right col-md-3">Tên đầy đủ</label>
-                      <div class="col-md-9"><input type="text" placeholder="Vd: Hoàng Văn Xyz" name="name" value=""
+                  <div class="form-group row"><label class="control-label  col-md-12">Tên sản phẩm</label>
+                      <div class="col-md-12"><input type="text" placeholder="Vd: Hoàng Văn Xyz" name="name" v-model="formData.name"
+                                                    v-on:change="makeSlug()"
                                                    required="required" class="form-control"></div>
                   </div>
               </div>
               <div class="col-md-6">
-                  <div class="form-group row"><label class="control-label text-right col-md-3">Email</label>
-                      <div class="col-md-9"><input type="email" placeholder="Vd: abcd@xyz.com" name="email" value=""
-                                                   required="required" class="form-control"></div>
-                  </div>
-              </div>
-          </div>
-          <div class="row">
-              <div class="col-md-6">
-                  <div class="form-group row"><label class="control-label text-right col-md-3">Giới tính</label>
-                      <div class="col-md-9"><select name="gender" required="required" class="form-control custom-select">
-                          <option value="0">Nữ</option>
-                          <option value="1">Nam</option>
-                          <option value="2">Khác</option>
-                      </select></div>
-                  </div>
-              </div>
-              <div class="col-md-6">
-                  <div class="form-group row"><label class="control-label text-right col-md-3">Điện thoại</label>
-                      <div class="col-md-9"><input type="number" max="9999999999999" name="phone" required="required"
-                                                   placeholder="Vd: 039283333" value="" class="form-control"></div>
-                  </div>
-              </div>
-          </div>
-          <div class="row">
-              <div class="col-md-6">
-                  <div class="form-group row"><label class="control-label text-right col-md-3">Phân loại</label>
-                      <div class="col-md-9"><select data-placeholder="Vui lòng chọn loại khách" tabindex="1"
-                                                    class="form-control custom-select">
-                          <option value="0">Khách lẻ</option>
-                          <option value="1">Khách sỉ</option>
-                          <option value="2">Khác</option>
-                      </select></div>
-                  </div>
-              </div>
-              <div class="col-md-6">
-                  <div class="form-group row"><label class="control-label text-right col-md-3">Sinh nhật</label>
-                      <div class="col-md-9"><input type="date" placeholder="dd/mm/yyyy" name="birthday" value="2020-12-10"
+                  <div class="form-group row"><label class="control-label  col-md-12">Đường dẫn</label>
+                      <div class="col-md-12"><input type="text" placeholder="Tạo tự động nếu để trống" name="slug" v-model="formData.slug"
                                                    class="form-control"></div>
                   </div>
               </div>
+          </div>
+          <div class="row">
+              <div class="col-md-4">
+                  <div class="form-group row"><label class="control-label  col-md-12">Giá sản phẩm</label>
+                      <div class="col-md-12"><input type="number" name="price" v-model="formData.price"
+                                                   required="required" class="form-control"></div>
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <div class="form-group row">
+                      <label class="control-label  col-md-12">Giá giảm</label>
+                      <div class="col-md-12"><input type="number" name="price_discount" v-model="formData.price_discount"
+                                                   class="form-control"></div>
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <div class="form-group row"><label class="control-label  col-md-12">Giá giảm</label>
+                      <div class="col-md-12">
+                          <select data-placeholder="Vui lòng chọn trạng thái" tabindex="1" v-model="formData.is_discount" class="form-control custom-select">
+                              <option v-for="discount in discounts" :key="discount.id" :value="discount.id">{{discount.name}}</option>
+                          </select>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
               <div class="col-md-6">
-                  <div class="form-group row"><label class="control-label text-right col-md-3">Trạng thái</label>
-                      <div class="col-md-9">
-                          <div class="m-b-10"><label class="custom-control custom-radio"><input value="0" id="radio0"
-                                                                                                name="status" type="radio"
-                                                                                                checked="checked"
-                                                                                                class="custom-control-input">
-                              <span class="custom-control-label">Khóa</span></label> <label
-                                  class="custom-control custom-radio"><input value="1" id="radio1" name="status"
-                                                                             type="radio" class="custom-control-input">
-                              <span class="custom-control-label">Hoạt động</span></label></div>
+                  <div class="form-group row"><label class="control-label  col-md-12">Trạng thái</label>
+                      <div class="col-md-12">
+                          <select data-placeholder="Vui lòng chọn trạng thái" tabindex="1" v-model="formData.status" class="form-control custom-select">
+                              <option v-for="item in status" :key="item.id" :value="item.id">{{item.name}}</option>
+                          </select>
                       </div>
                   </div>
               </div>
               <div class="col-md-6">
-                  <div class="form-group row"><label class="control-label text-right col-md-3">Ảnh đại diện</label>
-                      <div class="col-md-9">
+                  <div class="form-group row"><label class="control-label  col-md-12">Nhãn hiệu</label>
+                      <div class="col-md-12">
+                          <select data-placeholder="Vui lòng chọn nhãn hiệu" tabindex="1" v-model="formData.brand_id" class="form-control custom-select">
+                              <option v-for="brand in brands" :key="brand.id" :value="brand.id">{{brand.name}}</option>
+                          </select>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-6">
+                  <div class="form-group row"><label class="control-label  col-md-12">Ảnh đại diện</label>
+                      <div class="col-md-12">
                           <div class="row">
                               <div class="col-md-6">
                                   <div class="input-group"><span class="input-group-btn"><a id="lfm"
@@ -87,17 +85,12 @@
                   </div>
               </div>
           </div>
-          <h3 class="box-title">Địa chỉ</h3>
+          <h3 class="box-title">Thông tin thêm</h3>
           <hr class="m-t-0 m-b-40">
           <div class="row">
-              <div class="col-md-6">
-                  <div class="form-group row"><label class="control-label text-right col-md-3">Địa chỉ 1</label>
-                      <div class="col-md-9"><textarea name="address_1" class="form-control"></textarea></div>
-                  </div>
-              </div>
-              <div class="col-md-6">
-                  <div class="form-group row"><label class="control-label text-right col-md-3">Địa chỉ 2</label>
-                      <div class="col-md-9"><textarea name="address_2" class="form-control"></textarea></div>
+              <div class="col-md-12">
+                  <div class="form-group row"><label class="control-label  col-md-12">Giới thiệu sản phẩm</label>
+                      <div class="col-md-12"><textarea name="intro" class="form-control"></textarea></div>
                   </div>
               </div>
           </div>
@@ -108,7 +101,7 @@
               <div class="col-md-6"></div>
               <div class="col-md-6">
                   <div class="row">
-                      <div class="col-md-offset-3 col-md-9">
+                      <div class="col-md-offset-3 col-md-12">
                           <button type="reset" class="btn btn-primary">Làm mới</button>
                           <button type="submit" class="btn btn-danger">Lưu thông tin</button>
                       </div>
@@ -123,11 +116,81 @@
 <script>
     export default {
         name: "product-component",
-        data: function () {
-            return {
-                count: 0
+        props: {
+            urlGetBrand: {
+                type: String,
+                default:''
+            },
+            urlGetSize: {
+                type: String,
+                default:''
             }
         },
+        created() {
+            this.getBrands()
+            this.getSizes()
+        },
+        data: function () {
+            return {
+                sizes: {},
+                brands: {},
+                colors: {},
+                status: [
+                    {id:1,name:'Hoạt động'},
+                    {id:0,name:'Khóa'}
+                ],
+                discounts: [
+                    {id:1,name:'Có'},
+                    {id:0,name:'Không'}
+                ],
+                formData: {
+                    name:'',
+                    slug:'',
+                    avatar:'',
+                    status:1,
+                    price:0,
+                    brand_id:1,
+                    price_discount:0,
+                    is_discount:0,
+                    colors: [],
+                    intro:'',
+                }
+
+            }
+        },
+        methods: {
+            getBrands(){
+                const vm = this
+                axios
+                    .get(this.urlGetBrand)
+                    .then(response => {
+                        const res = response.data
+                        if (res.data){
+                            vm.brands = res.data
+                        }
+                    })
+            },
+            getSizes(){
+                const vm = this
+                axios
+                    .get(this.urlGetSize)
+                    .then(response => {
+                        const res = response.data
+                        if (res.data){
+                            vm.sizes = res.data
+                        }
+                    })
+            },
+            makeSlug(){
+                const vm = this
+                const name = vm.name
+                let slug = ''
+                if (name){
+                    slug = name.toLowerCase().replace(/ /g,'-').replace(/[^\w-]+/g,'');
+                    vm.formData.slug = slug
+                }
+            }
+        }
     }
 </script>
 

@@ -3,16 +3,19 @@
 namespace App\Services;
 
 use App\Helpers\Common;
+use App\Repositories\Product\ProductSizeRepository;
 use App\Repositories\Product\SizeRepository;
 
 class ProductSizeService
 {
     protected $sizeRepository;
-    
+    protected $productSizeRepository;
     public function __construct(
-        SizeRepository $sizeRepository
+        SizeRepository $sizeRepository,
+        ProductSizeRepository $productSizeRepository
     ) {
         $this->sizeRepository = $sizeRepository;
+        $this->productSizeRepository = $productSizeRepository;
     }
 
     public function findUserById($id)
@@ -30,5 +33,8 @@ class ProductSizeService
             return Common::successResponse('Xóa size thành công');
         }
         return Common::errorResponse('Xóa size thất bại');
+    }
+    public function apiGetAllSize($params) {
+        return $this->sizeRepository->getAll($params);
     }
 }

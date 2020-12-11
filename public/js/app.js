@@ -2056,19 +2056,86 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "product-component",
+  props: {
+    urlGetBrand: {
+      type: String,
+      "default": ''
+    },
+    urlGetSize: {
+      type: String,
+      "default": ''
+    }
+  },
+  created: function created() {
+    this.getBrands();
+    this.getSizes();
+  },
   data: function data() {
     return {
-      count: 0
+      sizes: {},
+      brands: {},
+      colors: {},
+      status: [{
+        id: 1,
+        name: 'Hoạt động'
+      }, {
+        id: 0,
+        name: 'Khóa'
+      }],
+      discounts: [{
+        id: 1,
+        name: 'Có'
+      }, {
+        id: 0,
+        name: 'Không'
+      }],
+      formData: {
+        name: '',
+        slug: '',
+        avatar: '',
+        status: 1,
+        price: 0,
+        brand_id: 1,
+        price_discount: 0,
+        is_discount: 0,
+        colors: [],
+        intro: ''
+      }
     };
+  },
+  methods: {
+    getBrands: function getBrands() {
+      var vm = this;
+      axios.get(this.urlGetBrand).then(function (response) {
+        var res = response.data;
+
+        if (res.data) {
+          vm.brands = res.data;
+        }
+      });
+    },
+    getSizes: function getSizes() {
+      var vm = this;
+      axios.get(this.urlGetSize).then(function (response) {
+        var res = response.data;
+
+        if (res.data) {
+          vm.sizes = res.data;
+        }
+      });
+    },
+    makeSlug: function makeSlug() {
+      var vm = this;
+      var name = vm.name;
+      var slug = '';
+
+      if (name) {
+        slug = name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+        vm.formData.slug = slug;
+      }
+    }
   }
 });
 
@@ -37727,348 +37794,453 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("div", { staticClass: "form-body" }, [
+      _c("h3", { staticClass: "box-title" }, [_vm._v("Thông tin sản phẩm")]),
+      _vm._v(" "),
+      _c("hr", { staticClass: "m-t-0 m-b-40" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-6" }, [
+          _c("div", { staticClass: "form-group row" }, [
+            _c("label", { staticClass: "control-label  col-md-12" }, [
+              _vm._v("Tên sản phẩm")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-12" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.formData.name,
+                    expression: "formData.name"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  placeholder: "Vd: Hoàng Văn Xyz",
+                  name: "name",
+                  required: "required"
+                },
+                domProps: { value: _vm.formData.name },
+                on: {
+                  change: function($event) {
+                    return _vm.makeSlug()
+                  },
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.formData, "name", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6" }, [
+          _c("div", { staticClass: "form-group row" }, [
+            _c("label", { staticClass: "control-label  col-md-12" }, [
+              _vm._v("Đường dẫn")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-12" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.formData.slug,
+                    expression: "formData.slug"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  placeholder: "Tạo tự động nếu để trống",
+                  name: "slug"
+                },
+                domProps: { value: _vm.formData.slug },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.formData, "slug", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-4" }, [
+          _c("div", { staticClass: "form-group row" }, [
+            _c("label", { staticClass: "control-label  col-md-12" }, [
+              _vm._v("Giá sản phẩm")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-12" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.formData.price,
+                    expression: "formData.price"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "number", name: "price", required: "required" },
+                domProps: { value: _vm.formData.price },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.formData, "price", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-4" }, [
+          _c("div", { staticClass: "form-group row" }, [
+            _c("label", { staticClass: "control-label  col-md-12" }, [
+              _vm._v("Giá giảm")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-12" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.formData.price_discount,
+                    expression: "formData.price_discount"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "number", name: "price_discount" },
+                domProps: { value: _vm.formData.price_discount },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(
+                      _vm.formData,
+                      "price_discount",
+                      $event.target.value
+                    )
+                  }
+                }
+              })
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-4" }, [
+          _c("div", { staticClass: "form-group row" }, [
+            _c("label", { staticClass: "control-label  col-md-12" }, [
+              _vm._v("Giá giảm")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-12" }, [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.formData.is_discount,
+                      expression: "formData.is_discount"
+                    }
+                  ],
+                  staticClass: "form-control custom-select",
+                  attrs: {
+                    "data-placeholder": "Vui lòng chọn trạng thái",
+                    tabindex: "1"
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.formData,
+                        "is_discount",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                _vm._l(_vm.discounts, function(discount) {
+                  return _c(
+                    "option",
+                    { key: discount.id, domProps: { value: discount.id } },
+                    [_vm._v(_vm._s(discount.name))]
+                  )
+                }),
+                0
+              )
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-6" }, [
+          _c("div", { staticClass: "form-group row" }, [
+            _c("label", { staticClass: "control-label  col-md-12" }, [
+              _vm._v("Trạng thái")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-12" }, [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.formData.status,
+                      expression: "formData.status"
+                    }
+                  ],
+                  staticClass: "form-control custom-select",
+                  attrs: {
+                    "data-placeholder": "Vui lòng chọn trạng thái",
+                    tabindex: "1"
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.formData,
+                        "status",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                _vm._l(_vm.status, function(item) {
+                  return _c(
+                    "option",
+                    { key: item.id, domProps: { value: item.id } },
+                    [_vm._v(_vm._s(item.name))]
+                  )
+                }),
+                0
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6" }, [
+          _c("div", { staticClass: "form-group row" }, [
+            _c("label", { staticClass: "control-label  col-md-12" }, [
+              _vm._v("Nhãn hiệu")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-12" }, [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.formData.brand_id,
+                      expression: "formData.brand_id"
+                    }
+                  ],
+                  staticClass: "form-control custom-select",
+                  attrs: {
+                    "data-placeholder": "Vui lòng chọn nhãn hiệu",
+                    tabindex: "1"
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.formData,
+                        "brand_id",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                _vm._l(_vm.brands, function(brand) {
+                  return _c(
+                    "option",
+                    { key: brand.id, domProps: { value: brand.id } },
+                    [_vm._v(_vm._s(brand.name))]
+                  )
+                }),
+                0
+              )
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _c("h3", { staticClass: "box-title" }, [_vm._v("Thông tin thêm")]),
+      _vm._v(" "),
+      _c("hr", { staticClass: "m-t-0 m-b-40" }),
+      _vm._v(" "),
+      _vm._m(1)
+    ]),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _vm._m(2)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "form-body" }, [
-        _c("h3", { staticClass: "box-title" }, [_vm._v("Thông tin sản phẩm")]),
-        _vm._v(" "),
-        _c("hr", { staticClass: "m-t-0 m-b-40" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-6" }, [
-            _c("div", { staticClass: "form-group row" }, [
-              _c(
-                "label",
-                { staticClass: "control-label text-right col-md-3" },
-                [_vm._v("Tên đầy đủ")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-9" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    placeholder: "Vd: Hoàng Văn Xyz",
-                    name: "name",
-                    value: "",
-                    required: "required"
-                  }
-                })
-              ])
-            ])
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-6" }, [
+        _c("div", { staticClass: "form-group row" }, [
+          _c("label", { staticClass: "control-label  col-md-12" }, [
+            _vm._v("Ảnh đại diện")
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-md-6" }, [
-            _c("div", { staticClass: "form-group row" }, [
-              _c(
-                "label",
-                { staticClass: "control-label text-right col-md-3" },
-                [_vm._v("Email")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-9" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "email",
-                    placeholder: "Vd: abcd@xyz.com",
-                    name: "email",
-                    value: "",
-                    required: "required"
-                  }
-                })
-              ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-6" }, [
-            _c("div", { staticClass: "form-group row" }, [
-              _c(
-                "label",
-                { staticClass: "control-label text-right col-md-3" },
-                [_vm._v("Giới tính")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-9" }, [
-                _c(
-                  "select",
-                  {
-                    staticClass: "form-control custom-select",
-                    attrs: { name: "gender", required: "required" }
-                  },
-                  [
-                    _c("option", { attrs: { value: "0" } }, [_vm._v("Nữ")]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "1" } }, [_vm._v("Nam")]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "2" } }, [_vm._v("Khác")])
-                  ]
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-6" }, [
-            _c("div", { staticClass: "form-group row" }, [
-              _c(
-                "label",
-                { staticClass: "control-label text-right col-md-3" },
-                [_vm._v("Điện thoại")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-9" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "number",
-                    max: "9999999999999",
-                    name: "phone",
-                    required: "required",
-                    placeholder: "Vd: 039283333",
-                    value: ""
-                  }
-                })
-              ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-6" }, [
-            _c("div", { staticClass: "form-group row" }, [
-              _c(
-                "label",
-                { staticClass: "control-label text-right col-md-3" },
-                [_vm._v("Phân loại")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-9" }, [
-                _c(
-                  "select",
-                  {
-                    staticClass: "form-control custom-select",
-                    attrs: {
-                      "data-placeholder": "Vui lòng chọn loại khách",
-                      tabindex: "1"
-                    }
-                  },
-                  [
-                    _c("option", { attrs: { value: "0" } }, [
-                      _vm._v("Khách lẻ")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "1" } }, [
-                      _vm._v("Khách sỉ")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "2" } }, [_vm._v("Khác")])
-                  ]
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-6" }, [
-            _c("div", { staticClass: "form-group row" }, [
-              _c(
-                "label",
-                { staticClass: "control-label text-right col-md-3" },
-                [_vm._v("Sinh nhật")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-9" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "date",
-                    placeholder: "dd/mm/yyyy",
-                    name: "birthday",
-                    value: "2020-12-10"
-                  }
-                })
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-6" }, [
-            _c("div", { staticClass: "form-group row" }, [
-              _c(
-                "label",
-                { staticClass: "control-label text-right col-md-3" },
-                [_vm._v("Trạng thái")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-9" }, [
-                _c("div", { staticClass: "m-b-10" }, [
-                  _c("label", { staticClass: "custom-control custom-radio" }, [
-                    _c("input", {
-                      staticClass: "custom-control-input",
-                      attrs: {
-                        value: "0",
-                        id: "radio0",
-                        name: "status",
-                        type: "radio",
-                        checked: "checked"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "custom-control-label" }, [
-                      _vm._v("Khóa")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("label", { staticClass: "custom-control custom-radio" }, [
-                    _c("input", {
-                      staticClass: "custom-control-input",
-                      attrs: {
-                        value: "1",
-                        id: "radio1",
-                        name: "status",
-                        type: "radio"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "custom-control-label" }, [
-                      _vm._v("Hoạt động")
-                    ])
-                  ])
-                ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-6" }, [
-            _c("div", { staticClass: "form-group row" }, [
-              _c(
-                "label",
-                { staticClass: "control-label text-right col-md-3" },
-                [_vm._v("Ảnh đại diện")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-9" }, [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-md-6" }, [
-                    _c("div", { staticClass: "input-group" }, [
-                      _c("span", { staticClass: "input-group-btn" }, [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "btn btn-primary text-white",
-                            attrs: {
-                              id: "lfm",
-                              "data-input": "thumbnail",
-                              "data-preview": "holder"
-                            }
-                          },
-                          [
-                            _c("i", { staticClass: "fa fa-picture-o" }),
-                            _vm._v(
-                              " Chọn ảnh\n                                                   "
-                            )
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "form-control",
-                        staticStyle: { display: "none" },
-                        attrs: {
-                          id: "thumbnail",
-                          type: "text",
-                          name: "avatar",
-                          value: ""
-                        }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-6" }, [
-                    _c("div", {
-                      staticStyle: { "max-height": "200px" },
-                      attrs: { id: "holder" }
-                    })
-                  ])
-                ])
-              ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("h3", { staticClass: "box-title" }, [_vm._v("Địa chỉ")]),
-        _vm._v(" "),
-        _c("hr", { staticClass: "m-t-0 m-b-40" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-6" }, [
-            _c("div", { staticClass: "form-group row" }, [
-              _c(
-                "label",
-                { staticClass: "control-label text-right col-md-3" },
-                [_vm._v("Địa chỉ 1")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-9" }, [
-                _c("textarea", {
-                  staticClass: "form-control",
-                  attrs: { name: "address_1" }
-                })
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-6" }, [
-            _c("div", { staticClass: "form-group row" }, [
-              _c(
-                "label",
-                { staticClass: "control-label text-right col-md-3" },
-                [_vm._v("Địa chỉ 2")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-9" }, [
-                _c("textarea", {
-                  staticClass: "form-control",
-                  attrs: { name: "address_2" }
-                })
-              ])
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("hr"),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-actions" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-6" }),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-6" }, [
+          _c("div", { staticClass: "col-md-12" }, [
             _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-offset-3 col-md-9" }, [
-                _c(
-                  "button",
-                  { staticClass: "btn btn-primary", attrs: { type: "reset" } },
-                  [_vm._v("Làm mới")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  { staticClass: "btn btn-danger", attrs: { type: "submit" } },
-                  [_vm._v("Lưu thông tin")]
-                )
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("div", { staticClass: "input-group" }, [
+                  _c("span", { staticClass: "input-group-btn" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-primary text-white",
+                        attrs: {
+                          id: "lfm",
+                          "data-input": "thumbnail",
+                          "data-preview": "holder"
+                        }
+                      },
+                      [
+                        _c("i", { staticClass: "fa fa-picture-o" }),
+                        _vm._v(
+                          " Chọn ảnh\n                                                   "
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    staticStyle: { display: "none" },
+                    attrs: {
+                      id: "thumbnail",
+                      type: "text",
+                      name: "avatar",
+                      value: ""
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("div", {
+                  staticStyle: { "max-height": "200px" },
+                  attrs: { id: "holder" }
+                })
               ])
             ])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "form-group row" }, [
+          _c("label", { staticClass: "control-label  col-md-12" }, [
+            _vm._v("Giới thiệu sản phẩm")
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-md-6" })
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("textarea", {
+              staticClass: "form-control",
+              attrs: { name: "intro" }
+            })
+          ])
         ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-actions" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-6" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-offset-3 col-md-12" }, [
+              _c(
+                "button",
+                { staticClass: "btn btn-primary", attrs: { type: "reset" } },
+                [_vm._v("Làm mới")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                { staticClass: "btn btn-danger", attrs: { type: "submit" } },
+                [_vm._v("Lưu thông tin")]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6" })
       ])
     ])
   }
@@ -53556,8 +53728,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! F:\laragon\www\doda\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! F:\laragon\www\doda\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\doda\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\doda\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

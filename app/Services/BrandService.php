@@ -40,4 +40,7 @@ class BrandService
     public function update($id,$params) {
         return $this->brandRepository->updateById($id,$params);
     }
+    public function apiGetAll($params){
+        return $this->brandRepository->getAll($params);
+    }
 }

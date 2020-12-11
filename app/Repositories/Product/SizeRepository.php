@@ -47,4 +47,12 @@ class SizeRepository extends BaseRepository
         return Common::toJson($query,$total);
     }
 
+    public function getAll($params){
+        $status = ACTIVE;
+        if (isset($params['status']) && $params['status'] != null) {
+            $status = $params['status'];
+        }
+        return $this->model->select('type')->selectRaw('ROUND(name,2) as name')->where('status',$status)->orderBy('name')->get();
+    }
+
 }
