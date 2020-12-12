@@ -48,6 +48,7 @@ mix.scripts([
     'resources/admin/assets/plugins/datatables/datetime.js',
     'resources/admin/js/jquery.slimscroll.js',
     'resources/admin/assets/plugins/sweetalert/sweetalert.min.js',
+    'resources/admin/assets/plugins/tinymce/tinymce.min.js',
     'resources/admin/js/waves.js',
     'resources/admin/js/sidebarmenu.js',
     'resources/admin/js/custom.min.js',

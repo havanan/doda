@@ -90,7 +90,10 @@
           <div class="row">
               <div class="col-md-12">
                   <div class="form-group row"><label class="control-label  col-md-12">Giới thiệu sản phẩm</label>
-                      <div class="col-md-12"><textarea name="intro" class="form-control"></textarea></div>
+                      <div class="col-md-12">
+                          <!--<textarea name="intro" id="intro" class="form-control"></textarea>-->
+                          <tiny-mce></tiny-mce>
+                      </div>
                   </div>
               </div>
           </div>
@@ -127,7 +130,7 @@
             }
         },
         created() {
-            this.getBrands()
+            this.getBrands(),
             this.getSizes()
         },
         data: function () {
@@ -189,8 +192,8 @@
                     slug = name.toLowerCase().replace(/ /g,'-').replace(/[^\w-]+/g,'');
                     vm.formData.slug = slug
                 }
-            }
-        }
+            },
+        },
     }
 </script>
 
