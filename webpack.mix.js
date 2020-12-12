@@ -34,6 +34,7 @@ mix.styles([
 ], 'public/admin/css/lib.css').version();
 // Admin Js
 mix.scripts([
+    'resources/admin/assets/plugins/laravel-filemanager/js/stand-alone-button.js',
     'resources/admin/assets/plugins/jquery/jquery.min.js',
     'resources/admin/assets/plugins/bootstrap/js/popper.min.js',
     'resources/admin/assets/plugins/bootstrap/js/bootstrap.min.js',
@@ -48,7 +49,6 @@ mix.scripts([
     'resources/admin/assets/plugins/datatables/datetime.js',
     'resources/admin/js/jquery.slimscroll.js',
     'resources/admin/assets/plugins/sweetalert/sweetalert.min.js',
-    'resources/admin/assets/plugins/tinymce/tinymce.min.js',
     'resources/admin/js/waves.js',
     'resources/admin/js/sidebarmenu.js',
     'resources/admin/js/custom.min.js',

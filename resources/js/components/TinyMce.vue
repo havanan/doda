@@ -1,15 +1,24 @@
 <template>
-    <div>
-        <p>Ahihi Đồ Ngok</p>
+    <div id="app">
+        <editor
+                api-key="no-api-key"
+                :init="config"
+        />
     </div>
 </template>
 
 <script>
+    import Editor from '@tinymce/tinymce-vue'
+
     export default {
-        name: "tiny-mce"
+        name: "editor",
+        components: {
+            'editor': Editor
+        },
+        data: function () {
+            return {
+
+            }
+        }
     }
 </script>
-
-<style scoped>
-
-</style>

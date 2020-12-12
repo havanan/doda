@@ -26,14 +26,13 @@
     ?>
 @endsection
 @section('js')
-    <script src="{{asset('vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>
+{{--    <script src="{{asset('vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>--}}
     <script>
-        var route_prefix = "{{route('home')}}/laravel-filemanager";
-        $('#lfm').filemanager('image', {prefix: route_prefix});
+
     </script>
 @endsection
 @section('content')
-    <div class="row" id="app">
+    <div class="row">
         <div class="col-lg-12">
             <div class="card card-outline-info">
                 <div class="card-header">
