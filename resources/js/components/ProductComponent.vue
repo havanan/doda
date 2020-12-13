@@ -77,22 +77,50 @@
                       <div class="form-group row">
                           <label class="control-label  col-md-12">Màu sắc</label>
                           <div class="col-md-3">
-                              <input type="hidden" v-model="color.id">
-                              <input type="text" class="form-control" placeholder="Nhập tên màu sản phẩm" v-model="color.name">
-                          </div>
-                          <div class="col-md-3">
-                              <div class="input-group"><span class="input-group-btn"><a :id="'lfm'+index"
+                              <div class="input-group"><span class="input-group-btn m-b-5"><a :id="'lfm'+index"
                                                                                         data-input="thumbnail"
                                                                                         :data-preview="'holder'+index"
-                                                                                        class="btn btn-primary text-white lfm"><i
+                                                                                        class="btn btn-danger text-white lfm"><i
                                       class="fa fa-picture-o"></i> Chọn ảnh
-                                                         </a></span> <input :id="'thumbnail'+index" type="text" v-model="color.avatar"
+                                                         </a></span> <input :id="'thumbnail'+index" type="text" v-model="color.image"
                                                                             value="" class="form-control"
                                                                             v-on:change="updateAvatarUrl(index)"
                                                                             style="display: none;"></div>
+                              <div :id="'holder'+color.id" style="max-height: 200px;"></div>
                           </div>
                           <div class="col-md-3">
-                              <div :id="'holder'+color.id" style="max-height: 200px;"></div>
+                              <input type="hidden" v-model="color.id">
+                              <input type="text" class="form-control" placeholder="Tên màu" v-model="color.name">
+                          </div>
+                          <div class="col-md-3">
+                              <input type="number" class="form-control" placeholder="Số lượng" v-model="color.available">
+                          </div>
+                          <div class="col-md-3">
+                              <div class="col-md-12 text-right">
+                                  <button class="btn btn-warning" type="button" v-on:click="createNewColor(index)"><i class="fa fa-plus"></i></button>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="form-group row">
+                          <div class="col-md-3"></div>
+                          <div class="col-md-9">
+
+                              <div class="row">
+                                  <div class="col-md-3">
+                                      <div class="form-group">
+                                          <label class="control-label  col-md-12">Size</label>
+                                          <select data-placeholder="Vui lòng chọn size" tabindex="1" v-model="productColors[index].name" class="form-control custom-select">
+                                              <option v-for="size in sizes" :key="size.id" :value="size.id">{{size.name}}</option>
+                                          </select>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-3">
+                                      <div class="form-group">
+                                          <label class="control-label  col-md-12">Số lượng</label>
+                                          <input type="number" class="form-control" v-model="productColors[index].available">
+                                      </div>
+                                  </div>
+                              </div>
                           </div>
                       </div>
                   </div>
@@ -112,7 +140,6 @@
                                       class="fa fa-picture-o"></i> Chọn ảnh
                                                          </a></span> <input id="thumbnail" type="text" name="avatar"
                                                                             value="" class="form-control"
-                                                                            v-on:change="updateAvatarUrl('')"
                                                                             style="display: none;"></div>
                           </div>
                           <div class="col-md-4">
@@ -162,17 +189,16 @@
             this.getBrands()
             this.getSizes()
         },
-        mounted() {
-            let route_prefix = "/laravel-filemanager";
-            $('.lfm').filemanager('image', {prefix: route_prefix});
-        },
+        mounted() {},
         data: function () {
             return {
                 sizes: {},
                 brands: {},
                 colors: [
-                    {id:-1, name:'', avatar:''},
-                    {id:0, name:'', avatar:''}
+                    {id:0, name:'',available: '', image:''}
+                ],
+                productColors: [
+                    {name:'',available:0}
                 ],
                 status: [
                     {id:1,name:'Hoạt động'},
@@ -194,7 +220,7 @@
                     intro:'',
                 },
                 options: {
-                    height: 500,
+                    height: '700',
                     path_absolute : this.route_prefix,
                     relative_urls: false,
                     file_browser_callback : function(field_name, url, type, win) {
@@ -234,31 +260,41 @@
                     })
             },
             getSizes(){
-                const vm = this
+                const vm = this;
                 axios
                     .get(this.urlGetSize)
                     .then(response => {
-                        const res = response.data
+                        const res = response.data;
                         if (res.data){
-                            vm.sizes = res.data
+                            vm.sizes = res.data;
                         }
                     })
             },
             makeSlug(){
-                const vm = this
-                const name = vm.name
-                let slug = ''
+                const vm = this;
+                const name = vm.name;
+                let slug = '';
                 if (name){
-                    slug = name.toLowerCase().replace(/ /g,'-').replace(/[^\w-]+/g,'')
-                    vm.formData.slug = slug
+                    slug = name.toLowerCase().replace(/ /g,'-').replace(/[^\w-]+/g,'');
+                    vm.formData.slug = slug;
                 }
             },
             updateAvatarUrl(index){
-                const vm = this
-                const avatarInfo = $('#thumbnail'+index).val()
+                const vm = this;
+                const avatarInfo = $('#thumbnail'+index).val();
                 if(avatarInfo.url) {
-                    vm.colors[index].avatar = avatarInfo.url
+                    vm.colors[index].avatar = avatarInfo.url;
                 }
+            },
+            randomId(){
+                return Math.floor(Math.random() * 9999) + 9999;
+            },
+            createNewColor(key){
+                const vm = this;
+                let colors = vm.colors;
+                const color ={id:this.randomId, name:'',available: '', image:''};
+                colors.push(color);
+                vm.colors = colors
             }
         },
     }

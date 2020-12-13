@@ -2087,6 +2087,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "product-component",
   props: {
@@ -2103,24 +2130,20 @@ __webpack_require__.r(__webpack_exports__);
     this.getBrands();
     this.getSizes();
   },
-  mounted: function mounted() {
-    var route_prefix = "/laravel-filemanager";
-    $('.lfm').filemanager('image', {
-      prefix: route_prefix
-    });
-  },
+  mounted: function mounted() {},
   data: function data() {
     return {
       sizes: {},
       brands: {},
       colors: [{
-        id: -1,
-        name: '',
-        avatar: ''
-      }, {
         id: 0,
         name: '',
-        avatar: ''
+        available: '',
+        image: ''
+      }],
+      productColors: [{
+        name: '',
+        available: 0
       }],
       status: [{
         id: 1,
@@ -2148,7 +2171,7 @@ __webpack_require__.r(__webpack_exports__);
         intro: ''
       },
       options: {
-        height: 500,
+        height: '700',
         path_absolute: this.route_prefix,
         relative_urls: false,
         file_browser_callback: function file_browser_callback(field_name, url, type, win) {
@@ -2212,6 +2235,21 @@ __webpack_require__.r(__webpack_exports__);
       if (avatarInfo.url) {
         vm.colors[index].avatar = avatarInfo.url;
       }
+    },
+    randomId: function randomId() {
+      return Math.floor(Math.random() * 9999) + 9999;
+    },
+    createNewColor: function createNewColor(key) {
+      var vm = this;
+      var colors = vm.colors;
+      var color = {
+        id: this.randomId,
+        name: '',
+        available: '',
+        image: ''
+      };
+      colors.push(color);
+      vm.colors = colors;
     }
   }
 });
@@ -107955,6 +107993,65 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-3" }, [
+                  _c("div", { staticClass: "input-group" }, [
+                    _c("span", { staticClass: "input-group-btn m-b-5" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-danger text-white lfm",
+                          attrs: {
+                            id: "lfm" + index,
+                            "data-input": "thumbnail",
+                            "data-preview": "holder" + index
+                          }
+                        },
+                        [
+                          _c("i", { staticClass: "fa fa-picture-o" }),
+                          _vm._v(
+                            " Chọn ảnh\n                                                       "
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: color.image,
+                          expression: "color.image"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      staticStyle: { display: "none" },
+                      attrs: {
+                        id: "thumbnail" + index,
+                        type: "text",
+                        value: ""
+                      },
+                      domProps: { value: color.image },
+                      on: {
+                        change: function($event) {
+                          return _vm.updateAvatarUrl(index)
+                        },
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(color, "image", $event.target.value)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", {
+                    staticStyle: { "max-height": "200px" },
+                    attrs: { id: "holder" + color.id }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-3" }, [
                   _c("input", {
                     directives: [
                       {
@@ -107986,10 +108083,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      placeholder: "Nhập tên màu sản phẩm"
-                    },
+                    attrs: { type: "text", placeholder: "Tên màu" },
                     domProps: { value: color.name },
                     on: {
                       input: function($event) {
@@ -108003,64 +108097,147 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-3" }, [
-                  _c("div", { staticClass: "input-group" }, [
-                    _c("span", { staticClass: "input-group-btn" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-primary text-white lfm",
-                          attrs: {
-                            id: "lfm" + index,
-                            "data-input": "thumbnail",
-                            "data-preview": "holder" + index
-                          }
-                        },
-                        [
-                          _c("i", { staticClass: "fa fa-picture-o" }),
-                          _vm._v(
-                            " Chọn ảnh\n                                                       "
-                          )
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: color.avatar,
-                          expression: "color.avatar"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      staticStyle: { display: "none" },
-                      attrs: {
-                        id: "thumbnail" + index,
-                        type: "text",
-                        value: ""
-                      },
-                      domProps: { value: color.avatar },
-                      on: {
-                        change: function($event) {
-                          return _vm.updateAvatarUrl(index)
-                        },
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(color, "avatar", $event.target.value)
-                        }
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: color.available,
+                        expression: "color.available"
                       }
-                    })
-                  ])
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "number", placeholder: "Số lượng" },
+                    domProps: { value: color.available },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(color, "available", $event.target.value)
+                      }
+                    }
+                  })
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-3" }, [
-                  _c("div", {
-                    staticStyle: { "max-height": "200px" },
-                    attrs: { id: "holder" + color.id }
-                  })
+                  _c("div", { staticClass: "col-md-12 text-right" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-warning",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.createNewColor(index)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "fa fa-plus" })]
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group row" }, [
+                _c("div", { staticClass: "col-md-3" }),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-9" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-md-3" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c(
+                          "label",
+                          { staticClass: "control-label  col-md-12" },
+                          [_vm._v("Size")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.productColors[index].name,
+                                expression: "productColors[index].name"
+                              }
+                            ],
+                            staticClass: "form-control custom-select",
+                            attrs: {
+                              "data-placeholder": "Vui lòng chọn size",
+                              tabindex: "1"
+                            },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.productColors[index],
+                                  "name",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          _vm._l(_vm.sizes, function(size) {
+                            return _c(
+                              "option",
+                              { key: size.id, domProps: { value: size.id } },
+                              [_vm._v(_vm._s(size.name))]
+                            )
+                          }),
+                          0
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-3" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c(
+                          "label",
+                          { staticClass: "control-label  col-md-12" },
+                          [_vm._v("Số lượng")]
+                        ),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.productColors[index].available,
+                              expression: "productColors[index].available"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "number" },
+                          domProps: {
+                            value: _vm.productColors[index].available
+                          },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.productColors[index],
+                                "available",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ])
+                  ])
                 ])
               ])
             ])
@@ -108072,39 +108249,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "col-md-5" }, [
       _c("div", { staticClass: "form-body" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-6" }, [
-            _c("div", { staticClass: "form-group row" }, [
-              _c("label", { staticClass: "control-label  col-md-12" }, [
-                _vm._v("Ảnh đại diện")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-8" }, [
-                _c("div", { staticClass: "input-group" }, [
-                  _vm._m(1),
-                  _vm._v(" "),
-                  _c("input", {
-                    staticClass: "form-control",
-                    staticStyle: { display: "none" },
-                    attrs: {
-                      id: "thumbnail",
-                      type: "text",
-                      name: "avatar",
-                      value: ""
-                    },
-                    on: {
-                      change: function($event) {
-                        return _vm.updateAvatarUrl("")
-                      }
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _vm._m(2)
-            ])
-          ])
-        ]),
+        _vm._m(1),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-md-12" }, [
@@ -108136,7 +108281,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(3)
+    _vm._m(2)
   ])
 }
 var staticRenderFns = [
@@ -108156,35 +108301,56 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "input-group-btn" }, [
-      _c(
-        "a",
-        {
-          staticClass: "btn btn-primary text-white lfm",
-          attrs: {
-            id: "lfm",
-            "data-input": "thumbnail",
-            "data-preview": "holder"
-          }
-        },
-        [
-          _c("i", { staticClass: "fa fa-picture-o" }),
-          _vm._v(
-            " Chọn ảnh\n                                                       "
-          )
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4" }, [
-      _c("div", {
-        staticStyle: { "max-height": "200px" },
-        attrs: { id: "holder" }
-      })
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-6" }, [
+        _c("div", { staticClass: "form-group row" }, [
+          _c("label", { staticClass: "control-label  col-md-12" }, [
+            _vm._v("Ảnh đại diện")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-8" }, [
+            _c("div", { staticClass: "input-group" }, [
+              _c("span", { staticClass: "input-group-btn" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-primary text-white lfm",
+                    attrs: {
+                      id: "lfm",
+                      "data-input": "thumbnail",
+                      "data-preview": "holder"
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "fa fa-picture-o" }),
+                    _vm._v(
+                      " Chọn ảnh\n                                                       "
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "form-control",
+                staticStyle: { display: "none" },
+                attrs: {
+                  id: "thumbnail",
+                  type: "text",
+                  name: "avatar",
+                  value: ""
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-4" }, [
+            _c("div", {
+              staticStyle: { "max-height": "200px" },
+              attrs: { id: "holder" }
+            })
+          ])
+        ])
+      ])
     ])
   },
   function() {

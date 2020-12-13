@@ -26,9 +26,10 @@
     ?>
 @endsection
 @section('js')
-{{--    <script src="{{asset('vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>--}}
+    <script src="{{asset('vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>
     <script>
-
+        let route_prefix = "/laravel-filemanager";
+        $('.lfm').filemanager('image', {prefix: route_prefix});
     </script>
 @endsection
 @section('content')
