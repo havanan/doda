@@ -107672,12 +107672,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    placeholder: "Vd: Hoàng Văn Xyz",
-                    name: "name",
-                    required: "required"
-                  },
+                  attrs: { type: "text", name: "name", required: "required" },
                   domProps: { value: _vm.formData.name },
                   on: {
                     change: function($event) {

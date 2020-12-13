@@ -11,7 +11,7 @@
               <div class="row">
                   <div class="col-md-12">
                       <div class="form-group row"><label class="control-label  col-md-12">Tên sản phẩm</label>
-                          <div class="col-md-12"><input type="text" placeholder="Vd: Hoàng Văn Xyz" name="name" v-model="formData.name"
+                          <div class="col-md-12"><input type="text" name="name" v-model="formData.name"
                                                         v-on:change="makeSlug()"
                                                         required="required" class="form-control"></div>
                       </div>
