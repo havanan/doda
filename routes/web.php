@@ -15,7 +15,10 @@ Route::group([
 ],function (){
     Route::get('profile', 'HomeController@profile')->name('profile');
 });
-Route::group(['prefix' => 'laravel-filemanager'], function () {
+Route::group([
+    'prefix' => 'laravel-filemanager',
+//    'middleware' => ['auth:admin']
+], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
 //Admin Route

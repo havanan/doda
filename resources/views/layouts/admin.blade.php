@@ -74,7 +74,10 @@
             <!-- ============================================================== -->
         </div>
     </div>
-
+    <script>
+        const route_prefix = '/laravel-filemanager';
+    </script>
+    <script src="{{ asset('admin/js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <!-- Scripts -->
     <script src="{{ asset('admin/js/lib.js') }}"></script>

@@ -34,8 +34,6 @@ mix.styles([
 ], 'public/admin/css/lib.css').version();
 // Admin Js
 mix.scripts([
-
-    'resources/admin/assets/plugins/jquery/jquery.min.js',
     'resources/admin/assets/plugins/bootstrap/js/popper.min.js',
     'resources/admin/assets/plugins/bootstrap/js/bootstrap.min.js',
     'resources/admin/assets/plugins/styleswitcher/jQuery.style.switcher.js',
@@ -54,10 +52,9 @@ mix.scripts([
     'resources/admin/js/waves.js',
     'resources/admin/js/sidebarmenu.js',
     'resources/admin/js/custom.min.js',
-    'resources/admin/js/dashboard4.js',
     'resources/admin/js/common.js',
 ], 'public/admin/js/lib.js').version();
 
-// mix.scripts([
-//     'resources/admin/js/data-table-init.js',
-// ], 'public/admin/js/data-table.js').version();
+mix.scripts([
+    'resources/admin/assets/plugins/jquery/jquery.min.js',
+], 'public/admin/js/jquery.min.js').version();

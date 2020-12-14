@@ -9,28 +9,11 @@
             'url' => '#'
         ]
     ];
-    $genders = [
-        0 => 'Nữ',
-        1 => 'Nam',
-        2 => 'Khác'
-    ];
-    $types = [
-        0 => 'Khách lẻ',
-        1 => 'Khách sỉ',
-        2 => 'Khác'
-    ];
-    $status = [
-        0 => 'Khóa',
-        1 => 'Hoạt động'
-    ];
     ?>
 @endsection
 @section('js')
-    {{--<script src="{{asset('vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>--}}
-    {{--<script>--}}
-        {{--let route_prefix = "/laravel-filemanager";--}}
-        {{--$('.lfm').filemanager('image', {prefix: route_prefix});--}}
-    {{--</script>--}}
+{{--    <script src="{{asset('vendor/laravel-filemanager/js/filemanager.js')}}"></script>--}}
+{{--    <script src="{{asset('vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>--}}
 @endsection
 @section('content')
     <div class="row">
