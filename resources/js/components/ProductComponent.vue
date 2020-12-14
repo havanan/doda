@@ -169,6 +169,7 @@
                         <div class="form-group row"><label class="control-label  col-md-12">Giới thiệu sản phẩm</label>
                             <div class="col-md-12" id="tinymce-editor">
                                 <tinymce id="d1" v-model="formData.intro" :other_options="options"></tinymce>
+<!--                                <tiny-mce-component v-model="formData.intro" :id="'d1'"></tiny-mce-component>-->
                             </div>
                         </div>
                     </div>
@@ -235,7 +236,7 @@
                     brand_id: 1,
                     price_discount: 0,
                     is_discount: 0,
-                    intro: '',
+                    intro: 'abcd1234',
                 },
                 options: {
                     height: '700',

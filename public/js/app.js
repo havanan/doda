@@ -2130,6 +2130,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "product-component",
   props: {
@@ -2186,7 +2187,7 @@ __webpack_require__.r(__webpack_exports__);
         brand_id: 1,
         price_discount: 0,
         is_discount: 0,
-        intro: ''
+        intro: 'abcd1234'
       },
       options: {
         height: '700',
@@ -2266,6 +2267,66 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TinyMceComponent.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TinyMceComponent.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "TinyMceComponent",
+  props: ['data', 'id'],
+  computed: {
+    // Mutating the prop :(
+    dataInput: {
+      get: function get() {
+        return this.data;
+      },
+      set: function set(newValue) {
+        this.$emit('update:data', newValue);
+      }
+    }
+  },
+  data: function data() {
+    return {
+      options: {
+        height: '700',
+        path_absolute: this.route_prefix,
+        relative_urls: false,
+        file_browser_callback: function file_browser_callback(field_name, url, type, win) {
+          var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+          var y = window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight;
+          var cmsURL = '/laravel-filemanager?field_name=' + field_name;
+
+          if (type === 'image') {
+            cmsURL = cmsURL + "&type=Images";
+          } else {
+            cmsURL = cmsURL + "&type=Files";
+          }
+
+          tinyMCE.activeEditor.windowManager.open({
+            file: cmsURL,
+            title: 'Filemanager',
+            width: x * 0.8,
+            height: y * 0.8,
+            resizable: "yes",
+            close_previous: "no"
+          });
+        }
+      }
+    };
   }
 });
 
@@ -107863,9 +107924,9 @@ var render = function() {
                       { key: discount.id, domProps: { value: discount.id } },
                       [
                         _vm._v(
-                          "\n                                    " +
+                          "\n                                        " +
                             _vm._s(discount.name) +
-                            "\n                                "
+                            "\n                                    "
                         )
                       ]
                     )
@@ -107928,7 +107989,7 @@ var render = function() {
                       [
                         _vm._v(
                           _vm._s(item.name) +
-                            "\n                                "
+                            "\n                                    "
                         )
                       ]
                     )
@@ -107989,7 +108050,7 @@ var render = function() {
                       [
                         _vm._v(
                           _vm._s(brand.name) +
-                            "\n                                "
+                            "\n                                    "
                         )
                       ]
                     )
@@ -108031,7 +108092,7 @@ var render = function() {
                         [
                           _c("i", { staticClass: "fa fa-picture-o" }),
                           _vm._v(
-                            " Chọn ảnh\n                                                     "
+                            " Chọn ảnh\n                                                         "
                           )
                         ]
                       )
@@ -108217,9 +108278,9 @@ var render = function() {
                               { key: size.id, domProps: { value: size.id } },
                               [
                                 _vm._v(
-                                  "\n                                                " +
+                                  "\n                                                    " +
                                     _vm._s(size.name) +
-                                    "\n                                            "
+                                    "\n                                                "
                                 )
                               ]
                             )
@@ -108379,7 +108440,7 @@ var staticRenderFns = [
         [
           _c("i", { staticClass: "fa fa-picture-o" }),
           _vm._v(
-            " Chọn ảnh\n                                                     "
+            " Chọn ảnh\n                                                         "
           )
         ]
       )
@@ -108421,6 +108482,39 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TinyMceComponent.vue?vue&type=template&id=72d4cab9&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TinyMceComponent.vue?vue&type=template&id=72d4cab9& ***!
+  \*******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("tinymce", {
+    attrs: { id: _vm.id, other_options: _vm.options },
+    model: {
+      value: _vm.dataInput,
+      callback: function($$v) {
+        _vm.dataInput = $$v
+      },
+      expression: "dataInput"
+    }
+  })
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -123756,24 +123850,6 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./plugins/laravel-filemanager/js/filemanager.min.js":
-/*!***********************************************************!*\
-  !*** ./plugins/laravel-filemanager/js/filemanager.min.js ***!
-  \***********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-window.filemanager = function () {
-  var n = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : "/filemanager",
-      e = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : "FileManager",
-      i = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : "width=900,height=600";
-  return new Promise(function (o) {
-    window.open(n, e, i), window.SetUrl = o;
-  });
-};
-
-/***/ }),
-
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -123790,8 +123866,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _components_ProductComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/ProductComponent.vue */ "./resources/js/components/ProductComponent.vue");
 /* harmony import */ var vue_tinymce_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-tinymce-editor */ "./node_modules/vue-tinymce-editor/src/index.js");
-/* harmony import */ var _plugins_laravel_filemanager_js_filemanager_min_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../plugins/laravel-filemanager/js/filemanager.min.js */ "./plugins/laravel-filemanager/js/filemanager.min.js");
-/* harmony import */ var _plugins_laravel_filemanager_js_filemanager_min_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_plugins_laravel_filemanager_js_filemanager_min_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _components_TinyMceComponent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/TinyMceComponent */ "./resources/js/components/TinyMceComponent.vue");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
@@ -123806,7 +123881,7 @@ Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_1___default.a, axios__WEBPACK_IMPORTE
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('product-component', _components_ProductComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"]);
 Vue.component('tinymce', vue_tinymce_editor__WEBPACK_IMPORTED_MODULE_4__["default"]);
-Vue.component('fmg', _plugins_laravel_filemanager_js_filemanager_min_js__WEBPACK_IMPORTED_MODULE_5___default.a);
+Vue.component('tiny-mce-component', _components_TinyMceComponent__WEBPACK_IMPORTED_MODULE_5__["default"]);
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
   mode: 'history'
 });
@@ -123994,6 +124069,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProductComponent_vue_vue_type_template_id_9e91ef8e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ProductComponent_vue_vue_type_template_id_9e91ef8e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/TinyMceComponent.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/TinyMceComponent.vue ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TinyMceComponent_vue_vue_type_template_id_72d4cab9___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TinyMceComponent.vue?vue&type=template&id=72d4cab9& */ "./resources/js/components/TinyMceComponent.vue?vue&type=template&id=72d4cab9&");
+/* harmony import */ var _TinyMceComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TinyMceComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/TinyMceComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TinyMceComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TinyMceComponent_vue_vue_type_template_id_72d4cab9___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TinyMceComponent_vue_vue_type_template_id_72d4cab9___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/TinyMceComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/TinyMceComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/TinyMceComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TinyMceComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./TinyMceComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TinyMceComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TinyMceComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/TinyMceComponent.vue?vue&type=template&id=72d4cab9&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/TinyMceComponent.vue?vue&type=template&id=72d4cab9& ***!
+  \*************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TinyMceComponent_vue_vue_type_template_id_72d4cab9___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./TinyMceComponent.vue?vue&type=template&id=72d4cab9& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TinyMceComponent.vue?vue&type=template&id=72d4cab9&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TinyMceComponent_vue_vue_type_template_id_72d4cab9___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TinyMceComponent_vue_vue_type_template_id_72d4cab9___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

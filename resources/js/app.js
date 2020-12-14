@@ -7,15 +7,14 @@ import VueAxios from 'vue-axios';
 import axios from 'axios';
 import ProductComponent from './components/ProductComponent.vue';
 import tinymce from 'vue-tinymce-editor'
-import FileManager from '../../plugins/laravel-filemanager/js/filemanager.min.js';
-
+import TinyMceComponent from "./components/TinyMceComponent";
 Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('product-component', ProductComponent);
 Vue.component('tinymce', tinymce);
-Vue.component('fmg',FileManager);
+Vue.component('tiny-mce-component', TinyMceComponent);
 
 const router = new VueRouter({ mode: 'history'});
 const app = new Vue(Vue.util.extend({ router })).$mount('#app');
