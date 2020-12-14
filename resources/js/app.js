@@ -8,6 +8,9 @@ import axios from 'axios';
 import ProductComponent from './components/ProductComponent.vue';
 import tinymce from 'vue-tinymce-editor'
 import TinyMceComponent from "./components/TinyMceComponent";
+import {myMixin} from './plugins/mixin';
+//hàm dùng chung
+Vue.mixin(myMixin);
 Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
 

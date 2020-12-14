@@ -46,10 +46,5 @@
                     language_url: '/js/plugins/tinymce/langs/vi.js'
                 }
             }},
-        methods: {
-            randomId(){
-                return Math.random().toString(36).substring(7);
-            }
-        }
     }
 </script>
