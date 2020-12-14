@@ -154,9 +154,8 @@
                                         data-preview="holder"
                                         class="btn btn-primary text-white lfm"><i
                                         class="fa fa-picture-o"></i> Chọn ảnh
-                                                         </a></span> <input id="thumbnail" type="text" name="avatar"
-                                                                            v-model="formData.avatar" class="form-control"
-                                                                            style="display: none;"></div>
+                                                         </a></span>
+                                    <input id="thumbnail" type="text" name="avatar" v-model="formData.avatar" class="form-control lfm-input"></div>
                             </div>
                             <div class="col-md-4">
                                 <div id="holder" style="max-height: 200px;"></div>
@@ -168,8 +167,7 @@
                     <div class="col-md-12">
                         <div class="form-group row"><label class="control-label  col-md-12">Giới thiệu sản phẩm</label>
                             <div class="col-md-12" id="tinymce-editor">
-                                <tinymce id="d1" v-model="formData.intro" :other_options="options"></tinymce>
-<!--                                <tiny-mce-component v-model="formData.intro" :id="'d1'"></tiny-mce-component>-->
+                                <tiny-mce-component v-model="formData.intro"></tiny-mce-component>
                             </div>
                         </div>
                     </div>
@@ -236,34 +234,8 @@
                     brand_id: 1,
                     price_discount: 0,
                     is_discount: 0,
-                    intro: 'abcd1234',
+                    intro: '',
                 },
-                options: {
-                    height: '700',
-                    path_absolute: this.route_prefix,
-                    relative_urls: false,
-                    file_browser_callback: function (field_name, url, type, win) {
-                        const x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
-                        const y = window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight;
-
-                        let cmsURL = '/laravel-filemanager?field_name=' + field_name;
-                        if (type === 'image') {
-                            cmsURL = cmsURL + "&type=Images";
-                        } else {
-                            cmsURL = cmsURL + "&type=Files";
-                        }
-
-                        tinyMCE.activeEditor.windowManager.open({
-                            file: cmsURL,
-                            title: 'Filemanager',
-                            width: x * 0.8,
-                            height: y * 0.8,
-                            resizable: "yes",
-                            close_previous: "no"
-                        });
-                    }
-                }
-
             }
         },
         methods: {
@@ -310,7 +282,16 @@
                 this.$nextTick(function () {
                     $('.lfm').filemanager('image', {prefix: route_prefix});
                 });
-            }
+            },
+            updateImagePath(id,target){
+                const vm = this;
+                const value = $('#'+id).val();
+                if(value) {
+                    $('#'+id).value = value;
+                    vm.target = value;
+                }
+            },
+
         },
     }
 </script>

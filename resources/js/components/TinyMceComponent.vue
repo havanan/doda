@@ -1,11 +1,11 @@
 <template>
-    <tinymce :id="id" v-model="dataInput" :other_options="options"></tinymce>
+    <tinymce :id="randomId()" :other_options="options" v-model="dataInput"></tinymce>
 </template>
 
 <script>
     export default {
         name: "TinyMceComponent",
-        props: ['data','id'],
+        props: ['data'],
         computed: {
             // Mutating the prop :(
             dataInput: {
@@ -13,7 +13,7 @@
                     return this.data;
                 },
                 set: function(newValue){
-                    this.$emit('update:data', newValue)
+                    this.$emit('input', newValue)
                 }
             },
         },
@@ -42,8 +42,14 @@
                             resizable: "yes",
                             close_previous: "no"
                         });
-                    }
+                    },
+                    language_url: '/js/plugins/tinymce/langs/vi.js'
                 }
-            }}
+            }},
+        methods: {
+            randomId(){
+                return Math.random().toString(36).substring(7);
+            }
+        }
     }
 </script>

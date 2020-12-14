@@ -4711,7 +4711,6 @@ window.filemanager=function(){var n=arguments.length>0&&void 0!==arguments[0]?ar
 
         // set or change the preview image src
         items.forEach(function (item) {
-          console.log(item)
           target_preview.append(
             $('<img>').css('width', '200px').attr('src', item.thumb_url)
           );

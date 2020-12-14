@@ -2129,8 +2129,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "product-component",
   props: {
@@ -2187,32 +2185,7 @@ __webpack_require__.r(__webpack_exports__);
         brand_id: 1,
         price_discount: 0,
         is_discount: 0,
-        intro: 'abcd1234'
-      },
-      options: {
-        height: '700',
-        path_absolute: this.route_prefix,
-        relative_urls: false,
-        file_browser_callback: function file_browser_callback(field_name, url, type, win) {
-          var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
-          var y = window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight;
-          var cmsURL = '/laravel-filemanager?field_name=' + field_name;
-
-          if (type === 'image') {
-            cmsURL = cmsURL + "&type=Images";
-          } else {
-            cmsURL = cmsURL + "&type=Files";
-          }
-
-          tinyMCE.activeEditor.windowManager.open({
-            file: cmsURL,
-            title: 'Filemanager',
-            width: x * 0.8,
-            height: y * 0.8,
-            resizable: "yes",
-            close_previous: "no"
-          });
-        }
+        intro: ''
       }
     };
   },
@@ -2266,6 +2239,15 @@ __webpack_require__.r(__webpack_exports__);
           prefix: route_prefix
         });
       });
+    },
+    updateImagePath: function updateImagePath(id, target) {
+      var vm = this;
+      var value = $('#' + id).val();
+
+      if (value) {
+        $('#' + id).value = value;
+        vm.target = value;
+      }
     }
   }
 });
@@ -2287,7 +2269,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "TinyMceComponent",
-  props: ['data', 'id'],
+  props: ['data'],
   computed: {
     // Mutating the prop :(
     dataInput: {
@@ -2295,7 +2277,7 @@ __webpack_require__.r(__webpack_exports__);
         return this.data;
       },
       set: function set(newValue) {
-        this.$emit('update:data', newValue);
+        this.$emit('input', newValue);
       }
     }
   },
@@ -2324,9 +2306,15 @@ __webpack_require__.r(__webpack_exports__);
             resizable: "yes",
             close_previous: "no"
           });
-        }
+        },
+        language_url: '/js/plugins/tinymce/langs/vi.js'
       }
     };
+  },
+  methods: {
+    randomId: function randomId() {
+      return Math.random().toString(36).substring(7);
+    }
   }
 });
 
@@ -107924,9 +107912,9 @@ var render = function() {
                       { key: discount.id, domProps: { value: discount.id } },
                       [
                         _vm._v(
-                          "\n                                        " +
+                          "\n                                    " +
                             _vm._s(discount.name) +
-                            "\n                                    "
+                            "\n                                "
                         )
                       ]
                     )
@@ -107989,7 +107977,7 @@ var render = function() {
                       [
                         _vm._v(
                           _vm._s(item.name) +
-                            "\n                                    "
+                            "\n                                "
                         )
                       ]
                     )
@@ -108050,7 +108038,7 @@ var render = function() {
                       [
                         _vm._v(
                           _vm._s(brand.name) +
-                            "\n                                    "
+                            "\n                                "
                         )
                       ]
                     )
@@ -108092,7 +108080,7 @@ var render = function() {
                         [
                           _c("i", { staticClass: "fa fa-picture-o" }),
                           _vm._v(
-                            " Chọn ảnh\n                                                         "
+                            " Chọn ảnh\n                                                     "
                           )
                         ]
                       )
@@ -108278,9 +108266,9 @@ var render = function() {
                               { key: size.id, domProps: { value: size.id } },
                               [
                                 _vm._v(
-                                  "\n                                                    " +
+                                  "\n                                                " +
                                     _vm._s(size.name) +
-                                    "\n                                                "
+                                    "\n                                            "
                                 )
                               ]
                             )
@@ -108359,8 +108347,7 @@ var render = function() {
                         expression: "formData.avatar"
                       }
                     ],
-                    staticClass: "form-control",
-                    staticStyle: { display: "none" },
+                    staticClass: "form-control lfm-input",
                     attrs: { id: "thumbnail", type: "text", name: "avatar" },
                     domProps: { value: _vm.formData.avatar },
                     on: {
@@ -108391,8 +108378,7 @@ var render = function() {
                 "div",
                 { staticClass: "col-md-12", attrs: { id: "tinymce-editor" } },
                 [
-                  _c("tinymce", {
-                    attrs: { id: "d1", other_options: _vm.options },
+                  _c("tiny-mce-component", {
                     model: {
                       value: _vm.formData.intro,
                       callback: function($$v) {
@@ -108440,7 +108426,7 @@ var staticRenderFns = [
         [
           _c("i", { staticClass: "fa fa-picture-o" }),
           _vm._v(
-            " Chọn ảnh\n                                                         "
+            " Chọn ảnh\n                                                     "
           )
         ]
       )
@@ -108504,7 +108490,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("tinymce", {
-    attrs: { id: _vm.id, other_options: _vm.options },
+    attrs: { id: _vm.randomId(), other_options: _vm.options },
     model: {
       value: _vm.dataInput,
       callback: function($$v) {
@@ -124161,8 +124147,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\doda\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\doda\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! F:\laragon\www\doda\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! F:\laragon\www\doda\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
