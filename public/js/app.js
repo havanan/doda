@@ -2130,7 +2130,10 @@ __webpack_require__.r(__webpack_exports__);
     this.getBrands();
     this.getSizes();
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    FileManager();
+    this.initFilemanager();
+  },
   data: function data() {
     return {
       sizes: {},
@@ -2250,6 +2253,11 @@ __webpack_require__.r(__webpack_exports__);
       };
       colors.push(color);
       vm.colors = colors;
+    },
+    initFilemanager: function initFilemanager() {
+      this.$nextTick(function () {
+        $('.lfm').filemanager('image', '/laravel-filemanager');
+      });
     }
   }
 });
@@ -123708,6 +123716,24 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./plugins/laravel-filemanager/js/filemanager.min.js":
+/*!***********************************************************!*\
+  !*** ./plugins/laravel-filemanager/js/filemanager.min.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+window.filemanager = function () {
+  var n = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : "/filemanager",
+      e = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : "FileManager",
+      i = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : "width=900,height=600";
+  return new Promise(function (o) {
+    window.open(n, e, i), window.SetUrl = o;
+  });
+};
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -123724,9 +123750,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _components_ProductComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/ProductComponent.vue */ "./resources/js/components/ProductComponent.vue");
 /* harmony import */ var vue_tinymce_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-tinymce-editor */ "./node_modules/vue-tinymce-editor/src/index.js");
+/* harmony import */ var _plugins_laravel_filemanager_js_filemanager_min_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../plugins/laravel-filemanager/js/filemanager.min.js */ "./plugins/laravel-filemanager/js/filemanager.min.js");
+/* harmony import */ var _plugins_laravel_filemanager_js_filemanager_min_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_plugins_laravel_filemanager_js_filemanager_min_js__WEBPACK_IMPORTED_MODULE_5__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+
 
 
 
@@ -123737,6 +123766,7 @@ Vue.use(vue_axios__WEBPACK_IMPORTED_MODULE_1___default.a, axios__WEBPACK_IMPORTE
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('product-component', _components_ProductComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"]);
 Vue.component('tinymce', vue_tinymce_editor__WEBPACK_IMPORTED_MODULE_4__["default"]);
+Vue.component('fmg', _plugins_laravel_filemanager_js_filemanager_min_js__WEBPACK_IMPORTED_MODULE_5___default.a);
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
   mode: 'history'
 });

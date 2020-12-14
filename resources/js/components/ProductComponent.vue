@@ -175,6 +175,7 @@
 
     export default {
         name: "product-component",
+
         props: {
             urlGetBrand: {
                 type: String,
@@ -189,7 +190,10 @@
             this.getBrands()
             this.getSizes()
         },
-        mounted() {},
+        mounted() {
+            FileManager()
+            this.initFilemanager()
+        },
         data: function () {
             return {
                 sizes: {},
@@ -295,6 +299,12 @@
                 const color ={id:this.randomId, name:'',available: '', image:''};
                 colors.push(color);
                 vm.colors = colors
+            },
+            initFilemanager()
+            {
+                this.$nextTick(function() {
+                    $('.lfm').filemanager('image','/laravel-filemanager');
+                });
             }
         },
     }
