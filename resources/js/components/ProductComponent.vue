@@ -85,17 +85,7 @@
                         <div class="form-group row">
                             <label class="control-label  col-md-12">Màu sắc</label>
                             <div class="col-md-3">
-                                <div class="input-group"><span class="input-group-btn m-b-5"><a :id="'lfm'+index"
-                                                                                                data-input="thumbnail"
-                                                                                                :data-preview="'holder'+index"
-                                                                                                class="btn btn-danger text-white lfm"><i
-                                        class="fa fa-picture-o"></i> Chọn ảnh
-                                                         </a></span> <input :id="'thumbnail'+index" type="text"
-                                                                            v-model="color.image"
-                                                                            value="" class="form-control"
-                                                                            v-on:change="updateAvatarUrl(index)"
-                                                                            style="display: none;"></div>
-                                <div :id="'holder'+color.id" style="max-height: 200px;"></div>
+                                <standalone-btn-component v-model="color.name"></standalone-btn-component>
                             </div>
                             <div class="col-md-3">
                                 <input type="hidden" v-model="color.id">
@@ -147,20 +137,7 @@
             <div class="form-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="form-group row"><label class="control-label  col-md-12">Ảnh đại diện</label>
-                            <div class="col-md-8">
-                                <div class="input-group"><span class="input-group-btn"><a
-                                        data-input="thumbnail"
-                                        data-preview="holder"
-                                        class="btn btn-primary text-white lfm"><i
-                                        class="fa fa-picture-o"></i> Chọn ảnh
-                                                         </a></span>
-                                    <input id="thumbnail" type="text" name="avatar" v-model="formData.avatar" class="form-control lfm-input"></div>
-                            </div>
-                            <div class="col-md-4">
-                                <div id="holder" style="max-height: 200px;"></div>
-                            </div>
-                        </div>
+                        <standalone-btn-component v-model="formData.avatar"></standalone-btn-component>
                     </div>
                 </div>
                 <div class="row">
@@ -228,7 +205,7 @@
                 formData: {
                     name: '',
                     slug: '',
-                    avatar: '',
+                    avatar: 'abc123',
                     status: 1,
                     price: 0,
                     brand_id: 1,
@@ -268,15 +245,16 @@
                     vm.colors[index].avatar = avatarInfo.url;
                 }
             },
-            randomId() {
-                return Math.floor(Math.random() * 9999) + 9999;
-            },
             createNewColor(key) {
                 const vm = this;
                 let colors = vm.colors;
+                let productColors = vm.productColors;
                 const color = {id: this.randomId, name: '', available: '', image: ''};
+                const size =  {name: '', available: 0};
                 colors.push(color);
-                vm.colors = colors
+                productColors.push(size);
+                vm.colors = colors;
+                vm.productColors = productColors;
             },
             initFilemanager() {
                 this.$nextTick(function () {
