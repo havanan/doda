@@ -12,8 +12,6 @@
     ?>
 @endsection
 @section('js')
-{{--    <script src="{{asset('vendor/laravel-filemanager/js/filemanager.js')}}"></script>--}}
-{{--    <script src="{{asset('vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>--}}
 @endsection
 @section('content')
     <div class="row">
@@ -23,10 +21,12 @@
                     <h4 class="m-b-0 text-white"><i class="fa fa-user-plus"></i></h4>
                 </div>
                 <div class="card-body" id="cardBody">
-                    <form>
+                    <form method="post" action="{{route('admin.product.save')}}">
+                        @csrf
                         <product-component
                                 :url-get-brand="'{{route('admin.brand.apiGetAll')}}'"
                                 :url-get-size="'{{route('admin.product.size.apiGetAllSize')}}'"
+                                :url-get-type="'{{route('admin.product.cat.apiGetAll')}}'"
                         ></product-component>
                     </form>
                 </div>

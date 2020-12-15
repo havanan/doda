@@ -1,5 +1,5 @@
 <template>
-    <tinymce :id="randomId()" :other_options="options" v-model="dataInput"></tinymce>
+    <tinymce :id="randomId()" :other_options="options" v-model="dataInput" :name="'intro'"></tinymce>
 </template>
 
 <script>

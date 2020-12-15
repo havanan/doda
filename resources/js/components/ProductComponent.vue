@@ -29,7 +29,7 @@
                     <div class="col-md-4">
                         <div class="form-group row"><label class="control-label  col-md-12">Giá sản phẩm</label>
                             <div class="col-md-12"><input type="number" name="price" v-model="formData.price"
-                                                          required="required" class="form-control"></div>
+                                                          required="required" class="form-control" min="0"></div>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -37,14 +37,15 @@
                             <label class="control-label  col-md-12">Giá giảm</label>
                             <div class="col-md-12"><input type="number" name="price_discount"
                                                           v-model="formData.price_discount"
-                                                          class="form-control"></div>
+                                                          class="form-control" min="0"></div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group row"><label class="control-label  col-md-12">Giá giảm</label>
                             <div class="col-md-12">
-                                <select data-placeholder="Vui lòng chọn trạng thái" tabindex="1"
+                                <select data-placeholder="Vui lòng chọn" tabindex="1"
                                         v-model="formData.is_discount" class="form-control custom-select">
+                                    <option value="">Vui lòng chọn loại giá</option>
                                     <option v-for="discount in discounts" :key="discount.id" :value="discount.id">
                                         {{discount.name}}
                                     </option>
@@ -54,24 +55,38 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group row"><label class="control-label  col-md-12">Trạng thái</label>
+                    <div class="col-md-4">
+                        <div class="form-group row"><label class="control-label  col-md-12">Loại sản phẩm</label>
                             <div class="col-md-12">
-                                <select data-placeholder="Vui lòng chọn trạng thái" tabindex="1"
-                                        v-model="formData.status" class="form-control custom-select">
-                                    <option v-for="item in status" :key="item.id" :value="item.id">{{item.name}}
+                                <select data-placeholder="Vui lòng chọn nhãn hiệu"
+                                        name="product_type_id"
+                                        tabindex="1"
+                                        v-model="formData.product_type_id"
+                                        v-html="makeTypesMenu()"
+                                        class="form-control custom-select"
+                                        required>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group row"><label class="control-label  col-md-12">Nhãn hiệu</label>
+                            <div class="col-md-12">
+                                <select data-placeholder="Vui lòng chọn nhãn hiệu" name="brand_id" tabindex="1" v-model="formData.brand_id" class="form-control custom-select" required>
+<!--                                    <option value="">Vui lòng chọn nhãn hiệu</option>-->
+                                    <option v-for="brand in brands" :key="brand.id" :value="brand.id">{{brand.name}}
                                     </option>
                                 </select>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group row"><label class="control-label  col-md-12">Nhãn hiệu</label>
+                    <div class="col-md-4">
+                        <div class="form-group row"><label class="control-label  col-md-12">Trạng thái</label>
                             <div class="col-md-12">
-                                <select data-placeholder="Vui lòng chọn nhãn hiệu" tabindex="1"
-                                        v-model="formData.brand_id" class="form-control custom-select">
-                                    <option v-for="brand in brands" :key="brand.id" :value="brand.id">{{brand.name}}
-                                    </option>
+                                <select data-placeholder="Vui lòng chọn trạng thái" tabindex="1" v-model="formData.status" name="status" class="form-control custom-select" required>
+                                    <option value="">Vui lòng chọn trạng thái</option>
+                                    <option v-for="item in status" :key="item.id" :value="item.id">{{item.name}}</option>
                                 </select>
                             </div>
                         </div>
@@ -85,59 +100,71 @@
                         <div class="form-group row">
                             <label class="control-label  col-md-12">Màu sắc</label>
                             <div class="col-md-3">
-                                <div class="input-group"><span class="input-group-btn m-b-5"><a :id="'lfm'+index"
-                                                                                                data-input="thumbnail"
-                                                                                                :data-preview="'holder'+index"
-                                                                                                class="btn btn-danger text-white lfm"><i
-                                        class="fa fa-picture-o"></i> Chọn ảnh
-                                                         </a></span> <input :id="'thumbnail'+index" type="text"
-                                                                            v-model="color.image"
-                                                                            value="" class="form-control"
-                                                                            v-on:change="updateAvatarUrl(index)"
-                                                                            style="display: none;"></div>
-                                <div :id="'holder'+color.id" style="max-height: 200px;"></div>
-                            </div>
-                            <div class="col-md-3">
-                                <input type="hidden" v-model="color.id">
-                                <input type="text" class="form-control" placeholder="Tên màu" v-model="color.name">
-                            </div>
-                            <div class="col-md-3">
-                                <input type="number" class="form-control" placeholder="Số lượng"
-                                       v-model="color.available">
-                            </div>
-                            <div class="col-md-3">
-                                <div class="col-md-12 text-right">
-                                    <button class="btn btn-warning" type="button" v-on:click="createNewColor(index)"><i
-                                            class="fa fa-plus"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-md-3"></div>
-                            <div class="col-md-9">
-
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label class="control-label  col-md-12">Size</label>
-                                            <select data-placeholder="Vui lòng chọn size" tabindex="1"
-                                                    v-model="productColors[index].name"
-                                                    class="form-control custom-select">
-                                                <option v-for="size in sizes" :key="size.id" :value="size.id">
-                                                    {{size.name}}
-                                                </option>
-                                            </select>
-                                        </div>
+                                <div class="form-group row"><label class="control-label  col-md-12">Ảnh màu</label>
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <span class="input-group-btn">
+                                                <a :data-input="'thumbnail-color'+index" :data-preview="'holder-color'+index" class="btn btn-primary text-white lfm">
+                                                    <i class="fa fa-picture-o"></i> Chọn ảnh
+                                                </a>
+                                            </span>
+                                            <input :id="'thumbnail-color'+index" type="text" :name="'color['+index+'][avatar]'" class="form-control hide-item"></div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label class="control-label  col-md-12">Số lượng</label>
-                                            <input type="number" class="form-control"
-                                                   v-model="productColors[index].available">
-                                        </div>
+                                    <div class="col-md-12">
+                                        <div :id="'holder-color'+index" class="mt-2"></div>
                                     </div>
                                 </div>
                             </div>
+                           <div class="col-md-9">
+                            <!--màu sắc-->
+                               <div class="row mb-2">
+                                   <div class="col-md-5">
+                                       <input type="text" class="form-control" placeholder="Tên màu" v-model="color.name" :name="'color['+index+'][name]'">
+                                   </div>
+                                   <div class="col-md-5">
+                                       <input type="number" class="form-control" placeholder="Số lượng" :name="'color['+index+'][available]'"
+                                              v-model="color.available">
+                                   </div>
+                                   <div class="col-md-2">
+                                   </div>
+                               </div>
+                               <!--/màu sắc-->
+                                <!--size-->
+                               <div class="row size-item" v-if="color.product_sizes && color.product_sizes.length > 0" v-for="(size,key) in color.product_sizes" :key="key">
+                                   <div class="col-md-4">
+                                       <div class="form-group">
+                                           <label class="control-label  col-md-12">Size</label>
+                                           <select tabindex="1"
+                                                   :name="'color['+index+'][sizes]['+key+'][name]'"
+                                                   class="form-control custom-select">
+                                               <option value="">Vui lòng chọn size</option>
+                                               <option v-for="size in sizes" :key="size.id" :value="size.name">
+                                                   {{size.name}}
+                                               </option>
+                                           </select>
+                                       </div>
+                                   </div>
+                                   <div class="col-md-4">
+                                       <div class="form-group">
+                                           <label class="control-label  col-md-12">Số lượng</label>
+                                           <input type="number" class="form-control"  :name="'color['+index+'][sizes]['+key+'][available]'" value="0" min="0">
+                                       </div>
+                                   </div>
+                                   <div class="col-md-4">
+                                       <button class="btn btn-pinterest center-div text-white" type="button" v-on:click="createNewSize(index,key)">
+                                           <i class="fa fa-plus"></i> Thêm size
+                                       </button>
+                                   </div>
+                               </div>
+                               <!--/size-->
+                               <div class="row">
+                                   <div class="col-md-12 text-right">
+                                       <button class="btn btn-warning" type="button" v-on:click="createNewColor(index)">
+                                           <i class="fa fa-plus"></i> Thêm màu
+                                       </button>
+                                   </div>
+                               </div>
+                           </div>
                         </div>
                     </div>
                 </div>
@@ -147,27 +174,15 @@
             <div class="form-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="form-group row"><label class="control-label  col-md-12">Ảnh đại diện</label>
-                            <div class="col-md-8">
-                                <div class="input-group"><span class="input-group-btn"><a
-                                        data-input="thumbnail"
-                                        data-preview="holder"
-                                        class="btn btn-primary text-white lfm"><i
-                                        class="fa fa-picture-o"></i> Chọn ảnh
-                                                         </a></span>
-                                    <input id="thumbnail" type="text" name="avatar" v-model="formData.avatar" class="form-control lfm-input"></div>
-                            </div>
-                            <div class="col-md-4">
-                                <div id="holder" style="max-height: 200px;"></div>
-                            </div>
-                        </div>
+                        <standalone-btn-component v-model="formData.avatar"></standalone-btn-component>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group row"><label class="control-label  col-md-12">Giới thiệu sản phẩm</label>
-                            <div class="col-md-12" id="tinymce-editor">
-                                <tiny-mce-component v-model="formData.intro"></tiny-mce-component>
+                            <div class="col-md-12">
+                                <tiny-mce-component v-model="formData.intro" ></tiny-mce-component>
+                                <textarea id="tta-intro" name="intro" class="hide-item"></textarea>
                             </div>
                         </div>
                     </div>
@@ -198,21 +213,39 @@
             urlGetSize: {
                 type: String,
                 default: ''
+            },
+            urlGetType: {
+                type: String,
+                default: ''
+            }
+        },
+        computed: {
+            intro() {
+                return this.formData.intro
+            }
+        },
+        watch: {
+            intro(newValue) {
+                if (newValue) {
+                    $('#tta-intro').val(newValue)
+                }
             }
         },
         created() {
             this.getBrands();
             this.getSizes();
+            this.getTypes();
         },
         updated() {
-            this.initFilemanager()
+            this.initFileManager()
         },
         data: function () {
             return {
                 sizes: {},
                 brands: {},
+                types: {},
                 colors: [
-                    {id: 0, name: '', available: '', image: ''}
+                    {id: this.randomId(), name: '', available: '', image: '',product_sizes: [ {name: '', available: 0} ]}
                 ],
                 productColors: [
                     {name: '', available: 0}
@@ -228,10 +261,11 @@
                 formData: {
                     name: '',
                     slug: '',
-                    avatar: '',
+                    avatar: 'abc123',
                     status: 1,
                     price: 0,
                     brand_id: 1,
+                    product_type_id:'',
                     price_discount: 0,
                     is_discount: 0,
                     intro: '',
@@ -261,6 +295,17 @@
                         }
                     })
             },
+            getTypes() {
+                const vm = this;
+                axios
+                    .get(this.urlGetType)
+                    .then(response => {
+                        const res = response.data;
+                        if (res.data) {
+                            vm.types = res.data;
+                        }
+                    })
+            },
             updateAvatarUrl(index) {
                 const vm = this;
                 const avatarInfo = $('#thumbnail' + index).val();
@@ -268,30 +313,55 @@
                     vm.colors[index].avatar = avatarInfo.url;
                 }
             },
-            randomId() {
-                return Math.floor(Math.random() * 9999) + 9999;
-            },
             createNewColor(key) {
                 const vm = this;
                 let colors = vm.colors;
-                const color = {id: this.randomId, name: '', available: '', image: ''};
+                let product_sizes = [];
+                const size =  {name: '', available: 0};
+                product_sizes.push(size);
+                const color = {id: this.randomId, name: '', available: '', image: '',product_sizes: product_sizes};
                 colors.push(color);
-                vm.colors = colors
+                vm.colors = colors;
             },
-            initFilemanager() {
+            createNewSize(index,key) {
+                const vm = this;
+                let colors = vm.colors;
+                if (colors[index].product_sizes) {
+                    let product_sizes = colors[index].product_sizes;
+                    const size =  {name: '', available: 0};
+                    product_sizes.push(size);
+                    colors[index].product_sizes = product_sizes;
+                    vm.colors = colors;
+                }
+            },
+            initFileManager() {
                 this.$nextTick(function () {
                     $('.lfm').filemanager('image', {prefix: route_prefix});
                 });
             },
-            updateImagePath(id,target){
-                const vm = this;
-                const value = $('#'+id).val();
-                if(value) {
-                    $('#'+id).value = value;
-                    vm.target = value;
+            getTypeName(data) {
+                if (data.name) {
+                    return  '--- ' + data.name;
                 }
             },
-
+            makeTypesMenu() {
+                const vm = this;
+                const data = vm.types;
+                let menu = '<option value="">Vui lòng chọn loại sản phẩm</option>';
+                //Tạo menu cha
+                for (let i = 0;i < data.length; i++) {
+                    const parent = data[i];
+                        menu += '<option value="'+parent.id+'">'+parent.name+'</option>';
+                    const children = parent.children;
+                    //Tạo menu con
+                    for (let j = 0; j < children.length; j++) {
+                        if (children[j]) {
+                            menu += '<option value="'+children[j].id+'">'+ this.getTypeName(children[j]) +'</option>';
+                        }
+                    }
+                }
+                return menu;
+            }
         },
     }
 </script>

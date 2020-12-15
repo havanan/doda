@@ -33,5 +33,9 @@ class CategoryRepository extends BaseRepository
     public function getAllParent(){
         return $this->model->where('status',1)->whereNull('parent_id')->get();
     }
+    public function getAll($params){
+        $status = 1;
+        return $this->model->with(['children'])->select('name','id','slug','status','parent_id')->where('status',$status)->whereNull('parent_id')->orderBy('parent_id')->get();
+    }
 
 }

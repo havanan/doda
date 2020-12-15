@@ -160,6 +160,12 @@ Route::group([
                 Route::post('delete',       'ProductCatController@delete')->name('admin.product.cat.delete');
                 Route::post('save',         'ProductCatController@save')->name('admin.product.cat.save');
                 Route::post('update/{id}',  'ProductCatController@update')->name('admin.product.cat.update');
+
+                Route::group([
+                    'prefix' => 'api',
+                ],function (){
+                    Route::get('get-all',   'ProductCatController@apiGetAll')->name('admin.product.cat.apiGetAll');
+                });
             });
 
             Route::group([

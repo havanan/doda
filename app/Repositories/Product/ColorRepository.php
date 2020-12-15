@@ -13,35 +13,6 @@ class ColorRepository extends BaseRepository
     {
         $this->model = $model;
     }
-    /**
-     * @return Collection
-     */
-    public function getBlockUsers()
-    {
-        return $this->model->where('is_blocked', 1)->get();
-    }
-    /**
-     * @param $email
-     * @return Collection
-     */
-    public function getByEmail($email)
-    {
-        return $this->model
-            ->where('email', $email)
-            ->first();
-    }
-
-    /**
-     * @param $user
-     * @param $data
-     * @return Collection
-     */
-    public function updateUserInfo($user, $data)
-    {
-        $user->fill($data)->save();
-        return $user;
-    }
-
     public function getListWithDataTable($params) {
 
         $paginate = Common::toPagination($params);
