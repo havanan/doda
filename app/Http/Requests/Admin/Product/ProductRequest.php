@@ -28,31 +28,31 @@ class ProductRequest extends FormRequest
 
             return [
                 'name' => 'required|max:255',
-                'email' => "email|unique:users,email,{$this->id}",
-                'phone' => "required|between:1,13|unique:users,phone,{$this->id}",
-                'birthday' => 'nullable|date',
+                'price' => 'required|numeric|gt:price_discount',
+                'price_discount' => 'numeric',
+                'avatar' => 'required',
             ];
         }
         //check create
         return [
             'name' => 'required|max:255',
-            'email' => 'email|unique:users,email',
-            'phone' => 'required|between:1,13|unique:users,phone',
-            'birthday' => 'nullable|date',
+            'price' => 'required|numeric|gt:price_discount',
+            'price_discount' => 'numeric',
+            'avatar' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Tên người dùng không được để trống',
-            'email.required' => 'Email không được để trống',
-            'email.unique' => 'Email đã tồn tại',
-            'phone.required' => 'Số điện thoại không được để trống',
-            'phone.unique' => 'Số điện thoại đã tồn tại',
-            'phone.between' => 'Số điện thoại không quá 13 số',
-            'password' => 'Mật khẩu không được để trống',
-            'birthday.date' => 'Ngày sinh phải là dạng dd/mm/yyyy'
+            'name.required' => 'Tên sản phẩm không được để trống',
+            'name.max' => 'Tên sản phẩm không quá :max ký tự',
+            'price.required' => 'Giá bán không được để trống',
+            'price.numeric' => 'Giá bán là dạng số',
+            'price.gt' => 'Giá bán lớn hơn giá khuyến mại',
+            'price_discount.numeric' => 'Giá khuyến mại là dạng số',
+            'avatar.required' => 'Ảnh sản phẩm không được để trống',
+
         ];
     }
 }

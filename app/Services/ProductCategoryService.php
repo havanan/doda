@@ -42,4 +42,7 @@ class ProductCategoryService
         $params['slug'] = Str::slug($params['name']);
         return $this->categoryRepository->updateById($id,$params);
     }
+    public function apiGetAll($params){
+        return $this->categoryRepository->getAll($params);
+    }
 }

@@ -9615,6 +9615,18 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever:after, input[type=chec
 .switch label input[type=checkbox]:checked + .lever.switch-col-white:after {
     background-color: #ffffff
 }
+.center-div {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.hide-item {
+    display: none;
+}
+.size-item {
+    padding-left: 12%;
+    margin-top: 1%;
+}
 /*
 Template Name: Admin Press Admin
 Author: Themedesigner

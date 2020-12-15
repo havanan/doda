@@ -3,13 +3,14 @@
 namespace App\Repositories\Product;
 
 use App\Helpers\Common;
-use App\Models\ProductSize;
+use App\Models\Product;
+use App\Models\ProductColor;
 use App\Repositories\Base\BaseRepository;
 use Illuminate\Database\Eloquent\Collection;
 
-class ProductSizeRepository extends BaseRepository
+class ProductColorRepository extends BaseRepository
 {
-    public function __construct(ProductSize $model)
+    public function __construct(ProductColor $model)
     {
         $this->model = $model;
     }

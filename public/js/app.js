@@ -2106,6 +2106,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "product-component",
   props: {
@@ -2116,24 +2154,46 @@ __webpack_require__.r(__webpack_exports__);
     urlGetSize: {
       type: String,
       "default": ''
+    },
+    urlGetType: {
+      type: String,
+      "default": ''
+    }
+  },
+  computed: {
+    intro: function intro() {
+      return this.formData.intro;
+    }
+  },
+  watch: {
+    intro: function intro(newValue) {
+      if (newValue) {
+        $('#tta-intro').val(newValue);
+      }
     }
   },
   created: function created() {
     this.getBrands();
     this.getSizes();
+    this.getTypes();
   },
   updated: function updated() {
-    this.initFilemanager();
+    this.initFileManager();
   },
   data: function data() {
     return {
       sizes: {},
       brands: {},
+      types: {},
       colors: [{
-        id: 0,
+        id: this.randomId(),
         name: '',
         available: '',
-        image: ''
+        image: '',
+        product_sizes: [{
+          name: '',
+          available: 0
+        }]
       }],
       productColors: [{
         name: '',
@@ -2160,6 +2220,7 @@ __webpack_require__.r(__webpack_exports__);
         status: 1,
         price: 0,
         brand_id: 1,
+        product_type_id: '',
         price_discount: 0,
         is_discount: 0,
         intro: ''
@@ -2187,6 +2248,16 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
+    getTypes: function getTypes() {
+      var vm = this;
+      axios.get(this.urlGetType).then(function (response) {
+        var res = response.data;
+
+        if (res.data) {
+          vm.types = res.data;
+        }
+      });
+    },
     updateAvatarUrl: function updateAvatarUrl(index) {
       var vm = this;
       var avatarInfo = $('#thumbnail' + index).val();
@@ -2198,37 +2269,67 @@ __webpack_require__.r(__webpack_exports__);
     createNewColor: function createNewColor(key) {
       var vm = this;
       var colors = vm.colors;
-      var productColors = vm.productColors;
-      var color = {
-        id: this.randomId,
-        name: '',
-        available: '',
-        image: ''
-      };
+      var product_sizes = [];
       var size = {
         name: '',
         available: 0
       };
+      product_sizes.push(size);
+      var color = {
+        id: this.randomId,
+        name: '',
+        available: '',
+        image: '',
+        product_sizes: product_sizes
+      };
       colors.push(color);
-      productColors.push(size);
       vm.colors = colors;
-      vm.productColors = productColors;
     },
-    initFilemanager: function initFilemanager() {
+    createNewSize: function createNewSize(index, key) {
+      var vm = this;
+      var colors = vm.colors;
+
+      if (colors[index].product_sizes) {
+        var product_sizes = colors[index].product_sizes;
+        var size = {
+          name: '',
+          available: 0
+        };
+        product_sizes.push(size);
+        colors[index].product_sizes = product_sizes;
+        vm.colors = colors;
+      }
+    },
+    initFileManager: function initFileManager() {
       this.$nextTick(function () {
         $('.lfm').filemanager('image', {
           prefix: route_prefix
         });
       });
     },
-    updateImagePath: function updateImagePath(id, target) {
-      var vm = this;
-      var value = $('#' + id).val();
-
-      if (value) {
-        $('#' + id).value = value;
-        vm.target = value;
+    getTypeName: function getTypeName(data) {
+      if (data.name) {
+        return '--- ' + data.name;
       }
+    },
+    makeTypesMenu: function makeTypesMenu() {
+      var vm = this;
+      var data = vm.types;
+      var menu = '<option value="">Vui lòng chọn loại sản phẩm</option>'; //Tạo menu cha
+
+      for (var i = 0; i < data.length; i++) {
+        var parent = data[i];
+        menu += '<option value="' + parent.id + '">' + parent.name + '</option>';
+        var children = parent.children; //Tạo menu con
+
+        for (var j = 0; j < children.length; j++) {
+          if (children[j]) {
+            menu += '<option value="' + children[j].id + '">' + this.getTypeName(children[j]) + '</option>';
+          }
+        }
+      }
+
+      return menu;
     }
   }
 });
@@ -2278,7 +2379,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   updated: function updated() {
-    this.initFilemanager();
+    this.initFileManager();
   },
   data: function data() {
     return {
@@ -107850,7 +107951,8 @@ var render = function() {
                   attrs: {
                     type: "number",
                     name: "price",
-                    required: "required"
+                    required: "required",
+                    min: "0"
                   },
                   domProps: { value: _vm.formData.price },
                   on: {
@@ -107883,7 +107985,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "number", name: "price_discount" },
+                  attrs: { type: "number", name: "price_discount", min: "0" },
                   domProps: { value: _vm.formData.price_discount },
                   on: {
                     input: function($event) {
@@ -107922,7 +108024,7 @@ var render = function() {
                     ],
                     staticClass: "form-control custom-select",
                     attrs: {
-                      "data-placeholder": "Vui lòng chọn trạng thái",
+                      "data-placeholder": "Vui lòng chọn",
                       tabindex: "1"
                     },
                     on: {
@@ -107945,20 +108047,26 @@ var render = function() {
                       }
                     }
                   },
-                  _vm._l(_vm.discounts, function(discount) {
-                    return _c(
-                      "option",
-                      { key: discount.id, domProps: { value: discount.id } },
-                      [
-                        _vm._v(
-                          "\n                                    " +
-                            _vm._s(discount.name) +
-                            "\n                                "
-                        )
-                      ]
-                    )
-                  }),
-                  0
+                  [
+                    _c("option", { attrs: { value: "" } }, [
+                      _vm._v("Vui lòng chọn loại giá")
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.discounts, function(discount) {
+                      return _c(
+                        "option",
+                        { key: discount.id, domProps: { value: discount.id } },
+                        [
+                          _vm._v(
+                            "\n                                        " +
+                              _vm._s(discount.name) +
+                              "\n                                    "
+                          )
+                        ]
+                      )
+                    })
+                  ],
+                  2
                 )
               ])
             ])
@@ -107966,68 +108074,55 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-6" }, [
+          _c("div", { staticClass: "col-md-4" }, [
             _c("div", { staticClass: "form-group row" }, [
               _c("label", { staticClass: "control-label  col-md-12" }, [
-                _vm._v("Trạng thái")
+                _vm._v("Loại sản phẩm")
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col-md-12" }, [
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.formData.status,
-                        expression: "formData.status"
-                      }
-                    ],
-                    staticClass: "form-control custom-select",
-                    attrs: {
-                      "data-placeholder": "Vui lòng chọn trạng thái",
-                      tabindex: "1"
-                    },
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.formData,
-                          "status",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      }
+                _c("select", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.formData.product_type_id,
+                      expression: "formData.product_type_id"
                     }
+                  ],
+                  staticClass: "form-control custom-select",
+                  attrs: {
+                    "data-placeholder": "Vui lòng chọn nhãn hiệu",
+                    name: "product_type_id",
+                    tabindex: "1",
+                    required: ""
                   },
-                  _vm._l(_vm.status, function(item) {
-                    return _c(
-                      "option",
-                      { key: item.id, domProps: { value: item.id } },
-                      [
-                        _vm._v(
-                          _vm._s(item.name) +
-                            "\n                                "
-                        )
-                      ]
-                    )
-                  }),
-                  0
-                )
+                  domProps: { innerHTML: _vm._s(_vm.makeTypesMenu()) },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.formData,
+                        "product_type_id",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                })
               ])
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-md-6" }, [
+          _c("div", { staticClass: "col-md-4" }, [
             _c("div", { staticClass: "form-group row" }, [
               _c("label", { staticClass: "control-label  col-md-12" }, [
                 _vm._v("Nhãn hiệu")
@@ -108048,7 +108143,9 @@ var render = function() {
                     staticClass: "form-control custom-select",
                     attrs: {
                       "data-placeholder": "Vui lòng chọn nhãn hiệu",
-                      tabindex: "1"
+                      name: "brand_id",
+                      tabindex: "1",
+                      required: ""
                     },
                     on: {
                       change: function($event) {
@@ -108077,12 +108174,76 @@ var render = function() {
                       [
                         _vm._v(
                           _vm._s(brand.name) +
-                            "\n                                "
+                            "\n                                    "
                         )
                       ]
                     )
                   }),
                   0
+                )
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-4" }, [
+            _c("div", { staticClass: "form-group row" }, [
+              _c("label", { staticClass: "control-label  col-md-12" }, [
+                _vm._v("Trạng thái")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-12" }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.formData.status,
+                        expression: "formData.status"
+                      }
+                    ],
+                    staticClass: "form-control custom-select",
+                    attrs: {
+                      "data-placeholder": "Vui lòng chọn trạng thái",
+                      tabindex: "1",
+                      name: "status",
+                      required: ""
+                    },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.formData,
+                          "status",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "" } }, [
+                      _vm._v("Vui lòng chọn trạng thái")
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.status, function(item) {
+                      return _c(
+                        "option",
+                        { key: item.id, domProps: { value: item.id } },
+                        [_vm._v(_vm._s(item.name))]
+                      )
+                    })
+                  ],
+                  2
                 )
               ])
             ])
@@ -108103,217 +108264,249 @@ var render = function() {
                   _vm._v("Màu sắc")
                 ]),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "col-md-3" },
-                  [
-                    _c("standalone-btn-component", {
-                      model: {
-                        value: color.name,
-                        callback: function($$v) {
-                          _vm.$set(color, "name", $$v)
-                        },
-                        expression: "color.name"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
                 _c("div", { staticClass: "col-md-3" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: color.id,
-                        expression: "color.id"
-                      }
-                    ],
-                    attrs: { type: "hidden" },
-                    domProps: { value: color.id },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(color, "id", $event.target.value)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: color.name,
-                        expression: "color.name"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "text", placeholder: "Tên màu" },
-                    domProps: { value: color.name },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(color, "name", $event.target.value)
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-3" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: color.available,
-                        expression: "color.available"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "number", placeholder: "Số lượng" },
-                    domProps: { value: color.available },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(color, "available", $event.target.value)
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-3" }, [
-                  _c("div", { staticClass: "col-md-12 text-right" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-warning",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            return _vm.createNewColor(index)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "fa fa-plus" })]
-                    )
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group row" }, [
-                _c("div", { staticClass: "col-md-3" }),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-9" }, [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-3" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c(
-                          "label",
-                          { staticClass: "control-label  col-md-12" },
-                          [_vm._v("Size")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.productColors[index].name,
-                                expression: "productColors[index].name"
+                  _c("div", { staticClass: "form-group row" }, [
+                    _c("label", { staticClass: "control-label  col-md-12" }, [
+                      _vm._v("Ảnh màu")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-12" }, [
+                      _c("div", { staticClass: "input-group" }, [
+                        _c("span", { staticClass: "input-group-btn" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-primary text-white lfm",
+                              attrs: {
+                                "data-input": "thumbnail-color" + index,
+                                "data-preview": "holder-color" + index
                               }
-                            ],
-                            staticClass: "form-control custom-select",
-                            attrs: {
-                              "data-placeholder": "Vui lòng chọn size",
-                              tabindex: "1"
                             },
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.$set(
-                                  _vm.productColors[index],
-                                  "name",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
-                          },
-                          _vm._l(_vm.sizes, function(size) {
-                            return _c(
-                              "option",
-                              { key: size.id, domProps: { value: size.id } },
-                              [
-                                _vm._v(
-                                  "\n                                                " +
-                                    _vm._s(size.name) +
-                                    "\n                                            "
-                                )
-                              ]
-                            )
-                          }),
-                          0
-                        )
+                            [
+                              _c("i", { staticClass: "fa fa-picture-o" }),
+                              _vm._v(
+                                " Chọn ảnh\n                                                "
+                              )
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "form-control hide-item",
+                          attrs: {
+                            id: "thumbnail-color" + index,
+                            type: "text",
+                            name: "color[" + index + "][avatar]"
+                          }
+                        })
                       ])
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-md-3" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c(
-                          "label",
-                          { staticClass: "control-label  col-md-12" },
-                          [_vm._v("Số lượng")]
-                        ),
-                        _vm._v(" "),
+                    _c("div", { staticClass: "col-md-12" }, [
+                      _c("div", {
+                        staticClass: "mt-2",
+                        attrs: { id: "holder-color" + index }
+                      })
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-md-9" },
+                  [
+                    _c("div", { staticClass: "row mb-2" }, [
+                      _c("div", { staticClass: "col-md-5" }, [
                         _c("input", {
                           directives: [
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.productColors[index].available,
-                              expression: "productColors[index].available"
+                              value: color.name,
+                              expression: "color.name"
                             }
                           ],
                           staticClass: "form-control",
-                          attrs: { type: "number" },
-                          domProps: {
-                            value: _vm.productColors[index].available
+                          attrs: {
+                            type: "text",
+                            placeholder: "Tên màu",
+                            name: "color[" + index + "][name]"
                           },
+                          domProps: { value: color.name },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
-                              _vm.$set(
-                                _vm.productColors[index],
-                                "available",
-                                $event.target.value
-                              )
+                              _vm.$set(color, "name", $event.target.value)
                             }
                           }
                         })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-5" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: color.available,
+                              expression: "color.available"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "number",
+                            placeholder: "Số lượng",
+                            name: "color[" + index + "][available]"
+                          },
+                          domProps: { value: color.available },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(color, "available", $event.target.value)
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-2" })
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(color.product_sizes, function(size, key) {
+                      return color.product_sizes &&
+                        color.product_sizes.length > 0
+                        ? _c(
+                            "div",
+                            { key: key, staticClass: "row size-item" },
+                            [
+                              _c("div", { staticClass: "col-md-4" }, [
+                                _c("div", { staticClass: "form-group" }, [
+                                  _c(
+                                    "label",
+                                    { staticClass: "control-label  col-md-12" },
+                                    [_vm._v("Size")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "select",
+                                    {
+                                      staticClass: "form-control custom-select",
+                                      attrs: {
+                                        tabindex: "1",
+                                        name:
+                                          "color[" +
+                                          index +
+                                          "][sizes][" +
+                                          key +
+                                          "][name]"
+                                      }
+                                    },
+                                    [
+                                      _c("option", { attrs: { value: "" } }, [
+                                        _vm._v("Vui lòng chọn size")
+                                      ]),
+                                      _vm._v(" "),
+                                      _vm._l(_vm.sizes, function(size) {
+                                        return _c(
+                                          "option",
+                                          {
+                                            key: size.id,
+                                            domProps: { value: size.name }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                                                   " +
+                                                _vm._s(size.name) +
+                                                "\n                                               "
+                                            )
+                                          ]
+                                        )
+                                      })
+                                    ],
+                                    2
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-md-4" }, [
+                                _c("div", { staticClass: "form-group" }, [
+                                  _c(
+                                    "label",
+                                    { staticClass: "control-label  col-md-12" },
+                                    [_vm._v("Số lượng")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    staticClass: "form-control",
+                                    attrs: {
+                                      type: "number",
+                                      name:
+                                        "color[" +
+                                        index +
+                                        "][sizes][" +
+                                        key +
+                                        "][available]",
+                                      value: "0",
+                                      min: "0"
+                                    }
+                                  })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-md-4" }, [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-pinterest center-div text-white",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.createNewSize(index, key)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("i", { staticClass: "fa fa-plus" }),
+                                    _vm._v(
+                                      " Thêm size\n                                       "
+                                    )
+                                  ]
+                                )
+                              ])
+                            ]
+                          )
+                        : _vm._e()
+                    }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-12 text-right" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-warning",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                return _vm.createNewColor(index)
+                              }
+                            }
+                          },
+                          [
+                            _c("i", { staticClass: "fa fa-plus" }),
+                            _vm._v(
+                              " Thêm màu\n                                       "
+                            )
+                          ]
+                        )
                       ])
                     ])
-                  ])
-                ])
+                  ],
+                  2
+                )
               ])
             ])
           }),
@@ -108352,7 +108545,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "div",
-                { staticClass: "col-md-12", attrs: { id: "tinymce-editor" } },
+                { staticClass: "col-md-12" },
                 [
                   _c("tiny-mce-component", {
                     model: {
@@ -108362,6 +108555,11 @@ var render = function() {
                       },
                       expression: "formData.intro"
                     }
+                  }),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    staticClass: "hide-item",
+                    attrs: { id: "tta-intro", name: "intro" }
                   })
                 ],
                 1
@@ -108439,7 +108637,7 @@ var render = function() {
       _vm._v("Ảnh đại diện")
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-md-8" }, [
+    _c("div", { staticClass: "col-md-6" }, [
       _c("div", { staticClass: "input-group" }, [
         _c("span", { staticClass: "input-group-btn" }, [
           _c(
@@ -108469,7 +108667,7 @@ var render = function() {
               expression: "dataInput"
             }
           ],
-          staticClass: "form-control",
+          staticClass: "form-control hide-item",
           attrs: { id: "thumbnail" + _vm.id, type: "text", name: "avatar" },
           domProps: { value: _vm.dataInput },
           on: {
@@ -108484,7 +108682,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-md-4" }, [
+    _c("div", { staticClass: "col-md-6" }, [
       _c("div", {
         staticStyle: { "max-height": "200px" },
         attrs: { id: "holder" + _vm.id }
@@ -108515,7 +108713,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("tinymce", {
-    attrs: { id: _vm.randomId(), other_options: _vm.options },
+    attrs: { id: _vm.randomId(), other_options: _vm.options, name: "intro" },
     model: {
       value: _vm.dataInput,
       callback: function($$v) {
@@ -124078,7 +124276,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!*************************************************************************************!*\
   !*** ./resources/js/components/ProductComponent.vue?vue&type=template&id=9e91ef8e& ***!
   \*************************************************************************************/
-/*! no static exports found */
+/*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -124268,8 +124466,8 @@ var myMixin = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! F:\laragon\www\doda\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! F:\laragon\www\doda\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\doda\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\doda\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

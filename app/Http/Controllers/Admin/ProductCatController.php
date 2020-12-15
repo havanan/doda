@@ -74,4 +74,8 @@ class ProductCatController extends Controller
         $params = $request->all();
         return  $this->productCategoryService->getListWithDataTable($params);
     }
+    public function apiGetAll(){
+        $data = $this->productCategoryService->apiGetAll([]);
+        return $this->resSuccessData($data);
+    }
 }

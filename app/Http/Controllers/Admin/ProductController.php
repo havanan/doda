@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Product\CreateRequest;
+use App\Http\Requests\Admin\Product\ProductRequest;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -28,14 +30,16 @@ class ProductController extends Controller
         $id = $request->get('id');
         return $this->productService->deleteById($id);
     }
-    public function save(CreateRequest $request) {
+    public function save(ProductRequest $request) {
         $params = $request->all();
-
+        DB::beginTransaction();
         try {
-            $this->productService->createUser($params);
+            $this->productService->create($params);
+            DB::commit();
             return redirect()->route('admin.product.index')->with('success','Thêm sản phẩm thành công');
         }
         catch (\Exception $e) {
+            DB::rollback();
             return  back()->with('error','Thêm sản phẩm thất bại');
         }
 
@@ -46,11 +50,15 @@ class ProductController extends Controller
     }
     public function update(CreateRequest $request,$id) {
         $params = $request->all();
+        DB::beginTransaction();
         try {
             $this->productService->updateUserInfo($id,$params);
+            DB::commit();
             return redirect()->route('admin.product.index')->with('success','Sửa sản phẩm thành công');
         }
         catch (\Exception $e) {
+            DB::rollback();
+            dd($e);
             return  back()->with('error','Sửa sản phẩm thất bại');
         }
     }
