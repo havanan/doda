@@ -2144,6 +2144,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "product-component",
   props: {
@@ -2285,6 +2286,7 @@ __webpack_require__.r(__webpack_exports__);
       colors.push(color);
       vm.colors = colors;
     },
+    deleteColor: function deleteColor(key) {},
     createNewSize: function createNewSize(index, key) {
       var vm = this;
       var colors = vm.colors;
@@ -2299,6 +2301,25 @@ __webpack_require__.r(__webpack_exports__);
         colors[index].product_sizes = product_sizes;
         vm.colors = colors;
       }
+    },
+    deleteSize: function deleteSize(index, size_id) {
+      var vm = this;
+      var colors = vm.colors;
+
+      if (colors[index].product_sizes) {
+        var product_sizes = colors[index].product_sizes;
+        this.deleteItemArrayByIndex(product_sizes, size_id); // colors[index].product_sizes = product_sizes;
+        // vm.colors = colors;
+      }
+    },
+    deleteItemArrayByIndex: function deleteItemArrayByIndex(arr, index) {
+      var newArr = [];
+
+      if (arr[index]) {
+        newArr = arr.splice(index, 1);
+      }
+
+      console.log(newArr);
     },
     initFileManager: function initFileManager() {
       this.$nextTick(function () {
@@ -108475,6 +108496,20 @@ var render = function() {
                                       " Thêm size\n                                       "
                                     )
                                   ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-dark center-div ml-2",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.deleteSize(index, key)
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "fa fa-close" })]
                                 )
                               ])
                             ]
@@ -124466,8 +124501,8 @@ var myMixin = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\doda\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\doda\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! F:\laragon\www\doda\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! F:\laragon\www\doda\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

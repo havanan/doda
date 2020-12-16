@@ -154,6 +154,7 @@
                                        <button class="btn btn-pinterest center-div text-white" type="button" v-on:click="createNewSize(index,key)">
                                            <i class="fa fa-plus"></i> Thêm size
                                        </button>
+                                       <button class="btn btn-dark center-div ml-2" type="button" v-on:click="deleteSize(index,key)"><i class="fa fa-close"></i></button>
                                    </div>
                                </div>
                                <!--/size-->
@@ -323,6 +324,9 @@
                 colors.push(color);
                 vm.colors = colors;
             },
+            deleteColor(key){
+
+            },
             createNewSize(index,key) {
                 const vm = this;
                 let colors = vm.colors;
@@ -333,6 +337,23 @@
                     colors[index].product_sizes = product_sizes;
                     vm.colors = colors;
                 }
+            },
+            deleteSize(index,size_id){
+                const vm = this;
+                let colors = vm.colors;
+                if (colors[index].product_sizes) {
+                    let product_sizes = colors[index].product_sizes;
+                        this.deleteItemArrayByIndex(product_sizes,size_id);
+                    // colors[index].product_sizes = product_sizes;
+                    // vm.colors = colors;
+                }
+            },
+            deleteItemArrayByIndex(arr,index){
+                let newArr = [];
+                if (arr[index]){
+                    newArr = arr.splice(index, 1);
+                }
+                console.log(newArr);
             },
             initFileManager() {
                 this.$nextTick(function () {
