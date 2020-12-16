@@ -145,6 +145,7 @@ Route::group([
             Route::get('view/{id}',     'ProductController@view')->name('admin.product.view');
             Route::get('update/{id}',   'ProductController@update')->name('admin.product.update');
             Route::get('edit/{id}',     'ProductController@edit')->name('admin.product.edit');
+            Route::get('get-by-id/{id}','ProductController@getById')->name('admin.product.getById');
             Route::post('delete',       'ProductController@delete')->name('admin.product.delete');
             Route::post('save',         'ProductController@save')->name('admin.product.save');
             Route::post('update/{id}',  'ProductController@update')->name('admin.product.update');

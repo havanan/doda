@@ -45,8 +45,8 @@ class ProductController extends Controller
 
     }
     public function edit($id){
-        $info = $this->productService->findUserById($id);
-        return view('adm.product.create',compact('info'));
+        $info = $this->productService->find($id);
+        return view('adm.product.edit',compact('id','info'));
     }
     public function update(CreateRequest $request,$id) {
         $params = $request->all();
@@ -63,7 +63,11 @@ class ProductController extends Controller
         }
     }
     public function view($id) {
-        $info = $this->productService->findUserById($id);
+        $info = $this->productService->find($id);
         return view('adm.product.view',compact('info'));
+    }
+    public function getById($id){
+        $info = $this->productService->apiGetInfo($id);
+        return $this->resSuccessData($info);
     }
 }

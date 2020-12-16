@@ -97,4 +97,10 @@ class ProductService
         }
         return $result;
     }
+    public function find($id){
+        return $this->productRepository->find($id);
+    }
+    public function apiGetInfo($id){
+        return $this->productRepository->apiGetInfo($id);
+    }
 }

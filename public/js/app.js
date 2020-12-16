@@ -2145,6 +2145,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "product-component",
   props: {
@@ -2159,6 +2175,10 @@ __webpack_require__.r(__webpack_exports__);
     urlGetType: {
       type: String,
       "default": ''
+    },
+    productId: {
+      type: Number,
+      require: false
     }
   },
   computed: {
@@ -2177,6 +2197,7 @@ __webpack_require__.r(__webpack_exports__);
     this.getBrands();
     this.getSizes();
     this.getTypes();
+    this.getProductInfo();
   },
   updated: function updated() {
     this.initFileManager();
@@ -2189,7 +2210,7 @@ __webpack_require__.r(__webpack_exports__);
       colors: [{
         id: this.randomId(),
         name: '',
-        available: '',
+        available: 0,
         image: '',
         product_sizes: [{
           name: '',
@@ -2217,15 +2238,17 @@ __webpack_require__.r(__webpack_exports__);
       formData: {
         name: '',
         slug: '',
-        avatar: 'abc123',
+        avatar: '',
+        intro: '',
+        product_type_id: '',
         status: 1,
         price: 0,
         brand_id: 1,
-        product_type_id: '',
         price_discount: 0,
         is_discount: 0,
-        intro: ''
-      }
+        reviews: 0
+      },
+      total: 0
     };
   },
   methods: {
@@ -2259,6 +2282,17 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
+    getProductInfo: function getProductInfo() {
+      var vm = this;
+
+      if (this.productId) {
+        var urlGetInfo = '/adm/product/get-by-id/' + this.productId;
+        axios.get(urlGetInfo).then(function (response) {
+          var res = response.data;
+          console.log(res);
+        });
+      }
+    },
     updateAvatarUrl: function updateAvatarUrl(index) {
       var vm = this;
       var avatarInfo = $('#thumbnail' + index).val();
@@ -2267,7 +2301,7 @@ __webpack_require__.r(__webpack_exports__);
         vm.colors[index].avatar = avatarInfo.url;
       }
     },
-    createNewColor: function createNewColor(key) {
+    createNewColor: function createNewColor() {
       var vm = this;
       var colors = vm.colors;
       var product_sizes = [];
@@ -2286,7 +2320,11 @@ __webpack_require__.r(__webpack_exports__);
       colors.push(color);
       vm.colors = colors;
     },
-    deleteColor: function deleteColor(key) {},
+    deleteColor: function deleteColor(key) {
+      var vm = this;
+      var colors = vm.colors;
+      this.colors = this.deleteItemArrayByIndex(colors, key);
+    },
     createNewSize: function createNewSize(index, key) {
       var vm = this;
       var colors = vm.colors;
@@ -2308,18 +2346,24 @@ __webpack_require__.r(__webpack_exports__);
 
       if (colors[index].product_sizes) {
         var product_sizes = colors[index].product_sizes;
-        this.deleteItemArrayByIndex(product_sizes, size_id); // colors[index].product_sizes = product_sizes;
-        // vm.colors = colors;
+        product_sizes = this.deleteItemArrayByIndex(product_sizes, size_id);
+        this.colors[index].product_sizes = product_sizes;
       }
     },
     deleteItemArrayByIndex: function deleteItemArrayByIndex(arr, index) {
-      var newArr = [];
-
       if (arr[index]) {
-        newArr = arr.splice(index, 1);
-      }
+        var newArr = [];
 
-      console.log(newArr);
+        for (var i = 0; i < arr.length; i++) {
+          if (i !== index) {
+            newArr.push(arr[i]);
+          }
+        }
+
+        return newArr;
+      } else {
+        return arr;
+      }
     },
     initFileManager: function initFileManager() {
       this.$nextTick(function () {
@@ -2351,6 +2395,43 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return menu;
+    },
+    updateColorTotal: function updateColorTotal() {
+      var vm = this;
+      var total = 0;
+      var colors = vm.colors;
+
+      if (colors.length) {
+        for (var i = 0; i < colors.length; i++) {
+          if (colors[i].available) {
+            total += parseInt(colors[i].available);
+          }
+        }
+      }
+
+      this.formData.reviews = total;
+    },
+    updateSizeTotal: function updateSizeTotal(key) {
+      var vm = this;
+      var colors = vm.colors;
+      var total = 0;
+
+      if (colors[key]) {
+        var color = colors[key];
+        var product_sizes = color.product_sizes;
+
+        if (product_sizes.length) {
+          for (var i = 0; i < product_sizes.length; i++) {
+            if (product_sizes[i].available) {
+              total += parseInt(product_sizes[i].available);
+            }
+          }
+        }
+
+        color.available = total;
+        this.colors[key] = color;
+        this.updateColorTotal();
+      }
     }
   }
 });
@@ -108271,7 +108352,39 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("h3", { staticClass: "box-title" }, [_vm._v("Thuộc tính sản phẩm")]),
+        _c("div", { staticClass: "row" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6 text-right" }, [
+            _c("h3", { staticClass: "box-title" }, [
+              _vm._v("Số lượng: "),
+              _c("span", { staticClass: "text-danger" }, [
+                _vm._v(_vm._s(_vm.formData.reviews))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.formData.reviews,
+                  expression: "formData.reviews"
+                }
+              ],
+              attrs: { type: "hidden", name: "reviews" },
+              domProps: { value: _vm.formData.reviews },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.formData, "reviews", $event.target.value)
+                }
+              }
+            })
+          ])
+        ]),
         _vm._v(" "),
         _c("hr", { staticClass: "m-t-0 m-b-40" }),
         _vm._v(" "),
@@ -108281,9 +108394,7 @@ var render = function() {
           _vm._l(_vm.colors, function(color, index) {
             return _c("div", { staticClass: "col-md-12" }, [
               _c("div", { staticClass: "form-group row" }, [
-                _c("label", { staticClass: "control-label  col-md-12" }, [
-                  _vm._v("Màu sắc")
-                ]),
+                _vm._m(2, true),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-3" }, [
                   _c("div", { staticClass: "form-group row" }, [
@@ -108338,59 +108449,77 @@ var render = function() {
                   [
                     _c("div", { staticClass: "row mb-2" }, [
                       _c("div", { staticClass: "col-md-5" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: color.name,
-                              expression: "color.name"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            placeholder: "Tên màu",
-                            name: "color[" + index + "][name]"
-                          },
-                          domProps: { value: color.name },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", { staticClass: "control-label" }, [
+                            _vm._v("Tên màu")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: color.name,
+                                expression: "color.name"
                               }
-                              _vm.$set(color, "name", $event.target.value)
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              placeholder: "Vd: đen,đỏ,trắng...",
+                              name: "color[" + index + "][name]"
+                            },
+                            domProps: { value: color.name },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(color, "name", $event.target.value)
+                              }
                             }
-                          }
-                        })
+                          })
+                        ])
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-5" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: color.available,
-                              expression: "color.available"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "number",
-                            placeholder: "Số lượng",
-                            name: "color[" + index + "][available]"
-                          },
-                          domProps: { value: color.available },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", { staticClass: "control-label" }, [
+                            _vm._v("Số lượng")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: color.available,
+                                expression: "color.available"
                               }
-                              _vm.$set(color, "available", $event.target.value)
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "number",
+                              name: "color[" + index + "][available]"
+                            },
+                            domProps: { value: color.available },
+                            on: {
+                              change: function($event) {
+                                return _vm.updateColorTotal()
+                              },
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  color,
+                                  "available",
+                                  $event.target.value
+                                )
+                              }
                             }
-                          }
-                        })
+                          })
+                        ])
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-2" })
@@ -108414,6 +108543,14 @@ var render = function() {
                                   _c(
                                     "select",
                                     {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: size.name,
+                                          expression: "size.name"
+                                        }
+                                      ],
                                       staticClass: "form-control custom-select",
                                       attrs: {
                                         tabindex: "1",
@@ -108423,6 +108560,31 @@ var render = function() {
                                           "][sizes][" +
                                           key +
                                           "][name]"
+                                      },
+                                      on: {
+                                        change: function($event) {
+                                          var $$selectedVal = Array.prototype.filter
+                                            .call(
+                                              $event.target.options,
+                                              function(o) {
+                                                return o.selected
+                                              }
+                                            )
+                                            .map(function(o) {
+                                              var val =
+                                                "_value" in o
+                                                  ? o._value
+                                                  : o.value
+                                              return val
+                                            })
+                                          _vm.$set(
+                                            size,
+                                            "name",
+                                            $event.target.multiple
+                                              ? $$selectedVal
+                                              : $$selectedVal[0]
+                                          )
+                                        }
                                       }
                                     },
                                     [
@@ -108434,7 +108596,7 @@ var render = function() {
                                         return _c(
                                           "option",
                                           {
-                                            key: size.id,
+                                            key: size.name,
                                             domProps: { value: size.name }
                                           },
                                           [
@@ -108461,6 +108623,14 @@ var render = function() {
                                   ),
                                   _vm._v(" "),
                                   _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: size.available,
+                                        expression: "size.available"
+                                      }
+                                    ],
                                     staticClass: "form-control",
                                     attrs: {
                                       type: "number",
@@ -108472,6 +108642,22 @@ var render = function() {
                                         "][available]",
                                       value: "0",
                                       min: "0"
+                                    },
+                                    domProps: { value: size.available },
+                                    on: {
+                                      change: function($event) {
+                                        return _vm.updateSizeTotal(index)
+                                      },
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          size,
+                                          "available",
+                                          $event.target.value
+                                        )
+                                      }
                                     }
                                   })
                                 ])
@@ -108526,7 +108712,7 @@ var render = function() {
                             attrs: { type: "button" },
                             on: {
                               click: function($event) {
-                                return _vm.createNewColor(index)
+                                return _vm.createNewColor()
                               }
                             }
                           },
@@ -108536,6 +108722,20 @@ var render = function() {
                               " Thêm màu\n                                       "
                             )
                           ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-dark center-div ml-2",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                return _vm.deleteColor(index)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fa fa-close" })]
                         )
                       ])
                     ])
@@ -108605,7 +108805,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(1)
+    _vm._m(3)
   ])
 }
 var staticRenderFns = [
@@ -108619,6 +108819,22 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("hr")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-6" }, [
+      _c("h3", { staticClass: "box-title" }, [_vm._v("Thuộc tính sản phẩm")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "control-label  col-md-12" }, [
+      _c("strong", [_vm._v("Màu sắc")])
     ])
   },
   function() {

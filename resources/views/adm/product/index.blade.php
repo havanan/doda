@@ -14,7 +14,8 @@
 
         const urlDelete = '{{route('admin.product.delete')}}';
         const urlList = '{{route('admin.product.list')}}';
-        const config = getUConfTable();
+        const urlPrefix = 'product';
+        const config = getPdConfTable();
     </script>
     <script src="{{asset( 'admin/js/data-table-init.js')}}"></script>
 @endsection
@@ -31,10 +32,10 @@
                             <tr>
                                 <th>STT</th>
                                 <th>Avatar</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Ngày sinh</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Loại sản phẩm</th>
+                                <th>Thương hiệu</th>
+                                <th>Tổng kho</th>
                                 <th>Trạng thái</th>
                                 <th>Tạo lúc</th>
                                 <th></th>

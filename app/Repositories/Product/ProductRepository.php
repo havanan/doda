@@ -23,9 +23,12 @@ class ProductRepository extends BaseRepository
         if (isset($paginate['search'])) {
             $query->where('name', 'like', "%" . $paginate['search'] . "%");
         }
-        $query = $query->skip($paginate['start'])->take($paginate['limit'])->get();
+        $query = $query->skip($paginate['start'])->with(['cat','brand'])->take($paginate['limit'])->get();
         $total = $this->model->count();
         return Common::toJson($query,$total);
+    }
+    public function apiGetInfo($id){
+        return $this->model->with(['brand','cat'])->find($id);
     }
 
 }

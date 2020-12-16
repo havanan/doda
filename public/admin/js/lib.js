@@ -5374,3 +5374,66 @@ function getBrConfTable() {
         ],
     }
 }
+function getPdConfTable() {
+    return {
+        ajax: urlList,
+        columns: [
+            {data:null},
+            {data:'avatar',render:function (data) {
+                    let img = '';
+                    if (data) {
+                        img = '<img src="'+data+'" style="width: 100px; height: 100px" />';
+                    }
+                    return img;
+                }},
+            {data:'name'},
+            {data:'cat',render:function (data) {
+                    let cat = '';
+                    if (data) {
+                        cat = data.name;
+                    }
+                    return cat;
+                }},
+            {data:'brand',render:function (data) {
+                    let cat = '';
+                    let img = '';
+                    if (data.name) {
+                        cat = data.name;
+                    }
+                    if (data.avatar) {
+                        img = '<img src="'+data.avatar+'" style="width: 100px; height: 100px" />';
+                        cat =  img;
+                    }
+                    return cat;
+                }},
+            {data:'reviews'},
+            {data:'status',render:function (data) {
+
+                    let btn = '<span class="label label-danger font-weight-100">Khóa</span>';
+
+                    if (data) {
+                        btn = '<span class="label label-success font-weight-100">Hoạt động</span>'
+                    }
+                    return btn;
+                }},
+            {data:'created_at',
+                type:'date',
+                render: function(data){
+                    if (data === null) return "";
+                    return moment(data).format(DATE_TIME);
+                },},
+            {data: null,
+                render: function (data) {
+                    if (!data) {
+                        return ''
+                    }
+                    return '<a href="'+urlPrefix+'/edit/'+data.id+'" class="btn btn-info m-r-5"><i class="fa fa-pencil"></i></a>' +
+                        '<button class="btn btn-danger alert-delete" onclick="alertDelete('+data.id+')"><i class="fa fa-trash"></i></button>'
+                }}
+        ],
+        columnDefs: [
+            { targets: 0, orderable: false },
+            { targets: 4, orderable: false },
+        ],
+    }
+}
