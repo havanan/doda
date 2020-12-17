@@ -166,10 +166,14 @@
                                        </div>
                                    </div>
                                    <div class="col-md-4">
-                                       <button class="btn btn-pinterest center-div text-white" type="button" v-on:click="createNewSize(index,key)">
+                                       <button class="btn btn-dark center-div" type="button" v-on:click="deleteSize(index,key)"><i class="fa fa-close"></i></button>
+                                   </div>
+                               </div>
+                               <div class="row mb-2">
+                                   <div class="col-md-12 text-right">
+                                       <button class="btn btn-pinterest center-div text-white" type="button" v-on:click="createNewSize(index)">
                                            <i class="fa fa-plus"></i> Thêm size
                                        </button>
-                                       <button class="btn btn-dark center-div ml-2" type="button" v-on:click="deleteSize(index,key)"><i class="fa fa-close"></i></button>
                                    </div>
                                </div>
                                <!--/size-->
@@ -339,7 +343,15 @@
                         .get(urlGetInfo)
                         .then(response => {
                             const res = response.data;
-                            console.log(res);
+                            if (res.data) {
+                                vm.formData = res.data;
+                                if (res.data.intro){
+                                    vm.formData.intro = unescape(res.data.intro);
+                                }
+                                if (res.data.colors){
+                                    vm.colors = res.data.colors;
+                                }
+                            }
                         })
                 }
             },
@@ -364,8 +376,9 @@
                 const vm = this;
                 let colors = vm.colors;
                 this.colors = this.deleteItemArrayByIndex(colors,key);
+                this.updateColorTotal();
             },
-            createNewSize(index,key) {
+            createNewSize(index) {
                 const vm = this;
                 let colors = vm.colors;
                 if (colors[index].product_sizes) {
@@ -383,6 +396,7 @@
                     let product_sizes = colors[index].product_sizes;
                      product_sizes =  this.deleteItemArrayByIndex(product_sizes,size_id);
                      this.colors[index].product_sizes = product_sizes;
+                     this.updateSizeTotal(index);
                 }
             },
             deleteItemArrayByIndex(arr,index){

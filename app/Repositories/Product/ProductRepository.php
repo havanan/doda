@@ -28,7 +28,6 @@ class ProductRepository extends BaseRepository
         return Common::toJson($query,$total);
     }
     public function apiGetInfo($id){
-        return $this->model->with(['brand','cat'])->find($id);
+        return $this->model->with(['brand','cat','colors'])->find($id);
     }
-
 }

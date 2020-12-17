@@ -14,7 +14,7 @@
 
         const urlDelete = '{{route('admin.product.delete')}}';
         const urlList = '{{route('admin.product.list')}}';
-        const urlPrefix = 'product';
+        const urlPrefix = '{{route('admin.product.index')}}';
         const config = getPdConfTable();
     </script>
     <script src="{{asset( 'admin/js/data-table-init.js')}}"></script>

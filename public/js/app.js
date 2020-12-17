@@ -2161,6 +2161,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "product-component",
   props: {
@@ -2289,7 +2293,18 @@ __webpack_require__.r(__webpack_exports__);
         var urlGetInfo = '/adm/product/get-by-id/' + this.productId;
         axios.get(urlGetInfo).then(function (response) {
           var res = response.data;
-          console.log(res);
+
+          if (res.data) {
+            vm.formData = res.data;
+
+            if (res.data.intro) {
+              vm.formData.intro = unescape(res.data.intro);
+            }
+
+            if (res.data.colors) {
+              vm.colors = res.data.colors;
+            }
+          }
         });
       }
     },
@@ -2324,8 +2339,9 @@ __webpack_require__.r(__webpack_exports__);
       var vm = this;
       var colors = vm.colors;
       this.colors = this.deleteItemArrayByIndex(colors, key);
+      this.updateColorTotal();
     },
-    createNewSize: function createNewSize(index, key) {
+    createNewSize: function createNewSize(index) {
       var vm = this;
       var colors = vm.colors;
 
@@ -2348,6 +2364,7 @@ __webpack_require__.r(__webpack_exports__);
         var product_sizes = colors[index].product_sizes;
         product_sizes = this.deleteItemArrayByIndex(product_sizes, size_id);
         this.colors[index].product_sizes = product_sizes;
+        this.updateSizeTotal(index);
       }
     },
     deleteItemArrayByIndex: function deleteItemArrayByIndex(arr, index) {
@@ -2464,6 +2481,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "StandaloneBtnComponent",
   props: ['value'],
@@ -2521,7 +2541,13 @@ __webpack_require__.r(__webpack_exports__);
     // Mutating the prop :(
     dataInput: {
       get: function get() {
-        return this.data;
+        var data = '';
+
+        if (this.$attrs['value']) {
+          data = this.decodeEntities(this.$attrs['value']);
+        }
+
+        return data;
       },
       set: function set(newValue) {
         this.$emit('input', newValue);
@@ -108667,27 +108693,7 @@ var render = function() {
                                 _c(
                                   "button",
                                   {
-                                    staticClass:
-                                      "btn btn-pinterest center-div text-white",
-                                    attrs: { type: "button" },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.createNewSize(index, key)
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c("i", { staticClass: "fa fa-plus" }),
-                                    _vm._v(
-                                      " Thêm size\n                                       "
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-dark center-div ml-2",
+                                    staticClass: "btn btn-dark center-div",
                                     attrs: { type: "button" },
                                     on: {
                                       click: function($event) {
@@ -108702,6 +108708,30 @@ var render = function() {
                           )
                         : _vm._e()
                     }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row mb-2" }, [
+                      _c("div", { staticClass: "col-md-12 text-right" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass:
+                              "btn btn-pinterest center-div text-white",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                return _vm.createNewSize(index)
+                              }
+                            }
+                          },
+                          [
+                            _c("i", { staticClass: "fa fa-plus" }),
+                            _vm._v(
+                              " Thêm size\n                                       "
+                            )
+                          ]
+                        )
+                      ])
+                    ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "row" }, [
                       _c("div", { staticClass: "col-md-12 text-right" }, [
@@ -108934,10 +108964,18 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "col-md-6" }, [
-      _c("div", {
-        staticStyle: { "max-height": "200px" },
-        attrs: { id: "holder" + _vm.id }
-      })
+      _c(
+        "div",
+        {
+          staticStyle: { "max-height": "200px" },
+          attrs: { id: "holder" + _vm.id }
+        },
+        [
+          _vm.dataInput
+            ? _c("img", { attrs: { src: _vm.value, width: "100%" } })
+            : _vm._e()
+        ]
+      )
     ])
   ])
 }
@@ -124693,6 +124731,11 @@ var myMixin = {
   methods: {
     randomId: function randomId() {
       return Math.random().toString(36).substring(7);
+    },
+    decodeEntities: function decodeEntities(encodedString) {
+      var textArea = document.createElement('textarea');
+      textArea.innerHTML = encodedString;
+      return textArea.value;
     }
   }
 };
@@ -124717,8 +124760,8 @@ var myMixin = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! F:\laragon\www\doda\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! F:\laragon\www\doda\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\doda\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\doda\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

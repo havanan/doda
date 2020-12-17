@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Common;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Product\CreateRequest;
 use App\Http\Requests\Admin\Product\ProductRequest;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
@@ -28,7 +28,16 @@ class ProductController extends Controller
     }
     public function delete(Request $request) {
         $id = $request->get('id');
-        return $this->productService->deleteById($id);
+        DB::beginTransaction();
+        try {
+            $this->productService->deleteById($id);
+            DB::commit();
+            return Common::successResponse('Xóa sản phẩm thành công');
+        }
+        catch (\Exception $e) {
+            DB::rollback();
+            return Common::errorResponse('Xóa sản phẩm thất bại');
+        }
     }
     public function save(ProductRequest $request) {
         $params = $request->all();
@@ -48,11 +57,11 @@ class ProductController extends Controller
         $info = $this->productService->find($id);
         return view('adm.product.edit',compact('id','info'));
     }
-    public function update(CreateRequest $request,$id) {
+    public function update(ProductRequest $request,$id) {
         $params = $request->all();
         DB::beginTransaction();
         try {
-            $this->productService->updateUserInfo($id,$params);
+            $this->productService->update($id,$params);
             DB::commit();
             return redirect()->route('admin.product.index')->with('success','Sửa sản phẩm thành công');
         }

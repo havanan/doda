@@ -10,7 +10,11 @@
             // Mutating the prop :(
             dataInput: {
                 get: function(){
-                    return this.data;
+                    let data = '';
+                    if(this.$attrs['value']){
+                        data = this.decodeEntities(this.$attrs['value']);
+                    }
+                    return data;
                 },
                 set: function(newValue){
                     this.$emit('input', newValue)

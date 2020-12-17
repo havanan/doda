@@ -22,7 +22,7 @@
                     <h4 class="m-b-0 text-white"><i class="fa fa-user-plus"></i></h4>
                 </div>
                 <div class="card-body" id="cardBody">
-                    <form method="post" action="{{route('admin.product.save')}}">
+                    <form method="post" action="{{route('admin.product.update',$id)}}">
                         @csrf
                         <product-component
                                 :url-get-brand="'{{route('admin.brand.apiGetAll')}}'"

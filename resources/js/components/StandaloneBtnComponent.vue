@@ -10,7 +10,10 @@
                                                                             v-model="dataInput" class="form-control hide-item"></div>
         </div>
         <div class="col-md-6">
-            <div :id="'holder'+id" style="max-height: 200px;"></div>
+            <div :id="'holder'+id" style="max-height: 200px;">
+                <img v-if="dataInput" :src="value" width="100%" />
+            </div>
+
         </div>
     </div>
 </template>

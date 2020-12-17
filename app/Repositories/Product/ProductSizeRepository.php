@@ -13,4 +13,7 @@ class ProductSizeRepository extends BaseRepository
     {
         $this->model = $model;
     }
+    public function deleteByProductId($product_id){
+        return $this->model->where('product_id',$product_id)->delete();
+    }
 }
