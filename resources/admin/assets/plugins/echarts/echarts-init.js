@@ -575,7 +575,7 @@ clearInterval(timeTicket);
 timeTicket = setInterval(function (){
     option.series[0].data[0].value = (Math.random()*100).toFixed(2) - 0;
     gauge2Chart.setOption(option,true);
-},2000)
+},2000);
                                                  
 
 // use configuration item and data specified to show chart

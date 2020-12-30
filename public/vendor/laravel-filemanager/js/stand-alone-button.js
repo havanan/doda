@@ -21,7 +21,7 @@
 
         // set or change the preview image src
         items.forEach(function (item) {
-          console.log(item)
+          console.log(item);
           target_preview.append(
             $('<img>').css('width', '200px').attr('src', item.thumb_url)
           );

@@ -302,11 +302,11 @@
         },
         methods: {
             getBrands() {
-                const vm = this
+                const vm = this;
                 axios
                     .get(this.urlGetBrand)
                     .then(response => {
-                        const res = response.data
+                        const res = response.data;
                         if (res.data) {
                             vm.brands = res.data
                         }

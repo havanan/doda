@@ -51,4 +51,4 @@ $(".validation-wizard").steps({
             email: !0
         }
     }
-})
+});

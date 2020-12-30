@@ -30,8 +30,8 @@ if( Tablesaw.mustard ) {
 	jQuery( document.documentElement ).addClass( 'tablesaw-enhanced' );
 }
 
-;(function( $ ) {
-	var pluginName = "table",
+(function ($) {
+    var pluginName = "table",
 		classes = {
 			toolbar: "tablesaw-bar"
 		},
@@ -160,9 +160,8 @@ if( Tablesaw.mustard ) {
 
 }( jQuery ));
 
-;(function( win, $, undefined ){
-
-	var classes = {
+(function (win, $, undefined) {
+    var classes = {
 		stackTable: 'tablesaw-stack',
 		cellLabels: 'tablesaw-cell-label',
 		cellContentLabels: 'tablesaw-cell-content'
@@ -257,8 +256,8 @@ if( Tablesaw.mustard ) {
 	} );
 
 }( this, jQuery ));
-;(function( $ ) {
-	var pluginName = "tablesawbtn",
+(function ($) {
+    var pluginName = "tablesawbtn",
 		methods = {
 			_create: function(){
 				return $( this ).each(function() {
@@ -335,9 +334,8 @@ if( Tablesaw.mustard ) {
 	$.extend( $.fn[ pluginName ].prototype, methods );
 
 }( jQuery ));
-;(function( win, $, undefined ){
-
-	var ColumnToggle = function( element ) {
+(function (win, $, undefined) {
+    var ColumnToggle = function( element ) {
 
 		this.$table = $( element );
 
@@ -522,9 +520,8 @@ if( Tablesaw.mustard ) {
 	} );
 
 }( this, jQuery ));
-;(function( win, $, undefined ){
-
-	$.extend( Tablesaw.config, {
+(function (win, $, undefined) {
+    $.extend( Tablesaw.config, {
 		swipe: {
 			horizontalThreshold: 15,
 			verticalThreshold: 30
@@ -843,8 +840,8 @@ if( Tablesaw.mustard ) {
 
 }( this, jQuery ));
 
-;(function( $ ) {
-	function getSortValue( cell ) {
+(function ($) {
+    function getSortValue( cell ) {
 		return $.map( cell.childNodes, function( el ) {
 				var $el = $( el );
 				if( $el.is( 'input, select' ) ) {
@@ -1122,9 +1119,8 @@ if( Tablesaw.mustard ) {
 
 }( jQuery ));
 
-;(function( win, $, undefined ){
-
-	var MM = {
+(function (win, $, undefined) {
+    var MM = {
 		attr: {
 			init: 'data-tablesaw-minimap'
 		}
@@ -1197,9 +1193,8 @@ if( Tablesaw.mustard ) {
 
 }( this, jQuery ));
 
-;(function( win, $ ) {
-
-	var S = {
+(function (win, $) {
+    var S = {
 		selectors: {
 			init: 'table[data-tablesaw-mode-switch]'
 		},

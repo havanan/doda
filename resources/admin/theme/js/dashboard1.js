@@ -87,7 +87,7 @@ $(function() {
             resize: true,
             sliceColors: ['#1cadbf', '#1f5f67', '#ffffff']
         });
-    }
+    };
     var sparkResize;
 
     sparklineLogin();

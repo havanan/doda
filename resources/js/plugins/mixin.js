@@ -9,4 +9,4 @@ export const myMixin = {
             return textArea.value;
         }
     }
-}
+};

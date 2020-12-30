@@ -278,7 +278,7 @@ $(function () {
           
         
        
-   }
+   };
     var sparkResize;
  
         $(window).resize(function(e) {

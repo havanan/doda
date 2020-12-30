@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xml:lang="en-US" xmlns="http://www.w3.org/2005/Atom" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:s="http://jadedpixel.com/-/spec/shopify">
+  <id>https://koza-theme.myshopify.com/collections/all.atom</id>
+  <link rel="alternate" type="text/html" href="https://koza-theme.myshopify.com/collections/all"/>
+  <link rel="self" type="application/atom+xml" href="https://koza-theme.myshopify.com/collections/bags-clutch.atom"/>
+  <title>koza theme</title>
+  <updated>2020-09-04T01:18:04-04:00</updated>
+  <author>
+    <name>koza theme</name>
+  </author>
+  <entry>
+    <id>https://koza-theme.myshopify.com/products/5726676779176</id>
+    <published>2020-09-04T01:18:04-04:00</published>
+    <updated>2020-09-04T01:18:04-04:00</updated>
+    <link rel="alternate" type="text/html" href="https://koza-theme.myshopify.com/products/leather-backpack"/>
+    <title>Leather Backpack</title>
+    <s:type>Bags</s:type>
+    <s:vendor>Luxion</s:vendor>
+    <summary type="html">
+      <![CDATA[<table border="0">
+  <tr>
+    <td width="200"><img width="200" src="https://cdn.shopify.com/s/files/1/0438/5698/6280/products/Product15_f023c413-9484-4ff2-837f-f03cb469a3a0.jpg?v=1599196735"></td>
+    <td valign="bottom">
+      <p>
+
+        <strong>Vendor: </strong>Luxion<br>
+        <strong>Type: </strong>Bags<br>
+        <strong>Price: </strong>
+            830.00 - 840.00
+            <a href="https://koza-theme.myshopify.com/products/leather-backpack">(2 variants)</a>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui official.</span></td>
+  </tr>
+</table>
+]]>
+    </summary>
+    <s:tag>$800-$900</s:tag>
+    <s:tag>8</s:tag>
+    <s:tag>Bags</s:tag>
+    <s:tag>Brown</s:tag>
+    <s:tag>Luxion</s:tag>
+    <s:variant>
+      <id>https://koza-theme.myshopify.com/products/5726676779176</id>
+      <title>Brown / 8</title>
+      <s:price currency="INR">830.00</s:price>
+      <s:sku/>
+      <s:grams>0</s:grams>
+    </s:variant>
+    <s:variant>
+      <id>https://koza-theme.myshopify.com/products/5726676779176</id>
+      <title>Black / 7</title>
+      <s:price currency="INR">840.00</s:price>
+      <s:sku/>
+      <s:grams>0</s:grams>
+    </s:variant>
+  </entry>
+  <entry>
+    <id>https://koza-theme.myshopify.com/products/5726662361256</id>
+    <published>2020-09-04T01:10:14-04:00</published>
+    <updated>2020-09-04T01:10:14-04:00</updated>
+    <link rel="alternate" type="text/html" href="https://koza-theme.myshopify.com/products/ladies-clutch"/>
+    <title>Ladies Clutch</title>
+    <s:type>Clutch</s:type>
+    <s:vendor>Luxion</s:vendor>
+    <summary type="html">
+      <![CDATA[<table border="0">
+  <tr>
+    <td width="200"><img width="200" src="https://cdn.shopify.com/s/files/1/0438/5698/6280/products/Product11_52c1a4ad-167f-47d2-be5a-7865259b6dab.jpg?v=1599196237"></td>
+    <td valign="bottom">
+      <p>
+
+        <strong>Vendor: </strong>Luxion<br>
+        <strong>Type: </strong>Clutch<br>
+        <strong>Price: </strong>
+            540.00 - 580.00
+            <a href="https://koza-theme.myshopify.com/products/ladies-clutch">(2 variants)</a>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui official.</span></td>
+  </tr>
+</table>
+]]>
+    </summary>
+    <s:tag>$500 - $600</s:tag>
+    <s:tag>8</s:tag>
+    <s:tag>Brown</s:tag>
+    <s:tag>Clutch</s:tag>
+    <s:tag>Luxion</s:tag>
+    <s:variant>
+      <id>https://koza-theme.myshopify.com/products/5726662361256</id>
+      <title>Brown / 8</title>
+      <s:price currency="INR">580.00</s:price>
+      <s:sku/>
+      <s:grams>0</s:grams>
+    </s:variant>
+    <s:variant>
+      <id>https://koza-theme.myshopify.com/products/5726662361256</id>
+      <title>Pink / 7</title>
+      <s:price currency="INR">540.00</s:price>
+      <s:sku/>
+      <s:grams>0</s:grams>
+    </s:variant>
+  </entry>
+  <entry>
+    <id>https://koza-theme.myshopify.com/products/5726658330792</id>
+    <published>2020-09-04T01:07:49-04:00</published>
+    <updated>2020-09-04T01:07:49-04:00</updated>
+    <link rel="alternate" type="text/html" href="https://koza-theme.myshopify.com/products/envelop-bag"/>
+    <title>Envelop Bag</title>
+    <s:type>Bags</s:type>
+    <s:vendor>Luxion</s:vendor>
+    <summary type="html">
+      <![CDATA[<table border="0">
+  <tr>
+    <td width="200"><img width="200" src="https://cdn.shopify.com/s/files/1/0438/5698/6280/products/Product10_ac61174b-d869-4522-8b38-c59c41ff3a82.jpg?v=1599196092"></td>
+    <td valign="bottom">
+      <p>
+
+        <strong>Vendor: </strong>Luxion<br>
+        <strong>Type: </strong>Bags<br>
+        <strong>Price: </strong>
+            740.00 - 780.00
+            <a href="https://koza-theme.myshopify.com/products/envelop-bag">(2 variants)</a>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui official.</span></td>
+  </tr>
+</table>
+]]>
+    </summary>
+    <s:tag>$700-$800</s:tag>
+    <s:tag>8</s:tag>
+    <s:tag>Bags</s:tag>
+    <s:tag>Brown</s:tag>
+    <s:tag>Luxion</s:tag>
+    <s:variant>
+      <id>https://koza-theme.myshopify.com/products/5726658330792</id>
+      <title>Brown / 8</title>
+      <s:price currency="INR">780.00</s:price>
+      <s:sku/>
+      <s:grams>0</s:grams>
+    </s:variant>
+    <s:variant>
+      <id>https://koza-theme.myshopify.com/products/5726658330792</id>
+      <title>Pink / 7</title>
+      <s:price currency="INR">740.00</s:price>
+      <s:sku/>
+      <s:grams>0</s:grams>
+    </s:variant>
+  </entry>
+  <entry>
+    <id>https://koza-theme.myshopify.com/products/5726652268712</id>
+    <published>2020-09-04T01:04:10-04:00</published>
+    <updated>2020-09-04T01:04:10-04:00</updated>
+    <link rel="alternate" type="text/html" href="https://koza-theme.myshopify.com/products/navy-laptop-bag"/>
+    <title>Navy Laptop Bag</title>
+    <s:type>Bags</s:type>
+    <s:vendor>Luxion</s:vendor>
+    <summary type="html">
+      <![CDATA[<table border="0">
+  <tr>
+    <td width="200"><img width="200" src="https://cdn.shopify.com/s/files/1/0438/5698/6280/products/Product9.jpg?v=1599195868"></td>
+    <td valign="bottom">
+      <p>
+
+        <strong>Vendor: </strong>Luxion<br>
+        <strong>Type: </strong>Bags<br>
+        <strong>Price: </strong>
+            740.00 - 790.00
+            <a href="https://koza-theme.myshopify.com/products/navy-laptop-bag">(2 variants)</a>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui official.</span></td>
+  </tr>
+</table>
+]]>
+    </summary>
+    <s:tag>$700-$800</s:tag>
+    <s:tag>8</s:tag>
+    <s:tag>Bags</s:tag>
+    <s:tag>Brown</s:tag>
+    <s:tag>Luxion</s:tag>
+    <s:variant>
+      <id>https://koza-theme.myshopify.com/products/5726652268712</id>
+      <title>Brown / 8</title>
+      <s:price currency="INR">790.00</s:price>
+      <s:sku/>
+      <s:grams>0</s:grams>
+    </s:variant>
+    <s:variant>
+      <id>https://koza-theme.myshopify.com/products/5726652268712</id>
+      <title>Black / 7</title>
+      <s:price currency="INR">740.00</s:price>
+      <s:sku/>
+      <s:grams>0</s:grams>
+    </s:variant>
+  </entry>
+  <entry>
+    <id>https://koza-theme.myshopify.com/products/5726647058600</id>
+    <published>2020-09-04T01:01:02-04:00</published>
+    <updated>2020-09-04T01:01:02-04:00</updated>
+    <link rel="alternate" type="text/html" href="https://koza-theme.myshopify.com/products/leather-satchel"/>
+    <title>Leather Satchel</title>
+    <s:type>Bags</s:type>
+    <s:vendor>Fashinoz</s:vendor>
+    <summary type="html">
+      <![CDATA[<table border="0">
+  <tr>
+    <td width="200"><img width="200" src="https://cdn.shopify.com/s/files/1/0438/5698/6280/products/Product8.jpg?v=1599195687"></td>
+    <td valign="bottom">
+      <p>
+
+        <strong>Vendor: </strong>Fashinoz<br>
+        <strong>Type: </strong>Bags<br>
+        <strong>Price: </strong>
+            740.00 - 760.00
+            <a href="https://koza-theme.myshopify.com/products/leather-satchel">(2 variants)</a>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui official.</span></td>
+  </tr>
+</table>
+]]>
+    </summary>
+    <s:tag>$700-$800</s:tag>
+    <s:tag>8</s:tag>
+    <s:tag>Bags</s:tag>
+    <s:tag>Brown</s:tag>
+    <s:tag>Fashinoz</s:tag>
+    <s:variant>
+      <id>https://koza-theme.myshopify.com/products/5726647058600</id>
+      <title>Brown / 8</title>
+      <s:price currency="INR">760.00</s:price>
+      <s:sku/>
+      <s:grams>0</s:grams>
+    </s:variant>
+    <s:variant>
+      <id>https://koza-theme.myshopify.com/products/5726647058600</id>
+      <title>Black / 7</title>
+      <s:price currency="INR">740.00</s:price>
+      <s:sku/>
+      <s:grams>0</s:grams>
+    </s:variant>
+  </entry>
+  <entry>
+    <id>https://koza-theme.myshopify.com/products/5726642765992</id>
+    <published>2020-09-04T00:58:37-04:00</published>
+    <updated>2020-09-04T00:58:37-04:00</updated>
+    <link rel="alternate" type="text/html" href="https://koza-theme.myshopify.com/products/leather-mobile-case"/>
+    <title>Leather Mobile Case</title>
+    <s:type>Mobile Case</s:type>
+    <s:vendor>Fashinoz</s:vendor>
+    <summary type="html">
+      <![CDATA[<table border="0">
+  <tr>
+    <td width="200"><img width="200" src="https://cdn.shopify.com/s/files/1/0438/5698/6280/products/Product7_51da4303-7a2c-478b-afea-71d44ff2a4a7.jpg?v=1599195534"></td>
+    <td valign="bottom">
+      <p>
+
+        <strong>Vendor: </strong>Fashinoz<br>
+        <strong>Type: </strong>Mobile Case<br>
+        <strong>Price: </strong>
+            740.00 - 750.00
+            <a href="https://koza-theme.myshopify.com/products/leather-mobile-case">(2 variants)</a>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui official.</span></td>
+  </tr>
+</table>
+]]>
+    </summary>
+    <s:tag>$700-$800</s:tag>
+    <s:tag>8</s:tag>
+    <s:tag>Brown</s:tag>
+    <s:tag>Fashinoz</s:tag>
+    <s:tag>Mobile Case</s:tag>
+    <s:variant>
+      <id>https://koza-theme.myshopify.com/products/5726642765992</id>
+      <title>Brown / 8</title>
+      <s:price currency="INR">750.00</s:price>
+      <s:sku/>
+      <s:grams>0</s:grams>
+    </s:variant>
+    <s:variant>
+      <id>https://koza-theme.myshopify.com/products/5726642765992</id>
+      <title>Black / 7</title>
+      <s:price currency="INR">740.00</s:price>
+      <s:sku/>
+      <s:grams>0</s:grams>
+    </s:variant>
+  </entry>
+  <entry>
+    <id>https://koza-theme.myshopify.com/products/5726633001128</id>
+    <published>2020-09-04T00:53:57-04:00</published>
+    <updated>2020-09-04T00:53:57-04:00</updated>
+    <link rel="alternate" type="text/html" href="https://koza-theme.myshopify.com/products/money-clip-wallet"/>
+    <title>Money Clip Wallet</title>
+    <s:type>Wallet</s:type>
+    <s:vendor>Daikons</s:vendor>
+    <summary type="html">
+      <![CDATA[<table border="0">
+  <tr>
+    <td width="200"><img width="200" src="https://cdn.shopify.com/s/files/1/0438/5698/6280/products/Product5.jpg?v=1599195261"></td>
+    <td valign="bottom">
+      <p>
+
+        <strong>Vendor: </strong>Daikons<br>
+        <strong>Type: </strong>Wallet<br>
+        <strong>Price: </strong>
+            720.00 - 740.00
+            <a href="https://koza-theme.myshopify.com/products/money-clip-wallet">(2 variants)</a>
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2"><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui official.</span></td>
+  </tr>
+</table>
+]]>
+    </summary>
+    <s:tag>$700-$800</s:tag>
+    <s:tag>8</s:tag>
+    <s:tag>Brown</s:tag>
+    <s:tag>Daikons</s:tag>
+    <s:tag>Wallet</s:tag>
+    <s:variant>
+      <id>https://koza-theme.myshopify.com/products/5726633001128</id>
+      <title>Brown / 8</title>
+      <s:price currency="INR">720.00</s:price>
+      <s:sku/>
+      <s:grams>0</s:grams>
+    </s:variant>
+    <s:variant>
+      <id>https://koza-theme.myshopify.com/products/5726633001128</id>
+      <title>Pink / 7</title>
+      <s:price currency="INR">740.00</s:price>
+      <s:sku/>
+      <s:grams>0</s:grams>
+    </s:variant>
+  </entry>
+</feed>

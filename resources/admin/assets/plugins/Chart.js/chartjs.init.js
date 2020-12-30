@@ -41,7 +41,7 @@ $( document ).ready(function() {
           ctx1.shadowBlur = 10;
           ctx1.shadowOffsetX = 8;
           ctx1.shadowOffsetY = 8;
-          originalStroke.apply(this, arguments)
+          originalStroke.apply(this, arguments);
           ctx1.restore();
 
         }

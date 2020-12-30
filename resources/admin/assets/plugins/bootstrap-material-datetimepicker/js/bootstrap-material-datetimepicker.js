@@ -398,7 +398,7 @@
                        svgHourText.addEventListener('click', this._onSelectHour.bind(this));
                     }
 
-                    svgClockElement.appendChild(svgHourCircle)
+                    svgClockElement.appendChild(svgHourCircle);
                     svgClockElement.appendChild(svgHourText)
                  }
 
@@ -428,7 +428,7 @@
                           svgHourText.addEventListener('click', this._onSelectHour.bind(this));
                        }
 
-                       svgClockElement.appendChild(svgHourCircle)
+                       svgClockElement.appendChild(svgHourCircle);
                        svgClockElement.appendChild(svgHourText)
                     }
 
@@ -530,7 +530,7 @@
                  var svgClockFace = this.createSVGElement("circle", {r: '192', fill: '#eee', stroke: '#bdbdbd', 'stroke-width': 2});
                  var svgClockCenter = this.createSVGElement("circle", {r: '15', fill: '#757575'});
 
-                 svgGElement.appendChild(svgClockFace)
+                 svgGElement.appendChild(svgClockFace);
 
                  if (isHour)
                  {
@@ -548,9 +548,9 @@
                     svgGElement.appendChild(svgMinuteHand);
                  }
 
-                 svgGElement.appendChild(svgClockCenter)
+                 svgGElement.appendChild(svgClockCenter);
 
-                 svgElement.appendChild(svgGElement)
+                 svgElement.appendChild(svgGElement);
 
                  this.$dtpElement.find("#dtp-svg-clock").empty();
                  this.$dtpElement.find("#dtp-svg-clock")[0].appendChild(svgElement);

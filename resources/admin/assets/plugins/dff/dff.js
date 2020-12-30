@@ -3,7 +3,7 @@ var room = 1;
 function education_fields() {
 
     room++;
-    var objTo = document.getElementById('education_fields')
+    var objTo = document.getElementById('education_fields');
     var divtest = document.createElement("div");
     divtest.setAttribute("class", "form-group removeclass" + room);
     var rdiv = 'removeclass' + room;

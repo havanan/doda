@@ -268,7 +268,7 @@ $(function() {
             output += '<p>- ' + result.text + '</p>';
           });
           $('#search-output').html(output);
-        }
+        };
 
         $('#btn-search').on('click', search);
         $('#input-search').on('keyup', search);

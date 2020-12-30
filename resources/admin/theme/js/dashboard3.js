@@ -118,7 +118,7 @@ $(function () {
             , barSpacing: '6'
             , barColor: 'rgba(255, 255, 255, 0.3)'
         });
-    }
+    };
     var sparkResize;
     
     sparklineLogin(); 

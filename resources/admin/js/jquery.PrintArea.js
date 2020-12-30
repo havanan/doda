@@ -118,7 +118,7 @@
             elements.each(function() {
                 var ele = PrintArea.getFormData( $(this) );
 
-                var attributes = ""
+                var attributes = "";
                 for ( var x = 0; x < attrs.length; x++ )
                 {
                     var eleAttr = $(ele).attr( attrs[x] );

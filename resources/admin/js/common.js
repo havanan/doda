@@ -33,7 +33,7 @@ function alertDelete(id) {
                       response = JSON.parse(response);
                       if (response.code === 500) {
                           swal(response.text, "", "success");
-                          reloadDataTable()
+                          reloadDataTable();
                           return false;
                       }
                   }

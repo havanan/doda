@@ -3,7 +3,7 @@
     "use strict";
 
     var CalendarApp = function() {
-        this.$body = $("body")
+        this.$body = $("body");
         this.$calendar = $('#calendar'),
         this.$event = ('#calendar-events div.calendar-events'),
         this.$categoryForm = $('#add-new-event form'),
@@ -118,7 +118,7 @@
                 revertDuration: 0  //  original position after the drag
             });
         });
-    }
+    };
     /* Initializing */
     CalendarApp.prototype.init = function() {
         this.enableDrag();
@@ -198,7 +198,7 @@
             var categoryName = $this.$categoryForm.find("input[name='category-name']").val();
             var categoryColor = $this.$categoryForm.find("select[name='category-color']").val();
             if (categoryName !== null && categoryName.length != 0) {
-                $this.$extEvents.append('<div class="calendar-events" data-class="bg-' + categoryColor + '" style="position: relative;"><i class="fa fa-circle text-' + categoryColor + '"></i>' + categoryName + '</div>')
+                $this.$extEvents.append('<div class="calendar-events" data-class="bg-' + categoryColor + '" style="position: relative;"><i class="fa fa-circle text-' + categoryColor + '"></i>' + categoryName + '</div>');
                 $this.enableDrag();
             }
 

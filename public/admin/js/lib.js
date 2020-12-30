@@ -267,7 +267,7 @@ m.ext;h.fn.DataTable=function(a){return h(this).dataTable(a).api()};h.each(m,fun
 //! license : MIT
 //! momentjs.com
 
-;(function (global, factory) {
+(function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
     global.moment = factory()
@@ -4654,7 +4654,7 @@ return hooks;
 		// Browser
 		factory( jQuery, window, document );
 	}
-}
+};
 (function( $, window, document ) {
 
 
@@ -5105,7 +5105,7 @@ function alertDelete(id) {
                       response = JSON.parse(response);
                       if (response.code === 500) {
                           swal(response.text, "", "success");
-                          reloadDataTable()
+                          reloadDataTable();
                           return false;
                       }
                   }

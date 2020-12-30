@@ -10,6 +10,23 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
+mix.styles([
+    'resources/admin/assets/plugins/bootstrap/css/bootstrap.min.css',
+    'resources/admin/assets/plugins/morrisjs/morris.css',
+    'resources/admin/css/style.css',
+    'resources/admin/css/colors/blue.css',
+    'resources/admin/css/spinners.css',
+    'resources/admin/css/animate.css',
+], 'public/koza/css/lib.css').version();
+
+mix.scripts([
+    'resources/admin/assets/plugins/bootstrap/js/popper.min.js',
+    'resources/admin/assets/plugins/bootstrap/js/bootstrap.min.js',
+    'resources/admin/assets/plugins/styleswitcher/jQuery.style.switcher.js',
+    'resources/admin/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js',
+    'resources/admin/assets/plugins/sparkline/jquery.sparkline.min.js',
+    'resources/admin/assets/plugins/raphael/raphael-min.js',
+], 'public/koza/js/lib.js').version();
 
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');

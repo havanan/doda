@@ -258,7 +258,7 @@ $(function () {
             barColor: '#f62d51'
         });
        
-   }
+   };
     var sparkResize;
  
         $(window).resize(function(e) {
