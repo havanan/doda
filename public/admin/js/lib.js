@@ -267,7 +267,7 @@ m.ext;h.fn.DataTable=function(a){return h(this).dataTable(a).api()};h.each(m,fun
 //! license : MIT
 //! momentjs.com
 
-(function (global, factory) {
+;(function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
     global.moment = factory()

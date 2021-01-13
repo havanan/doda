@@ -9,7 +9,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('home');
+        return view('frontend.home.index');
     }
     public function profile() {
         return view('frontend.user.profile');

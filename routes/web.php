@@ -1,19 +1,19 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-
-
-Route::get('/', 'HomeController@index')->name('home');
-
 Auth::routes();
 
 //User Route
 Route::group([
     'namespace' => 'Frontend',
-    'middleware' => 'auth:web'
 ],function (){
-    Route::get('profile', 'HomeController@profile')->name('profile');
+    Route::get('/', 'HomeController@index')->name('home');
+
+    Route::group([
+        'middleware' => 'auth:web'
+    ],function (){
+        Route::get('profile', 'HomeController@profile')->name('profile');
+    });
 });
 Route::group([
     'prefix' => 'laravel-filemanager',
